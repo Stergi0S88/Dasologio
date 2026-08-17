@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Δασικός χάρτης! Τι πρέπει να γνωρίζεις!</title>
+	
+  <!-- === OPEN GRAPH TAGS (Facebook, Instagram Preview, LinkedIn) - These are already correct === -->
+  <meta property="og:title" content="Δασικός χάρτης! Τι πρέπει να γνωρίζεις" />
+  <meta property="og:description" content="Ο δασικός χάρτης αποτελεί το ψηφιακό εργαλείο χαρτογράφησης των δασών της Ελλάδας! Παρά το γεγονός ότι είναι απαραίτητος για τον σχεδιασμό, διαχείριση και προστασία των δασικών οικοσυστημάτων της Ελλάδας, υπάρχουν αρκετά σημεία τα οποία προκαλούν περισσότερα προβλήματα σε σχέση με τις λύσεις που προσφέρουν." />
+  <meta property="og:type" content="article" /> <!-- Changed to 'article' for better context -->
+  <meta property="og:url" content="https://www.dasologio.com/dasikos-xartis.html" />
+  <meta property="og:image" content="https://www.dasologio.com/images/dasikos-xartis.jpg" />
+  <meta property="og:site_name" content="dasologio" />
+
+  <!-- === TWITTER CARD TAGS (Recommended for X/Twitter) - ADDED === -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@yourtwitterhandle"> <!-- Change to your handle if you have one -->
+  <meta name="twitter:title" content="Δασικός χάρτης! Τι πρέπει να γνωρίζεις">
+  <meta name="twitter:description" content="Ο δασικός χάρτης αποτελεί το ψηφιακό εργαλείο χαρτογράφησης των δασών της Ελλάδας!...">
+  <meta name="twitter:image" content="https://www.dasologio.com/images/dasikos-xartis.jpg">
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #a9db67;
+            --highlight-color: #a1d99b;
+            --dark-section-bg: #2a3d38;
+            --light-beige-bg: #fdf8e9;
+            --dark-grey: #333333;
+            --white-color: #ffffff;
+            --text-color: #555555;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { color: var(--text-color); line-height: 1.8; background-color: var(--white-color); }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 30px; }
+
+        /* ---- HEADER & NAVIGATION ---- */
+        header {
+            background-color: var(--white-color); 
+            padding: 10px 0;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        header .container { max-width: 1200px; display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 80px; width: auto; }
+        .logo .logo-dark { display: block; }
+        .nav-wrapper { display: flex; align-items: center; gap: 20px; }
+        nav ul { list-style: none; display: flex; gap: 40px; }
+        nav ul li a { text-decoration: none; color: var(--dark-grey); font-weight: 500; transition: color 0.4s ease; }
+        nav ul li a:hover { color: var(--primary-color); }
+        .header-actions .btn {
+            padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 700;
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-grey); color: var(--dark-grey); background-color: transparent;
+        }
+        .header-actions .btn:hover { background-color: var(--dark-grey); color: var(--white-color); }
+        .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: var(--dark-grey); z-index: 1001; }
+
+        /* ---- ARTICLE STYLES ---- */
+        #article-main {
+            padding-top: 120px;
+            padding-bottom: 80px;
+        }
+        .article-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .article-header .category {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 5px 15px;
+            border-radius: 5px;
+            background-color: var(--highlight-color);
+            color: var(--dark-section-bg);
+            font-size: 0.9em;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .article-header h1 {
+            font-size: clamp(2.2em, 5vw, 3.5em);
+            color: var(--dark-section-bg);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .article-meta {
+            color: #777;
+            font-size: 0.9em;
+        }
+        .featured-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+        .article-content h2 {
+            font-size: 1.8em;
+            color: var(--dark-section-bg);
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .article-content p {
+            margin-bottom: 20px;
+        }
+        .article-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+        .article-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        /* ---- SHARE & RELATED ---- */
+        .article-footer {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .share-buttons h3 {
+            margin-bottom: 20px;
+            color: var(--dark-section-bg);
+        }
+        .share-buttons a {
+            font-size: 1.8em;
+            color: var(--dark-grey);
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        .share-buttons a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* ======== NEW INSTAGRAM STYLES ======== */
+        .share-buttons a#share-instagram-story:hover {
+            /* The hover effect is purely visual now, as the JS handles the action */
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #d6249f;
+        }
+        
+        /* --- NEW: Style for copy confirmation message --- */
+        .share-message {
+            margin-top: 15px;
+            color: var(--primary-color);
+            font-weight: 700;
+            min-height: 20px; /* Prevent layout shift */
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            font-size: 0.9em;
+        }
+        .share-message.visible {
+            opacity: 1;
+        }
+        /* ======== END OF NEW STYLES ======== */
+
+        #related-articles {
+            padding: 80px 0;
+            background-color: var(--light-beige-bg);
+        }
+        #related-articles .container {
+             max-width: 1200px;
+        }
+        #related-articles h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: var(--dark-section-bg);
+            margin-bottom: 50px;
+        }
+        .blog-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .blog-card {
+            background-color: var(--white-color); border-radius: 20px; overflow: hidden;
+            text-decoration: none; color: var(--dark-grey); box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .blog-card img { width: 100%; height: 200px; object-fit: cover; }
+        .blog-card-content { padding: 25px; }
+        .blog-card-content .category {
+            display: inline-block; margin-bottom: 10px; padding: 5px 10px; border-radius: 5px;
+            background-color: var(--highlight-color); color: var(--dark-section-bg);
+            font-size: 0.8em; font-weight: 700;
+        }
+        .blog-card-content h3 { font-size: 1.3em; margin-bottom: 10px; line-height: 1.4; }
+        .blog-card-content .excerpt { font-size: 0.95em; color: var(--text-color); }
+
+        /* ---- FOOTER ---- */
+        footer { padding: 40px 0; background-color: var(--light-beige-bg); color: var(--dark-grey); }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-logo-main img { height: 100px; }
+        .footer-social a { color: var(--dark-grey); font-size: 1.5em; margin-left: 20px; transition: color 0.3s ease; }
+        .footer-social a:hover { color: var(--primary-color); }
+        .footer-bottom { font-size: 0.9em; color: var(--text-color); }
+
+        /* ---- RESPONSIVE DESIGN ---- */
+        @media (max-width: 992px) {
+            .menu-toggle { display: block; }
+            .nav-wrapper {
+                position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+                background-color: var(--highlight-color);
+                flex-direction: column; justify-content: center; align-items: center;
+                gap: 40px; transform: translateX(100%); transition: transform 0.4s ease-in-out;
+            }
+            .nav-wrapper.active { transform: translateX(0); }
+            nav ul { flex-direction: column; text-align: center; gap: 25px; }
+            nav ul li a { color: var(--white-color); font-size: 1.5em; }
+            .header-actions .btn { border-color: var(--white-color); color: var(--white-color); }
+        }
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-social a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img class="logo-dark" src="https://placehold.co/200x100/333333/FFFFFF?text=Logo" alt="Λογότυπο Σκούρο">
+            </a>
+            <div class="nav-wrapper" id="nav-wrapper">
+                <nav id="nav-menu">
+                    <ul>
+                        <li><a href="index.html#services">Τι κάνουμε</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#contact">Επικοινωνία</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                     <a href="index.html#contact" class="btn btn-secondary">Επικοινωνία</a>
+                </div>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main id="article-main">
+        <div class="container">
+            <article>
+                <header class="article-header">
+                    <a href="#" class="category">ΔΑΣΟΛΟΓΙΑ</a>
+                    <h1>Δασικός χάρτης! Τι πρέπει να γνωρίζεις!</h1>
+                    <div class="article-meta">
+                        <span></span> | <span>25 Αυγούστου 2025</span>
+                    </div>
+                </header>
+
+                <img src="images/dasikos-xartis.jpg" alt="Η Σημασία της Σωστής Διαχείρισης των Δασών" class="featured-image">
+
+                <div class="article-content">
+
+                    <h1>Ο Ατελής Χάρτης - Μια Δεκαετής Αναζήτηση για Νομική Βεβαιότητα</h1>
+                    <p>Η κατάρτιση των Δασικών Χαρτών και, κατ' επέκταση, η σύνταξη του Εθνικού Δασολογίου, 
+                        δεν αποτελεί απλώς μια γραφειοκρατική άσκηση, αλλά μια θεμελιώδη συνταγματική επιταγή που χρονολογείται από το 1975, καθώς και ένα κρίσιμο εργαλείο για την εθνική ανάπτυξη και την προστασία του περιβάλλοντος. H απουσία ενός σαφούς και οριστικού καθορισμού των δασικών εκτάσεων της χώρας διαιωνίζει ένα καθεστώς αβεβαιότητας που υπονομεύει την ασφάλεια δικαίου, αποθαρρύνει τις επενδύσεις και ευνοεί την αυθαιρεσία.
+                        Όπως έχει τονίσει εμφατικά το Τεχνικό Επιμελητήριο Ελλάδας (ΤΕΕ), η νομική βεβαιότητα σχετικά με τη χρήση γης —αν μια έκταση είναι δάσος, αρχαιολογικός χώρος ή οικοδομήσιμη— αποτελεί αδιαπραγμάτευτη προϋπόθεση για την προσέλκυση επενδύσεων. Η έλλειψη αυτών των σαφών χαρτών συντηρεί ένα σύστημα αδιαφάνειας και διαφθοράς, εμποδίζοντας την ορθολογική χωροταξική οργάνωση της χώρας.
+                        Παρά τη ζωτική του σημασία, το έργο των δασικών χαρτών βρίσκεται σήμερα αντιμέτωπο με μια βαθιά κρίση, η οποία χαρακτηρίζεται από ένα κεντρικό παράδοξο: ενώ η ολοκλήρωσή του είναι εθνικά επιτακτική, η διαδικασία έχει ουσιαστικά παραλύσει. Η παρούσα ανάλυση εστιάζει ακριβώς σε αυτή την παράλυση, εξετάζοντας τις δύο βασικές της διαστάσεις. Η πρώτη είναι ένας τεράστιος διοικητικός φόρτος που προκύπτει από τον πρωτοφανή αριθμό 
+                      αντιρρήσεων που έχουν υποβάλει οι πολίτες, οι οποίες παραμένουν σε εκκρεμότηταα για χρόνια, κρατώντας χιλιάδες ιδιοκτησίες σε καθεστώς «ομηρίας». Η δεύτερη διάσταση, εξίσου κρίσιμη, είναι η μετατροπή της διαδικασίας εξέτασης αυτών των αντιρρήσεων σε πεδίο έντονης διεπιστημονικής σύγκρουσης, κυρίως μεταξύ δασολόγων, μηχανικών και δικηγόρων. Αυτή η έκθεση θα αναλύσει σε βάθος τις αιτίες, τις συνέπειες και τις πρόσφατες εξελίξεις που διαμορφώνουν το παρόν και το μέλλον αυτού του κρίσιμου εθνικού εγχειρήματος.
+                    </p>
+                    <p>Η κλίμακα του προβλήματος είναι τεράστια. 
+                        Σε εθνικό επίπεδο έχουν υποβληθεί περίπου 460.000 αντιρρήσεις, εκ των οποίων, μέχρι τα τέλη του 2024, είχε εξεταστεί μόλις το 35%. Αυτό σημαίνει ότι περίπου 300.000 υποθέσεις παραμένουν σε εκκρεμότητα, με αποτέλεσμα χιλιάδες ιδιοκτησίες να βρίσκονται σε καθεστώς νομικής αβεβαιότητας για περισσότερα από επτά χρόνια.
+                       Οι συνέπειες για τους ιδιοκτήτες είναι καταστροφικές. Μια ιδιοκτησία για την οποία εκκρεμεί αντίρρηση δεν μπορεί να μεταβιβαστεί (π.χ. πώληση, γονική παροχή), ούτε είναι δυνατή η έκδοση οικοδομικής άδειας. Για τους αγρότες, ο χαρακτηρισμός μιας έκτασης ως δασικής μπορεί να οδηγήσει στην άμεση διακοπή των αγροτικών επιδοτήσεων, θέτοντας σε κίνδυνο την οικονομική τους βιωσιμότητα. Στην πράξη, η ιδιοκτησία μετατρέπεται σε ένα «παγωμένο», μη αξιοποιήσιμο περιουσιακό στοιχείο, προκαλώντας τεράστια οικονομική ζημία και ψυχολογική πίεση στους πολίτες, οι οποίοι συχνά ενημερώνονται από το Κτηματολόγιο ότι η περιουσία τους διεκδικείται από το Ελληνικό Δημόσιο.
+                        Αυτή η κατάσταση «ομηρίας» των περιουσιών δημιουργεί μια σημαντική, αν και μη μετρημένη, τροχοπέδη για την ελληνική οικονομία. Παγώνει την αγορά ακινήτων, αναστέλλει ιδιωτικές επενδύσεις σε κατασκευές και γεωργία και εμποδίζει τη χρήση της ακίνητης περιουσίας ως εγγύηση για δανεισμό, ασκώντας έτσι μια σιωπηλή αλλά ουσιαστική πίεση στη μακροοικονομική ανάπτυξη.
+                    </p>
+                    
+                    <h2> Σφάλματα, Γραφειοκρατία και Υποστελέχωση
+                    </h2>
+                    <p>Το διοικητικό αυτό αδιέξοδο δεν οφείλεται απλώς στον όγκο των αντιρρήσεων, αλλά έχει βαθύτερες, συστημικές ρίζες</p>
+
+                                        <ul>
+                        <li><strong>Ανακρίβειες στην Αρχική Χαρτογράφηση</strong> Η κύρια αιτία που προκάλεσε τον κατακλυσμό των αντιρρήσεων ήταν η κακή ποιότητα των αρχικών χαρτών. Σε πολλές περιπτώσεις, εκτάσεις που ήταν διαχρονικά αγροτικές, ακόμα και κτίρια του ίδιου του κράτους όπως πανεπιστήμια και μουσεία, χαρακτηρίστηκαν λανθασμένα ως δασικές. Αυτό ανάγκασε αμέτρητους πολίτες να εισέλθουν στην πολυδάπανη και χρονοβόρα διαδικασία των αντιρρήσεων, όχι για να αμφισβητήσουν έναν οριακό χαρακτηρισμό, αλλά για να διορθώσουν κατάφωρα σφάλματα της Διοίκησης. Το ίδιο το Υπουργείο Περιβάλλοντος και Ενέργειας (ΥΠΕΝ) έχει αναγνωρίσει αυτά τα λάθη και έχει δεσμευθεί να τα διορθώσει χωρίς να απαιτείται ενέργεια από τον πολίτη.
+                        </li>
+                        <li><strong>Γραφειοκρατικό και Οικονομικό Βάρος</strong>  Η διαδικασία είναι εγγενώς περίπλοκη. Η τεκμηρίωση μιας αντίρρησης απαιτεί συχνά την πρόσληψη τεχνικών συμβούλων (δασολόγων, τοπογράφων μηχανικών) για τη σύνταξη φακέλου, φωτοερμηνείας και τοπογραφικών διαγραμμάτων. Το κόστος αυτό, σε συνδυασμό με το επίσημο παράβολο, δημιουργεί ένα σημαντικό οικονομικό εμπόδιο για πολλούς πολίτες.
+                        </li>
+                        <li><strong>Κρίσιμες Ελλείψεις Πόρων</strong> Το σύστημα είναι δραματικά υποστελεχωμένο. Υπάρχει αναγνωρισμένη έλλειψη δασολόγων στον δημόσιο τομέα για τη στελέχωση των Επιτροπών Εξέτασης Αντιρρήσεων (ΕΠΕΑ), ενώ οι καθυστερήσεις στην καταβολή των αμοιβών των μελών των επιτροπών έχουν λειτουργήσει ως πρόσθετη τροχοπέδη, επιβραδύνοντας περαιτέρω το έργο τους.
+                        </li>
+                    </ul>
+                    
+                    <blockquote>"Ανακρίβειες στην αρχική χαρτογράφηση, έλλειψη κρατικού σχεδιασμού και μια υποστελεχωμένη Δασική Υπηρεσία."</blockquote>
+
+                     <h2> Η Επόμενη Μέρα - Προβλέψεις και Στρατηγικές Προτάσεις
+                    </h2>
+
+                    <p>Ο κυβερνητικός στόχος για την εκκαθάριση του 80% των 300.000 εκκρεμών αντιρρήσεων έως το τέλος του 2025
+                         είναι εξαιρετικά φιλόδοξος. Αυτό μεταφράζεται στην ανάγκη επεξεργασίας περίπου 240.000 υποθέσεων σε διάστημα λίγο μεγαλύτερο του ενός έτους, ένας ρυθμός που φαντάζει σχεδόν ανέφικτος με βάση την προηγούμενη απόδοση του συστήματος. Η επιτυχία αυτού του σχεδίου εξαρτάται απόλυτα από την άμεση και αποτελεσματική λειτουργία των νέων, αναδιαμορφωμένων ΕΠΕΑ.
+                        Η στρατηγική της κυβέρνησης αποτελεί ένα στοίχημα υψηλού ρίσκου. Ενδυναμώνοντας μια επαγγελματική ομάδα (τους δασολόγους) για να επιταχύνει τη διαδικασία, κινδυνεύει να ανταλλάξει ένα πρόβλημα (την καθυστέρηση) με ένα άλλο (την πιθανότητα για μεροληπτικές ή νομικά ευάλωτες αποφάσεις). Η επιτυχία του στόχου του 2025 δεν πρέπει να μετρηθεί μόνο από τον αριθμό των υποθέσεων που θα κλείσουν, 
+                        αλλά από το εάν αυτές οι αποφάσεις θα αντέξουν σε μελλοντικό δικαστικό έλεγχο.
+                    </p>
+
+                </div>
+
+                <footer class="article-footer">
+                    <div class="share-buttons">
+                        <h3>Μοιραστείτε το άρθρο</h3>
+                        <div class="footer-social">
+							<a href="https://www.facebook.com/sharer/sharer.php?u=https://www.dasologio.com/dasikos-xartis.html" 
+							   target="_blank" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+							<a id="share-twitter-link" href="#" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+							<a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.dasologio.com/dasikos-xartis.html" 
+							   target="_blank" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+							<a href="javascript:void(0);" id="share-instagram-story" title="Copy Link for Instagram"><i class="fab fa-instagram"></i></a>
+						</div>
+                        <!-- Container for copy success message -->
+                        <div id="copy-confirmation-message" class="share-message"></div>
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </main>
+
+    <section id="related-articles">
+        <div class="container">
+            <h2>Σχετικά Άρθρα</h2>
+            <div class="blog-grid-container">
+                <a href="imittos.html" class="blog-card">
+                    <img src="images/imitos.jpg" alt="Blog Post 2">
+                    <div class="blog-card-content">
+                        <span class="category">ΔΑΣΟΛΟΓΙΑ</span>
+                        <h3>Υμηττός! Γιατί τον αγαπάμε;</h3>
+                        <p class="excerpt">Από Χολαργο και Παπάγου μέχρι Αργυρούπολη! 
+                            Ποιος δεν έχει κάνει μια μικρή βολτίτσα στους πρόποδες του Υμηττού
+                        </p>
+                    </div>
+                </a>
+                <a href="dasika-akinhta.html" class="blog-card">
+                    <img src="images/cholomon-mountain.jpg" alt="Blog Post 3">
+                    <div class="blog-card-content">
+                        <span class="category">ΝΟΜΙΚΗ</span>
+                        <h3>Δασικά Ακίνητα και ο Ρόλος του Δασολόγου</h3>
+                        <p class="excerpt">Όταν χιλιάδες ιδιοκτήτες ακινήτων στην Ελλάδα βλέπουν τα περουσιακά τους στοιχεία να «παγώνουν» εμποδίζοντας την μεταβίβαση 
+                            και εν τέλει την αξιοποίηση τους και ίσως και το ιδιοκτησιακό τους καθεστώς.
+                        </p>
+                    </div>
+                </a>
+                <a href="tropoi-sunthrhsh-khpou.html" class="blog-card">
+                    <img src="images/kipos.jpg" alt="Blog Post 4">
+                    <div class="blog-card-content">
+                        <span class="category">ΣΥΜΒΟΥΛΕΣ</span>
+                        <h3>Επαναπροσδιορίζοντας τον Κήπο μας</h3>
+                        <p class="excerpt">Η επιλογή να δημιουργήσουμε έναν κήπο με ενδημικά και τοπικά φυτά υπερβαίνει τα όρια της απλής κηπουρικής. 
+                            Είναι μια συνειδητή απόφαση που ενσωματώνει την περιβαλλοντική ευθύνη και την επιδίωξη μιας πιο βιώσιμης καθημερινότητας. 
+                            Σε μια εποχή που οι μεγάλες περιβαλλοντικές προκλήσεις φαντάζουν συχνά συντριπτικές, 
+                            ο κήπος μας προσφέρει ένα πεδίο άμεσης και ουσιαστικής δράσης. Κάθε τοπικό φυτό που φυτεύουμε είναι μια μικρή, 
+                            αλλά σημαντική, συμβολή στην προστασία του τόπου μας.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo-main">
+                 <a href="index.html">
+                    <img src="images/dasologo.png" alt="Λογότυπο Σκούρο">
+                </a>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="year"></span> Δασολόγιο. All Rights Reserved.
+            </div>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.dasologio.com/dasikos-xartis.html" 
+				   target="_blank" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <!-- The corrected, direct link to your profile -->
+                <a href="https://www.instagram.com/dasologio/" target="_blank" title="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Menu ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navWrapper = document.getElementById('nav-wrapper');
+        const navLinks = document.querySelectorAll('#nav-menu a');
+
+        const closeMenu = () => {
+            navWrapper.classList.remove('active');
+            menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        };
+
+        menuToggle.addEventListener('click', () => {
+            navWrapper.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        navLinks.forEach(link => link.addEventListener('click', closeMenu));
+        
+        // --- On Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
+            // Define the Instagram user ID
+            const instagramUserId = '@dasologio'; 
+            
+            // Get the URL to share (from OG tag or current location)
+            const attributionUrlMeta = document.querySelector('meta[property="og:url"]');
+            const attributionUrl = attributionUrlMeta ? attributionUrl.getAttribute('content') : window.location.href;
+            const encodedUrl = encodeURIComponent(attributionUrl);
+            const encodedText = encodeURIComponent(document.title);
+            
+            // 1. Configure the Twitter Link
+            const twitterButton = document.getElementById('share-twitter-link');
+            if (twitterButton) {
+                // The correct Twitter Intent URL uses 'url' and 'text'
+                twitterButton.href = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`;
+            }
+
+            // 2. Setup Copy-to-Clipboard Functionality for Instagram (Reliable Fix)
+            const instagramButton = document.getElementById('share-instagram-story');
+            const copyMessage = document.getElementById('copy-confirmation-message');
+            
+            // Define the success message including the tag
+            const successMessage = `Ο σύνδεσμος αντιγράφηκε! Μην ξεχάσεις να μας κάνεις tag (${instagramUserId})!`;
+
+
+            /**
+             * Copies the provided text to the clipboard and shows a temporary success message.
+             * Uses navigator.clipboard.writeText (modern API) with execCommand fallback.
+             * @param {string} text - The text (URL) to copy.
+             */
+            const copyTextToClipboard = async (text) => {
+                try {
+                    // Modern API
+                    await navigator.clipboard.writeText(text);
+                    
+                    // Show confirmation message
+                    if (copyMessage) {
+                        copyMessage.textContent = successMessage;
+                        copyMessage.classList.add('visible');
+                        setTimeout(() => {
+                            copyMessage.classList.remove('visible');
+                        }, 3000); // Increased visibility time slightly
+                    }
+                } catch (err) {
+                    // Fallback for older browsers or restricted environments
+                    console.error('Could not use modern clipboard API. Falling back to execCommand.', err);
+                    
+                    // The execCommand method requires a temporary textarea
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    textarea.style.position = 'fixed'; // Prevents scrolling to the bottom
+                    textarea.style.opacity = '0'; // Keep it invisible
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    
+                    try {
+                        document.execCommand('copy');
+                        if (copyMessage) {
+                            copyMessage.textContent = successMessage;
+                            copyMessage.classList.add('visible');
+                            setTimeout(() => {
+                                copyMessage.classList.remove('visible');
+                            }, 3000);
+                        }
+                    } catch (execErr) {
+                        console.error('Fallback copy failed:', execErr);
+                        if (copyMessage) {
+                            copyMessage.textContent = 'Αποτυχία αντιγραφής συνδέσμου!';
+                            copyMessage.classList.add('visible');
+                            setTimeout(() => {
+                                copyMessage.classList.remove('visible');
+                            }, 3000);
+                        }
+                    } finally {
+                        document.body.removeChild(textarea);
+                    }
+                }
+            };
+
+            if (instagramButton) {
+                // Set href to javascript:void(0) to prevent page jump
+                instagramButton.href = 'javascript:void(0);'; 
+                
+                // Attach the robust copy function to the click event
+                instagramButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Copy the canonical article URL
+                    copyTextToClipboard(attributionUrl); 
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

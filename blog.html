@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Δασολόγιο</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #a9db67;
+            --highlight-color: #a1d99b;
+            --dark-section-bg: #2a3d38;
+            --light-beige-bg: #fdf8e9;
+            --dark-grey: #333333;
+            --white-color: #ffffff;
+            --text-color: #555555;
+            --footer-text-color: #ccc;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { color: var(--text-color); line-height: 1.6; background-color: var(--white-color); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+
+        /* ---- HEADER & NAVIGATION ---- */
+        header {
+            background-color: var(--white-color); 
+            padding: 10px 0;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: padding 0.4s ease;
+        }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 100px; width: auto; }
+        .logo .logo-dark { display: block; }
+        
+        .nav-wrapper { display: flex; align-items: center; gap: 20px; }
+        nav ul { list-style: none; display: flex; gap: 40px; }
+        nav ul li a { text-decoration: none; color: var(--dark-grey); font-weight: 500; transition: color 0.4s ease; }
+        nav ul li a:hover { color: var(--primary-color); }
+        
+        .header-actions .btn {
+            padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 700;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            border: 1px solid var(--dark-grey); color: var(--dark-grey); background-color: transparent;
+        }
+        .header-actions .btn:hover { background-color: var(--dark-grey); color: var(--white-color); }
+        
+        .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: var(--dark-grey); z-index: 1001; }
+        
+        /* ---- BLOG HERO SECTION ---- */
+        #blog-hero {
+            padding-top: 150px;
+            padding-bottom: 80px;
+            text-align: center;
+            background-color: var(--light-beige-bg);
+        }
+        #blog-hero h1 {
+            font-size: clamp(2.5em, 5vw, 4em);
+            color: var(--dark-section-bg);
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        #blog-hero p {
+            font-size: 1.1em;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto 30px auto;
+        }
+        #search-input {
+            width: 100%;
+            padding: 15px 20px;
+            padding-right: 50px; /* Space for the icon */
+            border-radius: 50px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+        }
+        .search-container i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-color);
+        }
+
+        /* Category Filters */
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .category-filters button {
+            background-color: var(--white-color);
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 8px 18px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .category-filters button:hover {
+            background-color: var(--highlight-color);
+            border-color: var(--highlight-color);
+        }
+        .category-filters button.active {
+            background-color: var(--dark-section-bg);
+            color: var(--white-color);
+            border-color: var(--dark-section-bg);
+        }
+
+        /* ---- BLOG GRID SECTION ---- */
+        #blog-grid {
+            padding: 80px 0;
+        }
+        .blog-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .blog-card {
+            background-color: var(--white-color);
+            border-radius: 0px;
+            overflow: hidden;
+            text-decoration: none;
+            color: var(--dark-grey);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+            display: block; /* Ensure it's a block for display property to work */
+        }
+        .blog-card.hidden {
+            display: none;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .blog-card-content {
+            padding: 25px;
+        }
+        .blog-card-content .category {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: var(--highlight-color);
+            color: var(--dark-section-bg);
+            font-size: 0.8em;
+            font-weight: 700;
+        }
+        .blog-card-content h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .blog-card-content .excerpt {
+            font-size: 0.95em;
+            color: var(--text-color);
+        }
+
+        /* ---- FOOTER ---- */
+        footer { 
+            padding: 40px 0; 
+            background-color: var(--light-beige-bg); 
+            color: var(--dark-grey); 
+        }
+        .footer-container { display: flex; justify-content: space-between; align-items: center; }
+        .footer-logo-main img { height: 100px; }
+        .footer-social a { 
+            color: var(--dark-grey); 
+            font-size: 1.5em; 
+            margin-left: 20px; 
+            transition: color 0.3s ease; 
+        }
+        .footer-social a:hover { color: var(--primary-color); }
+        .footer-bottom { 
+            font-size: 0.9em; 
+            color: var(--text-color); 
+        }
+
+        /* ---- RESPONSIVE DESIGN ---- */
+        @media (max-width: 992px) {
+            .menu-toggle { display: block; }
+            .nav-wrapper {
+                position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+                background-color: var(--highlight-color);
+                flex-direction: column; justify-content: center; align-items: center;
+                gap: 40px; transform: translateX(100%); transition: transform 0.4s ease-in-out;
+            }
+            .nav-wrapper.active { transform: translateX(0); }
+            nav ul { flex-direction: column; text-align: center; gap: 25px; }
+            nav ul li a { color: var(--white-color); font-size: 1.5em; }
+            nav ul li a:hover { text-decoration: underline; color: var(--white-color); }
+            .header-actions .btn { border-color: var(--white-color); color: var(--white-color); }
+            .header-actions .btn:hover { background-color: var(--white-color); color: var(--dark-grey); }
+        }
+        @media (max-width: 768px) {
+            .footer-container { flex-direction: column; text-align: center; }
+            .footer-logo-main { margin-bottom: 20px; }
+            .footer-social { margin-bottom: 20px; }
+            .footer-social a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img class="logo-dark" src="images/dasologo.png" alt="Λογότυπο Σκούρο">
+            </a>
+            <div class="nav-wrapper" id="nav-wrapper">
+                <nav id="nav-menu">
+                    <ul>
+                        <li><a href="index.html#services">Τι κάνουμε</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#contact">Επικοινωνία</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                     <a href="index.html#contact" class="btn btn-secondary">Επικοινωνία</a>
+                </div>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="blog-hero">
+            <div class="container">
+                <h1>Τελευταία Νέα</h1>
+                <p>Ενημερωθείτε για τις τελευταίες εξελίξεις, τις δράσεις μας και χρήσιμες συμβουλές για το περιβάλλον.</p>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Αναζήτηση άρθρων...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="category-filters">
+                    <button class="active" data-filter="all">Όλα</button>
+                    <button data-filter="ΔΑΣΟΛΟΓΙΑ">Δασολογία</button>
+                    <button data-filter="ΝΟΜΙΚΑ">Νομικά</button>
+                    <button data-filter="ΤΕΧΝΟΛΟΓΙΑ">Τεχνολογία</button>
+                    <button data-filter="ΣΥΜΒΟΥΛΕΣ">Συμβουλές</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog-grid">
+            <div class="container">
+                <div class="blog-grid-container">
+					
+					<a href="parnassos.html" class="blog-card" data-category="ΤΟΠΙΑ">
+                        <img src="images/parnassos-zemeno.jpg" alt="Placeholder Εικόνας">
+                        <div class="blog-card-content">
+                            <span class="category">TOΠΙΑ</span>
+                            <h3>Πόσο μαγικός είναι ο Παρνασσός;</h3>
+                            <p class="excerpt">Πως θα γινόταν να μην το διαλέξει για σπίτι του ο Απόλλωνας; Υπάρχει κάποιος/α που να έχει περάσει έστω, από του Δελφούς και να μην έχει νιώσει αυτή την ενέργεια; Πως θα ήταν δυνατό κάποιος να επισκεφτεί τον Παρνασό και να μην κλονιστεί έστω και λίγο από τις δονήσεις του; Αυτά και άλλα πολλά μαζί κάνοντας απλά ένα "κλικ".</p>
+                        </div>
+                    </a>
+					
+					<a href="karydia.html" class="blog-card" data-category="ΤΟΠΙΑ">
+                        <img src="images/karydia.jpg" alt="Placeholder Εικόνας">
+                        <div class="blog-card-content">
+                            <span class="category">ΣΥΜΒΟΥΛΕΣ</span>
+                            <h3>Η Καρυδιά</h3>
+                            <p class="excerpt">Περιβαλλοντική εκπαίδευση μπορεί να είναι μια δράση, μπορεί να είναι μια παρέμβαση στον κήπο μας ή στο άλσος της πόλης μας, μια πεζοπορία στο βουνό. Όμως μπορεί να είναι απλά ένα κείμενο, ένα ποιήμα και ένα τραγούδι. Εδώ μέσα από ένα ποιήμα για την καρυδιά και μπόλικη Σητειακή ντοπιολαλιά, μαθαίνουμε όσο πιο βιωματικά γίνεται για το αγαπημένο μας δέντρο την καρυδιά!
+                                
+                        </div>
+                    </a>
+
+                    <a href="imittos.html" class="blog-card" data-category="ΔΑΣΟΛΟΓΙΑ">
+                        <img src="images/imitos.jpg" alt="Placeholder Εικόνας">
+                        <div class="blog-card-content">
+                            <span class="category">ΔΑΣΟΛΟΓΙΑ</span>
+                            <h3>Υμηττός! Γιατί τον αγαπάμε;</h3>
+                            <p class="excerpt">Από Χολαργο και Παπάγου μέχρι Αργυρούπολη! Ποιος δεν έχει κάνει μια μικρή βολτίτσα στους πρόποδες του Υμηττού...</p>
+                        </div>
+                    </a>
+
+                    <a href="dasikos-xartis.html" class="blog-card" data-category="ΝΟΜΙΚΑ">
+                        <img src="images/dasikos-xartis.jpg" alt="Placeholder Εικόνας">
+                        <div class="blog-card-content">
+                            <span class="category">ΝΟΜΙΚΑ</span>
+                            <h3>Δασικός χάρτης! Τι πρέπει να γνωρίζεις!</h3>
+                            <p class="excerpt">Ο Δασικός Χάρτης ενώ σχεδιάστηκε για να βοηθήσει στη δασική διαχείριση και στην επίλυση προβλημάτων φαίνεται πως δημιουργεί ακόμα περισσότερα. Αυτά είναι κάποια από τα πιο βασικά πράγματα που πρέπει να γνωρίζεις.</p>
+                        </div>
+                    </a>
+
+                    <a href="dasika-akinhta.html" class="blog-card" data-category="ΤΕΧΝΟΛΟΓΙΑ">
+                        <img src="images/cholomon-mountain.jpg" alt="Placeholder Εικόνας">
+                        <div class="blog-card-content">
+                            <span class="category">ΝΟΜΙΚΑ</span>
+                            <h3>Δασικά Ακίνητα και ο Ρόλος του Δασολόγου</h3>
+                            <p class="excerpt">Όταν χιλιάδες ιδιοκτήτες ακινήτων στην Ελλάδα βλέπουν τα περουσιακά τους στοιχεία να «παγώνουν» εμποδίζοντας την μεταβίβαση και εν τέλει την αξιοποίηση τους και ίσως και το ιδιοκτησιακό τους καθεστώς.</p>
+                        </div>
+                    </a>
+
+                    <a href="tropoi-sunthrhsh-khpou.html" class="blog-card" data-category="ΣΥΜΒΟΥΛΕΣ">
+                        <img src="images/kipos.jpg" alt="Placeholder Εικόνας">
+                        <div class="blog-card-content">
+                            <span class="category">ΣΥΜΒΟΥΛΕΣ</span>
+                            <h3>Επαναπροσδιορίζοντας τον Κήπο μας</h3>
+                            <p class="excerpt">Η επιλογή να δημιουργήσουμε έναν κήπο με ενδημικά και τοπικά φυτά υπερβαίνει τα όρια της απλής κηπουρικής. Είναι μια συνειδητή απόφαση που ενσωματώνει την περιβαλλοντική ευθύνη και την επιδίωξη μιας πιο βιώσιμης καθημερινότητας. 
+                                Σε μια εποχή που οι μεγάλες περιβαλλοντικές προκλήσεις φαντάζουν συχνά συντριπτικές, 
+                                ο κήπος μας προσφέρει ένα πεδίο άμεσης και ουσιαστικής δράσης. Κάθε τοπικό φυτό που φυτεύουμε είναι μια μικρή, αλλά σημαντική, συμβολή στην προστασία του τόπου μας.
+                            </p>
+                        </div>
+                    </a>
+
+                    <a href="bookchin.html" class="blog-card" data-category="ΣΥΜΒΟΥΛΕΣ">
+                        <img src="images/ecology-of-freedom.jpg" alt="Placeholder Εικόνας">
+                        <div class="blog-card-content">
+                            <span class="category">ΣΥΜΒΟΥΛΕΣ</span>
+                            <h3>Η πολύτιμη παρακαταθήκη του Μάρεϊ Μπούκτσιν: Οικολογία, Δημοκρατία & Απελευθέρωση</h3>
+                            <p class="excerpt">Οποιαδήποτε περιβαλλοντική δράση, είτε επαγγελματική είτε εθελοντική από το σκάλισμα ενός κήπου ή τη φύτευση μιας φλαμουριάς ενέχει κάποιες αρχές, καποιους κανόνες! 
+                                Διαβάζοντας ξανά το έργο του Μπούκτσιν συνειδητοποιούμε ποσό επίκαιρος και ουσιαστικός είναι ο λόγος του και για αυτό θέλουμε να το μοιραστούμε μαζί σας!
+                        </div>
+                    </a>
+					
+					<a href="o-platanos-sto-krasi.html" class="blog-card" data-category="ΣΥΜΒΟΥΛΕΣ">
+                        <img src="images/platanos-krasi.jpg" alt="Placeholder Εικόνας">
+                        <div class="blog-card-content">
+                            <span class="category">ΣΥΜΒΟΥΛΕΣ</span>
+                            <h3>O Πλάτανος στο Κράσι</h3>
+                            <p class="excerpt">Ο Πλάτανος στο Κράσι Ηρακλείου αποτελεί ένα θαύμα της φύσης! Εκτός από όλους εμάς που απολαύσαμε τη σκιά και τη δροσιά που μας χάρισε αυτό το δέντρο όλα αυτα τα χρόνια ο σπουδαίος ποιητής Κωστής Φραγκούλης πρίν από περίπου 80 χρόνια "έπιασε κουβέντα" με τον πλάτανο στο Κράσι και μας άφησε αυτό το σπουδαίο λαϊκό δημιούργημα!
+                                
+                        </div>
+                    </a>
+					
+					<a href="ermhneia-dasikou-xarth.html" class="blog-card" data-category="ΣΥΜΒΟΥΛΕΣ">
+                        <img src="images/oros-elikonas.jpg" alt="Placeholder Εικόνας">
+                        <div class="blog-card-content">
+                            <span class="category">ΣΥΜΒΟΥΛΕΣ</span>
+                            <h3>Ερμηνεία και Σφάλματα Δασικών Χαρτών</h3>
+                            <p class="excerpt"> Η πρώτη φορά που το κράτος δημοσιοποιεί επίσημα τον χαρακτηρισμό κάθε έκτασης, δίνοντας την ευκαιρία στους πολίτες να ενημερωθούν και, κυρίως, να δράσουν και να διασφαλίσουν τις ιδιοκτησίες τους.
+                                
+                        </div>
+                    </a>
+
+                    <a href="diorthosi-dasikou-xarth.html" class="blog-card" data-category="ΔΑΣΟΛΟΓΙΑ">
+                        <img src="images/cholomontas.jpg" alt="Placeholder Εικόνας">
+                        <div class="blog-card-content">
+                            <span class="category">ΔΑΣΟΛΟΓΙΚΑ</span>
+                            <h3>Αντίρρηση ή Αίτηση Διόρθωσης του δασικού χάρτη;</h3>
+                            <p class="excerpt">Η ανάρτηση των δασικών χαρτών σε όλη την επικράτεια έχει δημιουργήσει πολλά προβλήματα στους ιδιοκτήτες ακινήτων. Πολλοί από αυτούς βλέπουν τα ακίνητά τους να χαρακτηρίζονται ως δασικά ή αναδασωτέα, γεγονός που επηρεάζει την αξία και τη δυνατότητα μεταβίβασής τους. 
+                                Σε αυτό το άρθρο θα προσπαθήσουμε να ξεκαθαρίσουμε τις έννοιες της αντίρρησης και της αίτησης διόρθωσης, ώστε να βοηθήσουμε τους ιδιοκτήτες να κατανοήσουν τις επιλογές τους.
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo-main">
+                 <a href="index.html">
+                    <img src="images/dasologo.png" alt="Λογότυπο Σκούρο">
+                </a>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="year"></span> Δασολόγιο. All Rights Reserved.
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Menu ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navWrapper = document.getElementById('nav-wrapper');
+        const navLinks = document.querySelectorAll('#nav-menu a');
+
+        const closeMenu = () => {
+            navWrapper.classList.remove('active');
+            menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        };
+
+        menuToggle.addEventListener('click', () => {
+            navWrapper.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        navLinks.forEach(link => link.addEventListener('click', closeMenu));
+        
+        // --- Search and Filter Functionality ---
+        const searchInput = document.getElementById('search-input');
+        const filterButtons = document.querySelectorAll('.category-filters button');
+
+        function filterAndSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeFilter = document.querySelector('.category-filters button.active').dataset.filter;
+
+            document.querySelectorAll('.blog-card').forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const category = card.dataset.category.toLowerCase();
+                const excerpt = card.querySelector('.excerpt').textContent.toLowerCase();
+
+                const matchesSearch = title.includes(searchTerm) || excerpt.includes(searchTerm);
+                const matchesFilter = activeFilter === 'all' || category === activeFilter.toLowerCase();
+
+                if (matchesSearch && matchesFilter) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        searchInput.addEventListener('keyup', filterAndSearch);
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                filterAndSearch();
+            });
+        });
+
+        // --- On Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+    </script>
+
+</body>
+</html>

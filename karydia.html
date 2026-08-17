@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Η Καρυδιά - Ένα Ποίημα</title>
+	
+  <meta property="og:title" content="Η Καρυδιά του Κωστή Φραγκούλη" />
+
+  <meta property="og:description" content="Όλα τὰ ξύλα τοῦ βουνοῦ καὶ τὰ δεντρὰ τοῦ κάμπου, δὲν ἔχουν ἴδια βγόδωση, δὲν ἔχουν ἴδια χάρη..." />
+
+  <meta property="og:type" content="website" />
+
+  <meta property="og:url" content="https://www.dasologio.com/karydia.html" />
+  <meta property="og:image" content="https://www.dasologio.com/images/karydia.jpg" />
+  <meta property="og:site_name" content="dasologio" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #a9db67;
+            --highlight-color: #a1d99b;
+            --dark-section-bg: #2a3d38;
+            --light-beige-bg: #fdf8e9;
+            --dark-grey: #333333;
+            --white-color: #ffffff;
+            --text-color: #555555;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { color: var(--text-color); line-height: 1.8; background-color: var(--white-color); }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 30px; }
+
+        /* ---- HEADER & NAVIGATION ---- */
+        header {
+            background-color: var(--white-color); 
+            padding: 10px 0;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        header .container { max-width: 1200px; display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 80px; width: auto; }
+        .logo .logo-dark { display: block; }
+        .nav-wrapper { display: flex; align-items: center; gap: 20px; }
+        nav ul { list-style: none; display: flex; gap: 40px; }
+        nav ul li a { text-decoration: none; color: var(--dark-grey); font-weight: 500; transition: color 0.4s ease; }
+        nav ul li a:hover { color: var(--primary-color); }
+        .header-actions .btn {
+            padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 700;
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-grey); color: var(--dark-grey); background-color: transparent;
+        }
+        .header-actions .btn:hover { background-color: var(--dark-grey); color: var(--white-color); }
+        .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: var(--dark-grey); z-index: 1001; }
+
+        /* ---- ARTICLE STYLES ---- */
+        #article-main {
+            padding-top: 120px;
+            padding-bottom: 80px;
+        }
+        .article-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .article-header .category {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 5px 15px;
+            border-radius: 5px;
+            background-color: var(--highlight-color);
+            color: var(--dark-section-bg);
+            font-size: 0.9em;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .article-header h1 {
+            font-size: clamp(2.2em, 5vw, 3.5em);
+            color: var(--dark-section-bg);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .article-meta {
+            color: #777;
+            font-size: 0.9em;
+        }
+        .featured-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 0;
+            margin-bottom: 40px;
+        }
+        .inline-image {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 0;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        .article-content h2 {
+            font-size: 1.8em;
+            color: var(--dark-section-bg);
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .article-content p {
+            margin-bottom: 5px; /* Μικρότερο κενό για στίχους */
+        }
+        .article-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+        .article-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.6;
+        }
+        .article-content blockquote p {
+             margin-bottom: 2px; /* Ακόμα μικρότερο κενό μεταξύ στίχων */
+        }
+        .article-content ul {
+            list-style-position: inside;
+            margin-bottom: 20px;
+            padding-left: 10px;
+        }
+        .article-content li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        /* ---- SHARE & RELATED ---- */
+        .article-footer {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .share-buttons h3 {
+            margin-bottom: 20px;
+            color: var(--dark-section-bg);
+        }
+        .share-buttons a {
+            font-size: 1.8em;
+            color: var(--dark-grey);
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        .share-buttons a:hover {
+            color: var(--primary-color);
+        }
+        
+        .share-buttons a[href*="instagram.com"]:hover {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #d6249f;
+        }
+
+        #related-articles {
+            padding: 80px 0;
+            background-color: var(--light-beige-bg);
+        }
+        #related-articles .container {
+             max-width: 1200px;
+        }
+        #related-articles h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: var(--dark-section-bg);
+            margin-bottom: 50px;
+        }
+        .blog-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .blog-card {
+            background-color: var(--white-color); border-radius: 0; overflow: hidden;
+            text-decoration: none; color: var(--dark-grey); box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .blog-card img { width: 100%; height: 200px; object-fit: cover; }
+        .blog-card-content { padding: 25px; }
+        .blog-card-content .category {
+            display: inline-block; margin-bottom: 10px; padding: 5px 10px; border-radius: 5px;
+            background-color: var(--highlight-color); color: var(--dark-section-bg);
+            font-size: 0.8em; font-weight: 700;
+        }
+        .blog-card-content h3 { font-size: 1.3em; margin-bottom: 10px; line-height: 1.4; }
+        .blog-card-content .excerpt { font-size: 0.95em; color: var(--text-color); }
+
+        /* ---- FOOTER ---- */
+        footer { padding: 40px 0; background-color: var(--light-beige-bg); color: var(--dark-grey); }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-logo-main img { height: 100px; }
+        .footer-social a { color: var(--dark-grey); font-size: 1.5em; margin-left: 20px; transition: color 0.3s ease; }
+        .footer-social a:hover { color: var(--primary-color); }
+        .footer-bottom { font-size: 0.9em; color: var(--text-color); }
+
+        /* ---- RESPONSIVE DESIGN ---- */
+        @media (max-width: 992px) {
+            .menu-toggle { display: block; }
+            .nav-wrapper {
+                position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+                background-color: var(--highlight-color);
+                flex-direction: column; justify-content: center; align-items: center;
+                gap: 40px; transform: translateX(100%); transition: transform 0.4s ease-in-out;
+            }
+            .nav-wrapper.active { transform: translateX(0); }
+            nav ul { flex-direction: column; text-align: center; gap: 25px; }
+            nav ul li a { color: var(--white-color); font-size: 1.5em; }
+            .header-actions .btn { border-color: var(--white-color); color: var(--white-color); }
+        }
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-social a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img class="logo-dark" src="images/dasologo.png" alt="Λογότυπο Σκούρο">
+            </a>
+            <div class="nav-wrapper" id="nav-wrapper">
+                <nav id="nav-menu">
+                    <ul>
+                        <li><a href="index.html#services">Τι κάνουμε</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#contact">Επικοινωνία</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                     <a href="index.html#contact" class="btn btn-secondary">Επικοινωνία</a>
+                </div>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main id="article-main">
+        <div class="container">
+            <article>
+                <header class="article-header">
+                    <a href="#" class="category">ΠΟΙΗΣΗ</a>
+                    <h1>Η Καρυδιά</h1>
+                    <div class="article-meta">
+                        <span></span>
+                    </div>
+                </header>
+
+                <img src="images/karydia.jpg" alt="Εικονα της Καρυδιάς" class="featured-image">
+
+                <div class="article-content">
+
+                    <p>
+                        Πολλές φορές καθώς διαβάζω και ξαναδιαβάζω τον Κωστή Φραγκούλη, αναρωτιέμαι πως ένας άνθρωπος μπορεί να μεταφέρει αυτούσιες εικόνες
+                        τόσο καθαρά και ζωντανά μέσα από λέξεις. Όλοι οι «μεγάλοι» συγγραφείς είναι καλοί σε αυτό, στο να σε διευκολύνουν να φτιάχνεις εικονες διαβάζοντας τα έργα τους.
+                        Όμως ο Φραγκούλης δεν ήταν απλά «μεγάλος», αφού "έπλαθε" κυριολεκτικά δικές του λέξεις με «προζύμι» την κρητική διάλεκτο, απογειώνοντας την ευρηματικότητα και την φαντασία του στο γραπτό.
+
+                    </p>
+
+                    <p>Σε αυτό λοιπόν το μικρό ποιηματάκι του ο Κωστής Φραγκούλης μας δείχνει πριν από πολλά χρόνια τι ακριβώς είναι αυτό που σήμερα ονομάζουμε περιβαλλοντική εκπαίδευση
+                        όπως θα το έχετε ακούσει αρκετές φορές. Το να τονίζουμε συνεχώς πως και με ποιους τρόπους ο άνθρωπος είναι μέρος της φύσης και όχι κάτι ξεχωριστό από αυτήν.
+                        Παρόλαυτά σπάνια διαβάζω κείμενα, τα οποία να συνοψίζουν με τόσο απλό και όμορφο τρόπο όσο αυτό το μικρό ποιηματάκι, την ουσία της σχέσης ανθρώπου και φύσης. <br>Ξεκινώντας από
+                        τα ξύλα του βουνού και τα δεντρά του κάμπου για να μας πάει στο αλέτρι και στο ζυγό και από εκεί στη λύρα και στο τραγούδι για να μας δείξει τι αξία έχει η καρυδιά, πόσα 
+                        αγαθά μας δίνει. Θα μου πείτε πολύ ανθρωποκεντρικό αυτό, καθώς βιάζεστε να κρίνετε από την θαλπωρή που μας προσφέρει η εποχή μας και η καινούργια μεταμοντέρνα ηθική. Αλλά γιατί όχι;
+                        Αυτό δεν κάνουν εκτός άλλων τα κείμενα, δεν μας προκαλούν και μας διεγείρουν συναισθήματα και σκέψεις; Όπως και να 'χει όμως ο Φραγκούλης δεν σταματάει εκεί.'
+                        Ας τον αφήσουμε να έρθει να μας μιλήσει για την γνωστή σε όλους μας αγαπημένη <strong>Kαρυδιά</strong> από το αριστούργημα-ωδή στην κρητική φύση και κρητικό πολιτισμό <strong>"Τα Δίφορα"</strong>
+                    </p>
+                    <h2>Η Καρυδιά</h2>
+
+                    <blockquote>
+                        <p>Όλα τὰ ξύλα τοῦ βουνοῦ καὶ τὰ δεντρὰ τοῦ κάμπου,</p>
+                        <p>δὲν ἔχουν ἴδια βγόδωση, δὲν ἔχουν ἴδια χάρη.</p>
+                        <p>Τὄ 'να σκαμνάκι γίνεται, τ' ἄλλο θρονὶ τοῦ ρήγα,</p>
+                        <p>τὸ παραπέρα κόνισμα, κάρβουνο τὸ παρέκει,</p>
+                        <p>ζυγὸς κι ἀλέτρι τ' ἀπὸ 'δῶ, σοφρᾶς καὶ σκρίνιο τ' ἄλλο,</p>
+                        <p>τό 'να στασίδι γὴ σταυρός, τ' ἄλλο προσκυνητάρι</p>
+                        <p>γὴ μποτζαργάτης τῶν ἐλιῶ, κούνια γὴ καθελέτο.</p>
+                        <p>Μὰ δέντρο σὰν τὴν καρυδιά, ὁ Θεὸς δὲν ἤκαμε ἄλλο,</p>
+                        <p>γιατὶ 'χει εὐκὴ στὸ ξύλο τζη, εὐκὴ καὶ στὸν καρπό τζη</p>
+                        <p>νὰ δίδει στὴ στεφάνωση καρύδι μὲ τὸ μέλι,</p>
+                        <p>ὄντε σταθοῦν στὴν ἐκκλησὰ τ' ἀντρόυνα γιὰ βλόγια.</p>
+                    </blockquote>
+
+
+                    <blockquote>
+                        <p>Δίδει τοῦ πρωτομάστορα τὰ ξύλα τζη γιὰ λύρες,</p>
+                        <p>νὰ πελεκᾶ ψιμυθευτά, νὰ μορφοσκαφιδώνει'</p>
+                        <p>στὴν κεφαλὴ δικέφαλο, πέρδικα στὸ καπάκι,</p>
+                        <p>δεξὰ ζερβὰ στὰ μάγουλα, πουλιὰ νὰ κηλαϊδοῦνε,</p>
+                        <p>στὸν καβαλάρη κυνηγό, λαγὸ νὰ σαϊτεύγει.</p>
+                    </blockquote>
+
+                    <img src="images/lasithiotika.jpg" alt="Καρύδια με μέλι" class="inline-image">
+
+                    <blockquote>
+                        <p>Καὶ στὰ γλυκοπατήματα, στὰ δαχτυλιώ τὰ ζάλα,</p>
+                        <p>ποὺ μαρτυροῦνε τσὶ καημοὺς καὶ μολογοῦν τὰ πάθη,</p>
+                        <p>παγώνι ἀνοιχτοφτέρουγο μ' ἀητὸ συνταιργιασμένο.</p>
+                        <p>Στοῦ δοξαργιοῦ τὴν ἔχερη, σὲ μιὰ μεριὰ καὶ σ' ἄλλη,</p>
+                        <p>ἀγρίμια κι ἀγριμιόφορα τὴ λέσκα νὰ πλουμίζου.</p>
+                        <p>Νὰ παίζει ἡ λύρα, νὰ λαλεῖ, πιδέξα νὰ δηγᾶται,</p>
+                        <p>τοῦ ψεύτη κόσμου τσὶ χαρές, τὰ ντέρτια τῶν ἀθρώπω,</p>
+                        <p>τσὴ νιότης τὸ λουλούδισμα, τσ' ἀγάπης τὸ μεθύσι.</p>
+                    </blockquote>
+
+                    <img src="images/lyra.jpg" alt="Μια λύρα φτιαγμένη από ξύλο" class="inline-image">
+
+                </div>
+
+                <footer class="article-footer">
+                    <div class="share-buttons">
+                        <h3>Μοιραστείτε το άρθρο</h3>
+						<a href="https://www.facebook.com/sharer/sharer.php?u=https://www.dasologio.com/karydia-poima.html" 
+						   target="_blank" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+						<a href="#" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+						<a href="#" target="_blank" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+						
+                        <a href="https://www.instagram.com/dasologio" target="_blank" title="Ακολουθήστε μας στο Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </main>
+
+    <section id="related-articles">
+        <div class="container">
+            <h2>Σχετικά Άρθρα</h2>
+            <div class="blog-grid-container">
+                <a href="dasikos-xartis.html" class="blog-card">
+                    <img src="images/dasikos-xartis.jpg" alt="Δασικός Χάρτης">
+                    <div class="blog-card-content">
+                        <span class="category">ΝΟΜΙΚΑ</span>
+                        <h3>Δασικός χάρτης! Τι πρέπει να γνωρίζεις!</h3>
+                        <p class="excerpt">Αναλυτικός οδηγός για τη διαδικασία υποβολής αντιρρήσεων...</p>
+                    </div>
+                </a>
+                <a href="imittos.html" class="blog-card">
+                    <img src="images/imitos.jpg" alt="Υμηττός">
+                    <div class="blog-card-content">
+                        <span class="category">ΔΑΣΟΛΟΓΙΑ</span>
+                        <h3>Υμηττός! Γιατί τον αγαπάμε;</h3>
+                        <p class="excerpt">Από Χολαργό και Παπάγου μέχρι Αργυρούπολη! Μια βόλτα στο βουνό μας...</p>
+                    </div>
+                </a>
+                <a href="parnassos.html" class="blog-card">
+                    <img src="images/parnassos-zemeno.jpg" alt="Παρνασσός">
+                    <div class="blog-card-content">
+                        <span class="category">ΤΑΞΙΔΙΑ & ΤΟΠΙΑ</span>
+                        <h3>Πόσο μαγικός είναι ο Παρνασσός;</h3>
+                        <p class="excerpt">Ένα ταξίδι από την Αράχωβα και την Αγόριανη μέχρι τη σπάνια Παιώνια...</p>
+                    </div>
+                </a>
+                </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo-main">
+                 <a href="index.html">
+                    <img src="images/dasologo.png" alt="Λογότυπο Σκούρο">
+                </a>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="year"></span> Δασολόγιο. All Rights Reserved.
+            </div>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.dasologio.com/karydia-poima.html" 
+				   target="_blank" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                
+                <a href="https://www.instagram.com/dasologio" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Menu ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navWrapper = document.getElementById('nav-wrapper');
+        const navLinks = document.querySelectorAll('#nav-menu a');
+
+        const closeMenu = () => {
+            navWrapper.classList.remove('active');
+            menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        };
+
+        menuToggle.addEventListener('click', () => {
+            navWrapper.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        navLinks.forEach(link => link.addEventListener('click', closeMenu));
+        
+        // --- On Load Script ---
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Πλάτανος στο Κράσι</title>
+    
+    <meta property="og:title" content="Περί πλατάνων - O Πλάτανος στο Κράσι" />
+    <meta property="og:description" content="Μια εξερεύνηση της σημασίας των δέντρων μέσα από το ποίημα του Κωστή Φραγκούλη για τον ιστορικό πλάτανο στο Κράσι της Κρήτης." />
+    <meta property="og:image" content="https://www.dasologio.com/images/platanos-krasi-2.jpg" />
+    <meta property="og:url" content="https://www.dasologio.com/o-platanos-sto-krasi.html" />
+    <meta property="og:type" content="article" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #a9db67;
+            --highlight-color: #a1d99b;
+            --dark-section-bg: #2a3d38;
+            --light-beige-bg: #fdf8e9;
+            --dark-grey: #333333;
+            --white-color: #ffffff;
+            --text-color: #555555;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { color: var(--text-color); line-height: 1.8; background-color: var(--white-color); }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 30px; }
+
+        /* ---- HEADER & NAVIGATION ---- */
+        header {
+            background-color: var(--white-color); 
+            padding: 10px 0;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        header .container { max-width: 1200px; display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 80px; width: auto; }
+        .logo .logo-dark { display: block; }
+        .nav-wrapper { display: flex; align-items: center; gap: 20px; }
+        nav ul { list-style: none; display: flex; gap: 40px; }
+        nav ul li a { text-decoration: none; color: var(--dark-grey); font-weight: 500; transition: color 0.4s ease; }
+        nav ul li a:hover { color: var(--primary-color); }
+        .header-actions .btn {
+            padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 700;
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-grey); color: var(--dark-grey); background-color: transparent;
+        }
+        .header-actions .btn:hover { background-color: var(--dark-grey); color: var(--white-color); }
+        .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: var(--dark-grey); z-index: 1001; }
+
+        /* ---- ARTICLE STYLES ---- */
+        #article-main {
+            padding-top: 120px;
+            padding-bottom: 80px;
+        }
+        .article-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .article-header .category {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 5px 15px;
+            border-radius: 5px;
+            background-color: var(--highlight-color);
+            color: var(--dark-section-bg);
+            font-size: 0.9em;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .article-header h1 {
+            font-size: clamp(2.2em, 5vw, 3.5em);
+            color: var(--dark-section-bg);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .article-meta {
+            color: #777;
+            font-size: 0.9em;
+        }
+        .featured-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+        .article-content h2 {
+            font-size: 1.8em;
+            color: var(--dark-section-bg);
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .article-content p {
+            margin-bottom: 20px;
+        }
+        .article-content ul {
+            list-style-position: inside;
+            margin-left: 15px;
+            margin-bottom: 20px;
+        }
+        .article-content li {
+            margin-bottom: 10px;
+        }
+        .article-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+        .article-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            font-size: 1.1em;
+            color: #555;
+            white-space: pre-line; /* <-- THIS LINE WAS ADDED */
+        }
+        
+        /* NEW STYLES FOR THE IMAGE SLOTS */
+        .poem-image-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .poem-image-gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            background-color: #f0f0f0; /* Light grey background for empty slots */
+        }
+        /* END OF NEW STYLES */
+
+        /* ---- SHARE & RELATED ---- */
+        .article-footer {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .share-buttons h3 {
+            margin-bottom: 20px;
+            color: var(--dark-section-bg);
+        }
+        .share-buttons a {
+            font-size: 1.8em;
+            color: var(--dark-grey);
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        .share-buttons a:hover {
+            color: var(--primary-color);
+        }
+
+        #related-articles {
+            padding: 80px 0;
+            background-color: var(--light-beige-bg);
+        }
+        #related-articles .container {
+             max-width: 1200px;
+        }
+        #related-articles h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: var(--dark-section-bg);
+            margin-bottom: 50px;
+        }
+        .blog-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .blog-card {
+            background-color: var(--white-color); border-radius: 20px; overflow: hidden;
+            text-decoration: none; color: var(--dark-grey); box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .blog-card img { width: 100%; height: 200px; object-fit: cover; }
+        .blog-card-content { padding: 25px; }
+        .blog-card-content .category {
+            display: inline-block; margin-bottom: 10px; padding: 5px 10px; border-radius: 5px;
+            background-color: var(--highlight-color); color: var(--dark-section-bg);
+            font-size: 0.8em; font-weight: 700;
+        }
+        .blog-card-content h3 { font-size: 1.3em; margin-bottom: 10px; line-height: 1.4; }
+        .blog-card-content .excerpt { font-size: 0.95em; color: var(--text-color); }
+
+        /* ---- FOOTER ---- */
+        footer { padding: 40px 0; background-color: var(--light-beige-bg); color: var(--dark-grey); }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .footer-logo img { height: 100px; }
+        .footer-social a { color: var(--dark-grey); font-size: 1.5em; margin-left: 20px; transition: color 0.3s ease; }
+        .footer-social a:hover { color: var(--primary-color); }
+        .footer-bottom { font-size: 0.9em; color: var(--text-color); }
+
+        /* ---- RESPONSIVE DESIGN ---- */
+        @media (max-width: 992px) {
+            .menu-toggle { display: block; }
+            .nav-wrapper {
+                position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+                background-color: var(--highlight-color);
+                flex-direction: column; justify-content: center; align-items: center;
+                gap: 40px; transform: translateX(100%); transition: transform 0.4s ease-in-out;
+            }
+            .nav-wrapper.active { transform: translateX(0); }
+            nav ul { flex-direction: column; text-align: center; gap: 25px; }
+            nav ul li a { color: var(--white-color); font-size: 1.5em; }
+            .header-actions .btn { border-color: var(--white-color); color: var(--white-color); }
+        }
+        @media (max-width: 768px) {
+            .footer-container { flex-direction: column; text-align: center; gap: 20px; }
+            .footer-social a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img class="logo-dark" src="images/dasologo.png" alt="Λογότυπο Σκούρο">
+            </a>
+            <div class="nav-wrapper" id="nav-wrapper">
+                <nav id="nav-menu">
+                    <ul>
+                        <li><a href="index.html#services">Τι κάνουμε</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#contact">Επικοινωνία</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                     <a href="index.html#contact" class="btn btn-secondary">Επικοινωνία</a>
+                </div>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main id="article-main">
+        <div class="container">
+            <article>
+                <header class="article-header">
+                    <a href="blog.html" class="category">ΔΑΣΟΛΟΓΙΑ</a>
+                    <h1>Περί πλατάνων </h1>
+                    <div class="article-meta">
+                        <span>Δασολόγιο</span> | <span>2 Σεπτεμβρίου 2024</span>
+                    </div>
+                </header>
+
+                <img src="images/platanos-1920.jpg" alt="O πλάτανος στο Κράσι στον Μεσοπόλεμο" class="featured-image">
+
+                <div class="article-content">
+            
+                    <h2>Περί πλατάνων</h2>
+                    <p>Δεν είναι λίγες οι φορές που θα αρχίσω να γκουκλάρω ασταμάτητα καθώς πίνω τον καφέ μου και « τσούπ» κάποιο κείμενο το οποίο θα περιγράφει την ιερότητα των δέντρων, το πόσο τα δέντρα ενσωματώνουν την ίδια την ανθρώπινη συλλογική μνήμη, και γενικότερα το πόσο σημαντικά είναι για «εμάς τους ανθρώπους»! Πάντα χαίρομαι όταν διαβάζω παρόμοια κείμενα και ενθουσιάζομαι με άλλη μια απόδειξη ότι υπάρχουν πολλοί άνθρωποι εκεί έξω που συγκινούνται με τα ίδια πράγματα που συγκινούν και μένα για αυτό και πάντα τα καλωσορίζω.
+                    Για αυτό τον λόγο θέλω να μοιραστώ το παρακάτω δείγμα λαϊκής ποίησης το οποίο πραγματικά ζωντανεύει το δέντρο μέσα από τον λόγο και την φαντασία του Κωστή Φραγκούλη. Αυτού το μεγάλου λαϊκού ποιητή της Κρήτης ο οποίος άφησε πίσω του «διαμάντια χρυσοστόλιστα» όπως λέει και το γνωστό άσμα (βεβαίως βεβαίως).
+                    </p>
+
+                    <h2>Κωστής Φραγκούλης</h2>
+                    <p>
+                     Ο Κωστής Φραγκούλης το γεννημένος στο Λάστρο της Σητείας στην Κρήτη σε μικρή ηλικία έφυγε για τη Χώρα, 
+                     δηλαδή το Ηράκλειο και έπιασε δουλεία ως βοηθός στην γνωστή εφημερίδα της εποχής Ίδη. Πολύ γρήγορα το ανήσυχο πνεύμα του και η τάση του να 
+                     σκαλίζει τα πράγματα πίσω από την επιφάνεια τον έστρεψε προς τη συγγραφή!
+                     Το συγγραφικό του έργο είναι τόσο πλούσιο και πραγματικά αποτελεί μια τεράστια παρακαταθήκη ειδικά για τους Κρητικούς! 
+                     Διαβάζοντας κάποια από τα έργα του ουσιαστικά ταξιδεύεις στον χρόνο με τον συγγραφέα να σε παίρνει από το χέρι και να σε ξεναγεί στην παλιά Κρητική υπαίθρο, 
+                     χαρίζοντας σου εικόνες μοναδικές, βγαλμένες από μια άλλη πραγματικότητα στην οποία ακόμα και τα πουλιά, τα δέντρα και τα φυτά έχουν και αυτά ψυχή και λαλιά όπως ακριβώς και εμείς οι άνθρωποι!
+                    </p>
+
+                    <h2>Ο πλάτανος στο Κράσι</h2>
+
+                    <div class="poem-image-gallery">
+                        <img src="images/platanos-krasi-2.jpg" alt="Ο πλάτανος στο Κράσι">
+                        <img src="images/platanos-krasi.jpg" alt="Οι βρύσες στο Κράσι">
+                        <img src="images/ta-difora.jpg" alt="Τα Δίφωρα του Κωστή Φράγκουλη">
+                    </div>
+
+                    <blockquote class="poem-text">"-<strong>Να σε ρωτήξω πλάτανε, πόσο χρονώ λογάσαι;</strong>
+Και ποιος σε πρωτοφύτεψε στη κρασανή δετάδα;
+-Να σε ρωτήξω δα κι εγώ, πόσο με καρατάρεις,
+να δω αν είσαι μπιριτζής και καλοστιμαδόρος,
+κατά που δείχνει η ρίζα μου η χιλιοροζασμένη
+και μολογούν οι κλώνοι μου οι μαυρομουχλιασμένοι.
+Τσι’ χίλιους χρόνους πο’ περνάς, τσ’ χίλιους πεντακόσους,
+και τα σημάδια που θωρώ για δυο χιλιάδες δείχνουν.   
+Καλή ταμίνα μου ’κανες, στίμα καλή μου βρήκες,
+μα οι δυο πολλοί ’ναι ζάβαλε, οι χίλιοι χρόνοι λίγοι.
+Μα κεια κοντά με φύτεψε με τη δεξά ντου χέρα
+ο Παντοδύναμος Θεός, τον τόπο να δροσίζω,
+δίπλα στο κεφαλόβρυσο που τρέχει μέρα-νύχτα,
+κι οι ρίζες μου χωστήκανε στα σπλάχna τση Σελένας.
+Κι εβύζαξα το γάλα τζη κι ήπια τη δύναμή τζη,
+και θράφηκα κι αντριεύτηκα και μπόρες δε φοβούμαι,
+μήδε αστραπές, μήδε βροντές, μήδε βαρύ χαλάζι.-
+Ήθελα και να κάτεχα τόσο καιρούς αν είσαι·
+ιντά ’δανε τα μάθια σου κι ακούσανε τ’ αυτιά σου;
+Εσάλεψε τσι κλώνους ντου, ήσεισε τα κλαδιά ντου,
+σαν να ’θελε να θυμηθεί, ν’ ανοίξει τα χαρτιά ντου,
+ωσά τον γέρο τον παππού με τα γγονάκια γύρω,
+που παραμύθια του ζητούν να ντως επεί και νάκλια.
+-Είδα και λύπες και χαρές, δόξες και καταφρόνια·
+πέρασα χρόνους δίσεκτους, καιρούς κατατρεγμένους,
+νύχτες χωρίς αστροφεγγιά και μέρες δίχως ήλιο,
+βοριάδες ανεμόχολους, πάχνες και κουκοσάλια.
+Μα και μελτέμια δροσερά στα φύλλα μου να παίζουν,
+και στα κλαδιά μου τα πουλιά με αγάπη να φωλεύγουν.
+Αφέντες είδα δυνατούς, ραγιάδες φουρκισμένους,
+λιάπηδες απροσκύνητους να μ’ έχουνε για κάστρο.
+Στσι ροζασμένους κλώνους μου κρεμούσαν τ’ άρματά ντως
+κι εθέτανε στ’ απόσκιο μου, στη ρίζα μου ακουμπούσαν
+να δέσουν τσι λαβωματιές, να λαγοκοιμηθούνε,
+με τ’ όνειρο του λυτρωμού, κι εγώ σα πρωτομάνα
+που ’χει στη κούνια πρωτογιό, χαμήλωνα τσ’ κλώνους
+και με σκοπούς τση λευτεριάς γλυκονανούριζά τζοι.
+Και δόξες είδα και τιμές, κι αφανισμούς κι αντάρες,
+και όλης τση γης τσ’ αδυνάτους, του κόσμου τα μιλέτια,
+που θέλαν ν’ αφεντέψουνε τση Κρήτης το ρηγάτο.
+Είδα των Φράγκων κάτεργα, των Τούρκων μπαϊράκια,
+Σαρακηνούς να με πατούν, τσι τόπους να κουρσεύγουν,
+τον Νικηφόρο τον Φωκά με το βαρύ φουσάτο
+να ξαναφέρνει τον σταυρό με το σπαθί στη χέρα,
+να ξαναχτίζει τσ’ εκκλησιές και να κρεμά καμπάνες,
+να φέρνει τον δικέφαλο στσι ρίζες και τα κάστρα.
+Κι άμα γλυκοξημέρωσε κι εδιάβηκεν η νύχτα,
+κι ήλιος γλυκύς ανάτειλε κι ήφεξε πάλι η Κρήτη,
+και των αρμάτω η ταραχή επέρασε κι η ζάλη,
+κι η ξορισμένη λευτεριά με τον σταυρό ξανάρθε,
+κι ανεντρανίσαν τα βουνά, οι κάμποι ξαναθίσαν.
+Από ψηλά ’ρχουνται βοσκοί, πο’ χαμηλά ζευγάδες,
+συφάμελοι στη ρίζα μου, στσ’ κλώνους μου ποκάτω,
+και στρώνουνε φαντά χαλιά, χιράμια κεντησμένα,
+και τα στολίζουν με φαγιά, σαν τση Λαμπρής τη ταύλα,
+και τρων και πίνουν άκολοι, με λύρες και λαγούτα,
+και χαίρουνται τη λευτεριά και μπαλοτοκοπούνε,
+και χαίρουνται τη λευτεριά σαν να ’χουν Πάσχα και Λαμπρή,
+γάμους και πανηγύρια.
+"</blockquote>
+					
+				
+                       
+                </div>
+
+                <footer class="article-footer">
+                    <div class="share-buttons">
+                        <h3>Μοιραστείτε το άρθρο</h3>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.dasologio.com/o-platanos-sto-krasi.html" target="_blank" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </main>
+
+    <section id="related-articles">
+        <div class="container">
+            <h2>Σχετικά Άρθρα</h2>
+            <div class="blog-grid-container">
+                <a href="dasikos-xartis.html" class="blog-card">
+                    <img src="images/dasikos-xartis.jpg" alt="Blog Post 2">
+                    <div class="blog-card-content">
+                        <span class="category">ΝΟΜΙΚΑ</span>
+                        <h3>Δασικός χάρτης! Τι πρέπει να γνωρίζεις!</h3>
+                        <p class="excerpt">Ο Δασικός Χάρτης ενώ σχεδιάστηκε για να βοηθήσει στη δασική διαχείριση και στην επίλυση προβλημάτων φαίνεται
+                             πως δημιουργεί ακόμα περισσότερα. Αυτά είναι κάποια από τα πιο βασικά πράγματα που πρέπει να γνωρίζεις.
+                            </p>
+                    </div>
+                </a>
+                <a href="imittos.html" class="blog-card">
+                    <img src="images/imitos.jpg" alt="Blog Post 3">
+                    <div class="blog-card-content">
+                        <span class="category">ΔΑΣΟΛΟΓΙΑ</span>
+                        <h3>Υμηττός! Γιατί τον αγαπάμε;</h3>
+                        <p class="excerpt">Από Χολαργο και Παπάγου μέχρι Αργυρούπολη! Ποιος δεν έχει κάνει μια μικρή βολτίτσα στους πρόποδες του Υμηττού...</p>
+                    </div>
+                </a>
+                <a href="dasika-akinhta.html" class="blog-card">
+                    <img src="images/cholomon-mountain.jpg" alt="Blog Post 4">
+                    <div class="blog-card-content">
+                        <span class="category">ΣΥΜΒΟΥΛΕΣ</span>
+                        <h3>Δασικά Ακίνητα και ο Ρόλος του Δασολόγου</h3>
+                        <p class="excerpt">Όταν χιλιάδες ιδιοκτήτες ακινήτων στην Ελλάδα βλέπουν τα περουσιακά τους στοιχεία να «παγώνουν» εμποδίζοντας την μεταβίβαση 
+                            και εν τέλει την αξιοποίηση τους και ίσως και το ιδιοκτησιακό τους καθεστώς.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">
+                 <a href="index.html">
+                    <img src="images/dasologo.png" alt="Λογότυπο Σκούρο">
+                </a>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="year"></span> Δασολόγιο. All Rights Reserved.
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/dasologio/"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Menu ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navWrapper = document.getElementById('nav-wrapper');
+        const navLinks = document.querySelectorAll('#nav-menu a');
+
+        const closeMenu = () => {
+            navWrapper.classList.remove('active');
+            menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        };
+
+        menuToggle.addEventListener('click', () => {
+            navWrapper.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        navLinks.forEach(link => link.addEventListener('click', closeMenu));
+        
+        // --- On Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+    </script>
+
+</body>
+</html>

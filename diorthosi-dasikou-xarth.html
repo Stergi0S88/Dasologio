@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Αντίρρηση ή Αίτηση Διόρθωσης του Δασικού Χάρτη;</title>
+	
+  <meta property="og:title" content="Your Catchy Page Title Here" />
+
+  <meta property="og:description" content="A compelling description of what this page is about." />
+
+  <meta property="og:type" content="website" />
+
+  <meta property="og:url" content="https://www.your-website.com/this-exact-page.html" />
+
+  <meta property="og:image" content="https://www.your-website.com/images/your-stunning-preview-image.jpg" />
+
+  <meta property="og:site_name" content="My Awesome Website" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #a9db67;
+            --highlight-color: #a1d99b;
+            --dark-section-bg: #2a3d38;
+            --light-beige-bg: #fdf8e9;
+            --dark-grey: #333333;
+            --white-color: #ffffff;
+            --text-color: #555555;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { color: var(--text-color); line-height: 1.8; background-color: var(--white-color); }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 30px; }
+
+        /* ---- HEADER & NAVIGATION ---- */
+        header {
+            background-color: var(--white-color); 
+            padding: 10px 0;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        header .container { max-width: 1200px; display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 80px; width: auto; }
+        .logo .logo-dark { display: block; }
+        .nav-wrapper { display: flex; align-items: center; gap: 20px; }
+        nav ul { list-style: none; display: flex; gap: 40px; }
+        nav ul li a { text-decoration: none; color: var(--dark-grey); font-weight: 500; transition: color 0.4s ease; }
+        nav ul li a:hover { color: var(--primary-color); }
+        .header-actions .btn {
+            padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 700;
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-grey); color: var(--dark-grey); background-color: transparent;
+        }
+        .header-actions .btn:hover { background-color: var(--dark-grey); color: var(--white-color); }
+        .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: var(--dark-grey); z-index: 1001; }
+
+        /* ---- ARTICLE STYLES ---- */
+        #article-main {
+            padding-top: 120px;
+            padding-bottom: 80px;
+        }
+        .article-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .article-header .category {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 5px 15px;
+            border-radius: 5px;
+            background-color: var(--highlight-color);
+            color: var(--dark-section-bg);
+            font-size: 0.9em;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .article-header h1 {
+            font-size: clamp(2.2em, 5vw, 3.5em);
+            color: var(--dark-section-bg);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .article-meta {
+            color: #777;
+            font-size: 0.9em;
+        }
+        .featured-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+        .article-content h2 {
+            font-size: 1.8em;
+            color: var(--dark-section-bg);
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .article-content p {
+            margin-bottom: 20px;
+        }
+        .article-content ul {
+            list-style-position: inside;
+            margin-left: 15px;
+            margin-bottom: 20px;
+        }
+        .article-content li {
+            margin-bottom: 10px;
+        }
+        .article-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+        .article-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        /* ---- SHARE & RELATED ---- */
+        .article-footer {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .share-buttons h3 {
+            margin-bottom: 20px;
+            color: var(--dark-section-bg);
+        }
+        .share-buttons a {
+            font-size: 1.8em;
+            color: var(--dark-grey);
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        .share-buttons a:hover {
+            color: var(--primary-color);
+        }
+
+        #related-articles {
+            padding: 80px 0;
+            background-color: var(--light-beige-bg);
+        }
+        #related-articles .container {
+             max-width: 1200px;
+        }
+        #related-articles h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: var(--dark-section-bg);
+            margin-bottom: 50px;
+        }
+        .blog-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .blog-card {
+            background-color: var(--white-color); border-radius: 20px; overflow: hidden;
+            text-decoration: none; color: var(--dark-grey); box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .blog-card img { width: 100%; height: 200px; object-fit: cover; }
+        .blog-card-content { padding: 25px; }
+        .blog-card-content .category {
+            display: inline-block; margin-bottom: 10px; padding: 5px 10px; border-radius: 5px;
+            background-color: var(--highlight-color); color: var(--dark-section-bg);
+            font-size: 0.8em; font-weight: 700;
+        }
+        .blog-card-content h3 { font-size: 1.3em; margin-bottom: 10px; line-height: 1.4; }
+        .blog-card-content .excerpt { font-size: 0.95em; color: var(--text-color); }
+
+        /* ---- FOOTER ---- */
+        footer { padding: 40px 0; background-color: var(--light-beige-bg); color: var(--dark-grey); }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .footer-logo img { height: 100px; }
+        .footer-social a { color: var(--dark-grey); font-size: 1.5em; margin-left: 20px; transition: color 0.3s ease; }
+        .footer-social a:hover { color: var(--primary-color); }
+        .footer-bottom { font-size: 0.9em; color: var(--text-color); }
+
+        /* ---- RESPONSIVE DESIGN ---- */
+        @media (max-width: 992px) {
+            .menu-toggle { display: block; }
+            .nav-wrapper {
+                position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+                background-color: var(--highlight-color);
+                flex-direction: column; justify-content: center; align-items: center;
+                gap: 40px; transform: translateX(100%); transition: transform 0.4s ease-in-out;
+            }
+            .nav-wrapper.active { transform: translateX(0); }
+            nav ul { flex-direction: column; text-align: center; gap: 25px; }
+            nav ul li a { color: var(--white-color); font-size: 1.5em; }
+            .header-actions .btn { border-color: var(--white-color); color: var(--white-color); }
+        }
+        @media (max-width: 768px) {
+            .footer-container { flex-direction: column; text-align: center; gap: 20px; }
+            .footer-social a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img class="logo-dark" src="images/dasologo.png" alt="Λογότυπο Σκούρο">
+            </a>
+            <div class="nav-wrapper" id="nav-wrapper">
+                <nav id="nav-menu">
+                    <ul>
+                        <li><a href="index.html#services">Τι κάνουμε</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#contact">Επικοινωνία</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                     <a href="index.html#contact" class="btn btn-secondary">Επικοινωνία</a>
+                </div>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main id="article-main">
+        <div class="container">
+            <article>
+                <header class="article-header">
+                    <a href="blog.html" class="category">ΔΑΣΟΛΟΓΙΑ</a>
+                    <h1>Αντίρρηση ή Αίτηση Διόρθωσης του δασικού χάρτη;</h1>
+                    <div class="article-meta">
+                        <span>Από τον/την Δασολόγιο</span> | <span>2 Σεπτεμβρίου 2025</span>
+                    </div>
+                </header>
+
+                <img src="images/cholomontas.jpg" alt="Άποψη του κόλπου της Σιθωνίας από το όρος Χολομώντας" class="featured-image">
+
+                <div class="article-content">
+            
+                    <h2>Το ακίνητό σας εμφανίζεται ως δασικό στον Χάρτη; Οδηγός δεύτερης ευκαιρίας για ιδιοκτήτες</h2>
+                    <p>Ανακαλύψατε καθυστερημένα, ίσως κατά τη διάρκεια μιας μεταβίβασης ή της κτηματογράφησης, ότι η ιδιοκτησία σας έχει χαρακτηριστεί λανθασμένα ως δασική έκταση 
+                        στους επίσημα κυρωμένους δασικούς χάρτες; Εάν χάσατε την προθεσμία για ένσταση, υπάρχει ακόμα λύση.
+                        Το κράτος παρέχει μια «δεύτερη ευκαιρία» για τη διόρθωση προφανών λαθών, επιτρέποντάς σας να διασφαλίσετε την περιουσία σας.</p>
+
+                    <h2>Αίτηση Διόρθωσης Προδήλου Σφάλματος</h2>
+                    <p>
+                     Ανακαλύψατε καθυστερημένα, ίσως κατά τη διάρκεια μιας μεταβίβασης ή της κτηματογράφησης, ότι η ιδιοκτησία σας έχει χαρακτηριστεί λανθασμένα ως δασική έκταση στους 
+                     επίσημα κυρωμένους δασικούς χάρτες; Εάν χάσατε την προθεσμία για ένσταση, υπάρχει ακόμα λύση: Αίτηση Διόρθωσης Προδήλου Σφάλματος Η διαδικασία που πρέπει να ακολουθήσετε δεν είναι η υποβολή αντίρρησης, αλλά η Αίτηση Διόρθωσης Προδήλου Σφάλματος. Πρόκειται για μια ειδική διαδικασία που απευθύνεται σε ιδιοκτήτες των 
+                     οποίων η γη χαρακτηρίστηκε δασική λόγω προφανούς λάθους στη χαρτογράφηση ή σε διοικητικές παραλείψεις, και όχι επειδή είναι πράγματι δάσος.   
+                    </p>
+
+                    <h2>Ποιους Αφορά;</h2>
+                    <ul>
+                        <li><strong>Ιδιοκτήτες εκτάσεων εκτός σχεδίου πόλης.</strong> 
+                        </li>
+                        <li><strong>Πολίτες που βρίσκονται σε περιοχές όπου οι δασικοί χάρτες έχουν ήδη κυρωθεί.</strong>  
+                        </li>
+                        <li><strong>Περιπτώσεις σχετικά εύκολης τεκμηρίωσης σφάλματος.</strong> 
+                    </ul>
+                    
+                    
+                
+                    <h2>
+                        Τι Θεωρείται "Πρόδηλο Σφάλμα"; (Συνηθισμένες Περιπτώσεις)
+                    </h2>
+                    <ul>
+                        <li><strong>Αγροτικές εκτάσεις ή βοσκότοποι</strong> που λανθασμένα χαρακτηρίστηκαν ως δασικές.
+                        </li>
+                        <li><strong>Οικοδομήσιμες εκτάσεις</strong> που δεν έχουν δασική κάλυψη αλλά εμφανίζονται ως δασικές.
+                        </li>
+                        <li><strong>Εκτάσεις με γεωργική χρήση</strong> που έχουν καταγραφεί λανθασμένα ως δάση.
+                        </li>
+                        <li><strong>Περιοχές με ανθρώπινες παρεμβάσεις</strong> όπως δρόμοι, κτίσματα ή άλλες υποδομές που δεν είναι δασικές.
+                        </li>
+                    </ul>
+
+                    <h2>Η Διαδικασία Βήμα-Βήμα</h2>
+
+                    <p>
+                        <strong> 1. Συγκέντρωση Αποδεικτικών Στοιχείων:</strong> 
+                        Συλλέξτε όλα τα απαραίτητα έγγραφα που αποδεικνύουν ότι η έκταση δεν είναι δασική. 
+                        Αυτό μπορεί να περιλαμβάνει τοπογραφικά διαγράμματα, αεροφωτογραφίες, συμβόλαια ιδιοκτησίας, 
+                        και οποιαδήποτε άλλα επίσημα έγγραφα που τεκμηριώνουν τη χρήση της γης.
+                    </p>
+                    <p>
+                        <strong> 2. Σύνταξη της Αίτησης:</strong> 
+                        Η αίτηση πρέπει να περιλαμβάνει τα στοιχεία του αιτούντος, την ακριβή περιγραφή της έκτασης, 
+                        τον λόγο για τον οποίο θεωρείτε ότι υπάρχει πρόδηλο σφάλμα, και τα αποδεικτικά στοιχεία που έχετε συγκεντρώσει.
+                    </p>
+                    <p>
+                        <strong>  3. Υποβολή της Αίτησης:</strong> 
+                        Η αίτηση υποβάλλεται στην αρμόδια Διεύθυνση Δασών της περιοχής όπου βρίσκεται η έκταση. 
+                        Είναι σημαντικό να τηρηθούν οι προθεσμίες και να ακολουθηθούν οι οδηγίες που παρέχονται από τις τοπικές αρχές.  
+                    </p>
+                    <p>
+                         <strong>4. Αξιολόγηση της Αίτησης:</strong> 
+                        Η αρμόδια ομάδα της Διεύθυνσης Δασών θα εξετάσει την αίτηση και τα συνοδευτικά έγγραφα. 
+                        Ενδέχεται να πραγματοποιηθεί επιτόπιος έλεγχος για την επιβεβαίωση των στοιχείων που έχουν υποβληθεί.
+                    </p>
+                    <p>
+                         <strong>5. Απόφαση:</strong> 
+                        Εάν η αίτηση γίνει δεκτή, Η τελική διόρθωση απαιτεί μια κεντρική διαδικασία έγκρισης από το Υπουργείο Περιβάλλοντος, η οποία μπορεί να πάρει χρόνο.
+                         Οι διορθώσεις συχνά συγκεντρώνονται και ο χάρτης αναμορφώνεται περιοδικά (π.χ. ετησίως).  
+                    </p>
+
+                    <h2>Απαραίτητα Δικαιολογητικά</h2>
+                    <ul>
+                        <li>Αίτηση προς την τοπική Διεύθυνση Δασών</li>
+                        <li>Συμβόλαιο ιδιοκτησίας</li>
+                        <li>Αντίγραφο της δήλωσης Ε9.</li>
+                        <li>Φωτοτυπία ταυτότητας.</li>
+                        <li>Συντεταγμένες των κορυφών του ακινήτου στο σύστημα ΕΓΣΑ '87.</li>
+                        <li>Οποιοδήποτε έγγραφο της Διοίκησης που αποδεικνύει το σφάλμα (π.χ. πράξη χαρακτηρισμού, παραχωρητήριο, βεβαίωση για κτίσμα προ του 1955 κ.λπ.).</li>
+
+
+                </div>
+
+                <footer class="article-footer">
+                    <div class="share-buttons">
+                        <h3>Μοιραστείτε το άρθρο</h3>
+                        <a href="#" target="_blank" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </main>
+
+    <section id="related-articles">
+        <div class="container">
+            <h2>Σχετικά Άρθρα</h2>
+            <div class="blog-grid-container">
+                <!-- Related Article 1 -->
+                <a href="dasikos-xartis.html" class="blog-card">
+                    <img src="images/dasikos-xartis.jpg" alt="Blog Post 2">
+                    <div class="blog-card-content">
+                        <span class="category">ΝΟΜΙΚΑ</span>
+                        <h3>Δασικός χάρτης! Τι πρέπει να γνωρίζεις!</h3>
+                        <p class="excerpt">Ο Δασικός Χάρτης ενώ σχεδιάστηκε για να βοηθήσει στη δασική διαχείριση και στην επίλυση προβλημάτων φαίνεται
+                             πως δημιουργεί ακόμα περισσότερα. Αυτά είναι κάποια από τα πιο βασικά πράγματα που πρέπει να γνωρίζεις.
+                            </p>
+                    </div>
+                </a>
+                <!-- Related Article 2 -->
+                <a href="imittos.html" class="blog-card">
+                    <img src="images/imitos.jpg" alt="Blog Post 3">
+                    <div class="blog-card-content">
+                        <span class="category">ΔΑΣΟΛΟΓΙΑ</span>
+                        <h3>Υμηττός! Γιατί τον αγαπάμε;</h3>
+                        <p class="excerpt">Από Χολαργο και Παπάγου μέχρι Αργυρούπολη! Ποιος δεν έχει κάνει μια μικρή βολτίτσα στους πρόποδες του Υμηττού...</p>
+                    </div>
+                </a>
+                <!-- Related Article 3 -->
+                <a href="dasika-akinhta.html" class="blog-card">
+                    <img src="images/cholomon-mountain.jpg" alt="Blog Post 4">
+                    <div class="blog-card-content">
+                        <span class="category">ΣΥΜΒΟΥΛΕΣ</span>
+                        <h3>Δασικά Ακίνητα και ο Ρόλος του Δασολόγου</h3>
+                        <p class="excerpt">Όταν χιλιάδες ιδιοκτήτες ακινήτων στην Ελλάδα βλέπουν τα περουσιακά τους στοιχεία να «παγώνουν» εμποδίζοντας την μεταβίβαση 
+                            και εν τέλει την αξιοποίηση τους και ίσως και το ιδιοκτησιακό τους καθεστώς.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">
+                 <a href="index.html">
+                    <img src="images/dasologo.png" alt="Λογότυπο Σκούρο">
+                </a>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="year"></span> Δασολόγιο. All Rights Reserved.
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.instagram.com/dasologio/"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Menu ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navWrapper = document.getElementById('nav-wrapper');
+        const navLinks = document.querySelectorAll('#nav-menu a');
+
+        const closeMenu = () => {
+            navWrapper.classList.remove('active');
+            menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        };
+
+        menuToggle.addEventListener('click', () => {
+            navWrapper.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        navLinks.forEach(link => link.addEventListener('click', closeMenu));
+        
+        // --- On Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+    </script>
+
+</body>
+</html>

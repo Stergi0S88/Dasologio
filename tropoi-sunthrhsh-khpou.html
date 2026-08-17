@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Επαναπροσδιορίζοντας τον Κήπο μας</title>
+	
+  <meta property="og:title" content="Your Catchy Page Title Here" />
+
+  <meta property="og:description" content="A compelling description of what this page is about." />
+
+  <meta property="og:type" content="website" />
+
+  <meta property="og:url" content="https://www.your-website.com/this-exact-page.html" />
+
+  <meta property="og:image" content="https://www.your-website.com/images/your-stunning-preview-image.jpg" />
+
+  <meta property="og:site_name" content="My Awesome Website" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #a9db67;
+            --highlight-color: #a1d99b;
+            --dark-section-bg: #2a3d38;
+            --light-beige-bg: #fdf8e9;
+            --dark-grey: #333333;
+            --white-color: #ffffff;
+            --text-color: #555555;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { color: var(--text-color); line-height: 1.8; background-color: var(--white-color); }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 30px; }
+
+        /* ---- HEADER & NAVIGATION ---- */
+        header {
+            background-color: var(--white-color); 
+            padding: 10px 0;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        header .container { max-width: 1200px; display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 80px; width: auto; }
+        .logo .logo-dark { display: block; }
+        .nav-wrapper { display: flex; align-items: center; gap: 20px; }
+        nav ul { list-style: none; display: flex; gap: 40px; }
+        nav ul li a { text-decoration: none; color: var(--dark-grey); font-weight: 500; transition: color 0.4s ease; }
+        nav ul li a:hover { color: var(--primary-color); }
+        .header-actions .btn {
+            padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 700;
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-grey); color: var(--dark-grey); background-color: transparent;
+        }
+        .header-actions .btn:hover { background-color: var(--dark-grey); color: var(--white-color); }
+        .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: var(--dark-grey); z-index: 1001; }
+
+        /* ---- ARTICLE STYLES ---- */
+        #article-main {
+            padding-top: 120px;
+            padding-bottom: 80px;
+        }
+        .article-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .article-header .category {
+            display: inline-block;
+            margin-bottom: 15px;
+            padding: 5px 15px;
+            border-radius: 5px;
+            background-color: var(--highlight-color);
+            color: var(--dark-section-bg);
+            font-size: 0.9em;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .article-header h1 {
+            font-size: clamp(2.2em, 5vw, 3.5em);
+            color: var(--dark-section-bg);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .article-meta {
+            color: #777;
+            font-size: 0.9em;
+        }
+        .featured-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+        .article-content h2 {
+            font-size: 1.8em;
+            color: var(--dark-section-bg);
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .article-content p {
+            margin-bottom: 20px;
+        }
+        .article-content ul {
+            list-style-position: inside;
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+        .article-content li {
+            margin-bottom: 15px;
+        }
+        .article-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .article-content a:hover {
+            text-decoration: underline;
+        }
+        .article-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        /* ---- SHARE & RELATED ---- */
+        .article-footer {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .share-buttons h3 {
+            margin-bottom: 20px;
+            color: var(--dark-section-bg);
+        }
+        .share-buttons a {
+            font-size: 1.8em;
+            color: var(--dark-grey);
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        .share-buttons a:hover {
+            color: var(--primary-color);
+        }
+
+        #related-articles {
+            padding: 80px 0;
+            background-color: var(--light-beige-bg);
+        }
+        #related-articles .container {
+             max-width: 1200px;
+        }
+        #related-articles h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: var(--dark-section-bg);
+            margin-bottom: 50px;
+        }
+        .blog-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        .blog-card {
+            background-color: var(--white-color); border-radius: 20px; overflow: hidden;
+            text-decoration: none; color: var(--dark-grey); box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .blog-card img { width: 100%; height: 200px; object-fit: cover; }
+        .blog-card-content { padding: 25px; }
+        .blog-card-content .category {
+            display: inline-block; margin-bottom: 10px; padding: 5px 10px; border-radius: 5px;
+            background-color: var(--highlight-color); color: var(--dark-section-bg);
+            font-size: 0.8em; font-weight: 700;
+        }
+        .blog-card-content h3 { font-size: 1.3em; margin-bottom: 10px; line-height: 1.4; }
+        .blog-card-content .excerpt { font-size: 0.95em; color: var(--text-color); }
+
+        /* ---- FOOTER ---- */
+        footer { padding: 40px 0; background-color: var(--light-beige-bg); color: var(--dark-grey); }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-logo-main img { height: 100px; }
+        .footer-social a { color: var(--dark-grey); font-size: 1.5em; margin-left: 20px; transition: color 0.3s ease; }
+        .footer-social a:hover { color: var(--primary-color); }
+        .footer-bottom { font-size: 0.9em; color: var(--text-color); }
+
+        /* ---- RESPONSIVE DESIGN ---- */
+        @media (max-width: 992px) {
+            .menu-toggle { display: block; }
+            .nav-wrapper {
+                position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+                background-color: var(--highlight-color);
+                flex-direction: column; justify-content: center; align-items: center;
+                gap: 40px; transform: translateX(100%); transition: transform 0.4s ease-in-out;
+            }
+            .nav-wrapper.active { transform: translateX(0); }
+            nav ul { flex-direction: column; text-align: center; gap: 25px; }
+            nav ul li a { color: var(--white-color); font-size: 1.5em; }
+            .header-actions .btn { border-color: var(--white-color); color: var(--white-color); }
+        }
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+            }
+            .footer-social a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img class="logo-dark" src="https://placehold.co/200x100/333333/FFFFFF?text=Logo" alt="Λογότυπο Σκούρο">
+            </a>
+            <div class="nav-wrapper" id="nav-wrapper">
+                <nav id="nav-menu">
+                    <ul>
+                        <li><a href="index.html#services">Τι κάνουμε</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="index.html#contact">Επικοινωνία</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                     <a href="index.html#contact" class="btn btn-secondary">Επικοινωνία</a>
+                </div>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main id="article-main">
+        <div class="container">
+            <article>
+                <header class="article-header">
+                    <a href="#" class="category">ΔΑΣΟΛΟΓΙΑ</a>
+                    <h1>Επαναπροσδιορίζοντας τον Κήπο μας</h1>
+                    <div class="article-meta">
+                        <span>Από τον/την ΔασοΛόγιο</span> | <span>25 Αυγούστου 2025</span>
+                    </div>
+                </header>
+
+                <img src="images/kipos.jpg" alt="Κήπος με τοπικά φυτά" class="featured-image">
+
+                <div class="article-content">
+                    <p>Η αντίληψη για τον ιδιωτικό κήπο διέρχεται μια περίοδο βαθιάς μεταμόρφωσης. Παραδοσιακά, ο κήπος αντιμετωπιζόταν ως ένας διακοσμητικός χώρος, μια προέκταση της αισθητικής του σπιτιού, συχνά διαμορφωμένος με ξενικά, εντυπωσιακά φυτά που απαιτούσαν εντατική φροντίδα, άφθονο νερό και χημικές παρεμβάσεις. Ωστόσο, μπροστά στις σύγχρονες προκλήσεις της κλιματικής αλλαγής, της απώλειας βιοποικιλότητας και της αυξανόμενης λειψυδρίας, αυτή η προσέγγιση αποδεικνύεται μη βιώσιμη. Μια νέα φιλοσοφία αναδύεται, η οποία αντιμετωπίζει τον κήπο όχι ως μια απομονωμένη οντότητα, αλλά ως ένα δυναμικό, λειτουργικό και αναπόσπαστο τμήμα του ευρύτερου τοπικού οικοσυστήματος.</p>
+                    <p>Οι ιδιωτικοί χώροι πρασίνου, ανεξαρτήτως μεγέθους, αναγνωρίζονται πλέον ως κρίσιμοι κόμβοι που μπορούν να συμβάλουν θετικά στην περιβαλλοντική ανθεκτικότητα και την οικολογική υγεία του τόπου μας. Η μετάβαση σε αυτή τη νέα θεώρηση ξεκινά με την κατανόηση και την επιλογή των κατάλληλων φυτών. Η φύτευση ενδημικών και τοπικών ειδών δεν αποτελεί απλώς μια εναλλακτική αισθητική πρόταση, αλλά μια συνειδητή πράξη οικολογικής αποκατάστασης.</p>
+                    
+                    <h2>Ενδημικά, Αυτοφυή (Ιθαγενή) και Τοπικά Είδη</h2>
+                    <p>Η επιτυχία ενός πραγματικά ανθεκτικού κήπου βασίζεται στην ορθή επιλογή φυτικού υλικού, η οποία προϋποθέτει την κατανόηση της διάκρισης μεταξύ των παρακάτω όρων:</p>
+                    
+                    <ul>
+                        <li><strong>Αυτοφυή ή Ιθαγενή (Native) Φυτά:</strong> Ο όρος αυτός περιγράφει τα φυτά που έχουν εξελιχθεί φυσικά σε μια ευρύτερη γεωγραφική περιοχή (π.χ. στην Ελλάδα, στη λεκάνη της Μεσογείου) χωρίς ανθρώπινη παρέμβαση.</li>
+                        <li><strong>Ενδημικά (Endemic) Φυτά:</strong> Αποτελούν μια ειδική και πολύτιμη υποκατηγορία των ιθαγενών. Ο όρος αναφέρεται σε είδη που η γεωγραφική τους εξάπλωση περιορίζεται αποκλειστικά σε μια συγκεκριμένη, συχνά μικρή, περιοχή και δεν απαντώνται πουθενά αλλού στον πλανήτη.</li>
+                        <li><strong>Toπικά Φυτά (Local Species):</strong> Αυτός είναι ο πιο στοχευμένος όρος για τον οικολογικό κηπουρό. Αναφέρεται στα αυτοφυή φυτά που απαντώνται φυσικά στη συγκεκριμένη μικρο-περιοχή όπου βρίσκεται ο κήπος (π.χ. Αττική, Κυκλάδες, Πήλιο).</li>
+                    </ul>
+                    
+                    <blockquote>"Η επιλογή τοπικών ειδών διασφαλίζει τη μέγιστη δυνατή εναρμόνιση με τις τοπικές εδαφοκλιματικές συνθήκες."</blockquote>
+
+                    <h2>Οφέλη ενός Κήπου με Τοπικά Φυτά</h2>
+                    <p>Η δημιουργία ενός κήπου με τοπικά φυτά θέτει σε κίνηση μια αλυσίδα θετικών αλληλεπιδράσεων που ωφελούν το περιβάλλον, την τοπική πανίδα και τον ίδιο τον κηπουρό.</p>
+                    <ul>
+                        <li><strong>Υποστήριξη Επικονιαστών:</strong> Η σχέση μεταξύ των αυτοφυών φυτών και των τοπικών επικονιαστών (μέλισσες, πεταλούδες) είναι αποτέλεσμα συν-εξέλιξης εκατομμυρίων ετών. Ένας τέτοιος κήπος λειτουργεί ως μια πλούσια και αξιόπιστη πηγή τροφής για αυτούς.</li>
+                        <li><strong>Προσέλκυση Ορνιθοπανίδας:</strong> Τα τοπικά φυτά δημιουργούν ένα πλήρες οικοσύστημα για τα πουλιά, παρέχοντας τροφή (καρπούς, σπόρους και κυρίως έντομα), ασφάλεια και χώρους φωλεοποίησης.</li>
+                        <li><strong>Υγεία του Εδάφους και Διαχείριση Υδάτων:</strong> Τα τοπικά φυτά αναπτύσσουν βαθιά ριζικά συστήματα που προλαμβάνουν τη διάβρωση του εδάφους και αυξάνουν την απορροφητικότητά του στο νερό της βροχής.</li>
+                    </ul>
+
+                    <h2>Ο Κήπος ως Προσωπική Δράση</h2>
+                    <p>Η επιλογή να δημιουργήσουμε έναν κήπο με ενδημικά και τοπικά φυτά υπερβαίνει τα όρια της απλής κηπουρικής. Είναι μια συνειδητή απόφαση που ενσωματώνει την περιβαλλοντική ευθύνη και την επιδίωξη μιας πιο βιώσιμης καθημερινότητας. Σε μια εποχή που οι μεγάλες περιβαλλοντικές προκλήσεις φαντάζουν συχνά συντριπτικές, ο κήπος μας προσφέρει ένα πεδίο άμεσης και ουσιαστικής δράσης. Κάθε τοπικό φυτό που φυτεύουμε είναι μια μικρή, αλλά σημαντική, συμβολή στην προστασία του τόπου μας.</p>
+                </div>
+
+                <footer class="article-footer">
+                    <div class="share-buttons">
+                        <h3>Μοιραστείτε το άρθρο</h3>
+                        <a href="#" target="_blank" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </main>
+
+    <section id="related-articles">
+        <div class="container">
+            <h2>Σχετικά Άρθρα</h2>
+            <div class="blog-grid-container">
+                <!-- Related Article 1 -->
+                <a href="dasikos-xartis.html" class="blog-card">
+                    <img src="images/dasikos-xartis.jpg" alt="Blog Post 2">
+                    <div class="blog-card-content">
+                        <span class="category">ΝΟΜΙΚΑ</span>
+                        <h3>Οδηγός για τις Αντιρρήσεις Δασικών Χαρτών</h3>
+                        <p class="excerpt">Αναλυτικός οδηγός για τη διαδικασία υποβολής αντιρρήσεων...</p>
+                    </div>
+                </a>
+                <!-- Related Article 2 -->
+                <a href="dasika-akinhta.html" class="blog-card">
+                    <img src="images/cholomon-mountain.jpg" alt="Blog Post 3">
+                    <div class="blog-card-content">
+                        <span class="category">ΝΟΜΙΚΗ</span>
+                        <h3>Δασικά Ακίνητα και ο Ρόλος του Δασολόγου</h3>
+                        <p class="excerpt">Πώς τα drones και η τεχνητή νοημοσύνη αλλάζουν τα δεδομένα...</p>
+                    </div>
+                </a>
+                <!-- Related Article 3 -->
+                <a href="imittos.html" class="blog-card">
+                    <img src="images/imitos.jpg" alt="Blog Post 4">
+                    <div class="blog-card-content">
+                        <span class="category">ΣΥΜΒΟΥΛΕΣ</span>
+                        <h3>Υμηττός! Γιατί τον αγαπάμε;</h3>
+                        <p class="excerpt">Μια ματιά στην ιστορία και την οικολογική σημασία του βουνού...</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo-main">
+                 <a href="index.html">
+                    <img src="images/dasologo.png" alt="Λογότυπο Σκούρο">
+                </a>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="year"></span> Δασολόγιο. All Rights Reserved.
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Menu ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navWrapper = document.getElementById('nav-wrapper');
+        const navLinks = document.querySelectorAll('#nav-menu a');
+
+        const closeMenu = () => {
+            navWrapper.classList.remove('active');
+            menuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+        };
+
+        menuToggle.addEventListener('click', () => {
+            navWrapper.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        navLinks.forEach(link => link.addEventListener('click', closeMenu));
+        
+        // --- On Load ---
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+    </script>
+
+</body>
+</html>
