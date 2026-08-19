@@ -1,62 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://www.dasologio.com/</loc>
-  <lastmod>2025-08-26T13:31:07+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://www.dasologio.com/index.html</loc>
-  <lastmod>2025-08-26T13:31:07+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.dasologio.com/services-1.html</loc>
-  <lastmod>2025-08-20T12:24:37+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.dasologio.com/services-2.html</loc>
-  <lastmod>2025-08-20T12:24:47+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.dasologio.com/services-3.html</loc>
-  <lastmod>2025-08-20T12:24:57+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.dasologio.com/imittos.html</loc>
-  <lastmod>2025-08-26T13:29:51+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.dasologio.com/dasikos-xartis.html</loc>
-  <lastmod>2025-08-26T13:29:51+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.dasologio.com/dasika-akinhta.html</loc>
-  <lastmod>2025-08-26T13:29:51+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.dasologio.com/tropoi-sunthrhsh-khpou.html</loc>
-  <lastmod>2025-08-26T13:32:35+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.dasologio.com/blog.html</loc>
-  <lastmod>2025-08-26T13:29:50+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.dasologio.com/</loc></url>
+  <url><loc>https://www.dasologio.com/en/</loc></url>
+  <url><loc>https://www.dasologio.com/blog/</loc></url>
+  <url><loc>https://www.dasologio.com/en/blog/</loc></url>
+  <url><loc>https://www.dasologio.com/learning/</loc></url>
+  <url><loc>https://www.dasologio.com/services/dasikes-meletes/</loc></url>
+  <url><loc>https://www.dasologio.com/en/services/dasikes-meletes/</loc></url>
+  <url><loc>https://www.dasologio.com/services/diaxeirisi-prostasia/</loc></url>
+  <url><loc>https://www.dasologio.com/en/services/diaxeirisi-prostasia/</loc></url>
+  <url><loc>https://www.dasologio.com/services/ypiresies-ypaithrou/</loc></url>
+  <url><loc>https://www.dasologio.com/en/services/ypiresies-ypaithrou/</loc></url>
+  <url><loc>https://www.dasologio.com/blog/parnassos/</loc></url>
+  <url><loc>https://www.dasologio.com/blog/karydia/</loc></url>
+  <url><loc>https://www.dasologio.com/blog/ermhneia-dasikou-xarth/</loc></url>
+  <url><loc>https://www.dasologio.com/blog/diorthosi-dasikou-xarth/</loc></url>
+  <url><loc>https://www.dasologio.com/blog/bookchin/</loc></url>
+  <url><loc>https://www.dasologio.com/blog/dasika-akinhta/</loc></url>
+  <url><loc>https://www.dasologio.com/blog/dasikos-xartis/</loc></url>
+  <url><loc>https://www.dasologio.com/blog/imittos/</loc></url>
+  <url><loc>https://www.dasologio.com/blog/tropoi-sunthrhsh-khpou/</loc></url>
+  <url><loc>https://www.dasologio.com/blog/o-platanos-sto-krasi/</loc></url>
+  <url><loc>https://www.dasologio.com/en/blog/parnassos/</loc></url>
+  <url><loc>https://www.dasologio.com/en/blog/karydia/</loc></url>
+  <url><loc>https://www.dasologio.com/en/blog/ermhneia-dasikou-xarth/</loc></url>
+  <url><loc>https://www.dasologio.com/en/blog/diorthosi-dasikou-xarth/</loc></url>
+  <url><loc>https://www.dasologio.com/en/blog/bookchin/</loc></url>
+  <url><loc>https://www.dasologio.com/en/blog/dasika-akinhta/</loc></url>
+  <url><loc>https://www.dasologio.com/en/blog/dasikos-xartis/</loc></url>
+  <url><loc>https://www.dasologio.com/en/blog/imittos/</loc></url>
+  <url><loc>https://www.dasologio.com/en/blog/tropoi-sunthrhsh-khpou/</loc></url>
+  <url><loc>https://www.dasologio.com/en/blog/o-platanos-sto-krasi/</loc></url>
+  <url><loc>https://www.dasologio.com/learning/archeio-dasikis-gnosis/</loc></url>
 </urlset>

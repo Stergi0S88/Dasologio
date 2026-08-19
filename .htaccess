@@ -1,4 +1,38 @@
+Options -MultiViews
+DirectoryIndex index.html
 RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ $1.html [L,QSA]
+
+# Permanent compatibility redirects. Search engines and saved links keep working,
+# while every canonical URL uses the clean directory structure.
+RewriteRule ^index\.html$ / [R=301,L]
+RewriteRule ^blog(?:\.html)?$ /blog/ [R=301,L]
+RewriteRule ^imittos(?:\.html)?$ /blog/imittos/ [R=301,L]
+RewriteRule ^dasikos-xartis(?:\.html)?$ /blog/dasikos-xartis/ [R=301,L]
+RewriteRule ^dasika-akinhta(?:\.html)?$ /blog/dasika-akinhta/ [R=301,L]
+RewriteRule ^tropoi-sunthrhsh-khpou(?:\.html)?$ /blog/tropoi-sunthrhsh-khpou/ [R=301,L]
+RewriteRule ^bookchin(?:\.html)?$ /blog/bookchin/ [R=301,L]
+RewriteRule ^karydia(?:\.html)?$ /blog/karydia/ [R=301,L]
+RewriteRule ^parnassos(?:\.html)?$ /blog/parnassos/ [R=301,L]
+RewriteRule ^o-platanos-sto-krasi(?:\.html)?$ /blog/o-platanos-sto-krasi/ [R=301,L]
+RewriteRule ^ermhneia-dasikou-xarth(?:\.html)?$ /blog/ermhneia-dasikou-xarth/ [R=301,L]
+RewriteRule ^diorthosi-dasikou-xarth(?:\.html)?$ /blog/diorthosi-dasikou-xarth/ [R=301,L]
+RewriteRule ^services-1(?:\.html)?$ /services/dasikes-meletes/ [R=301,L]
+RewriteRule ^services-2(?:\.html)?$ /services/diaxeirisi-prostasia/ [R=301,L]
+RewriteRule ^services-3(?:\.html)?$ /services/ypiresies-ypaithrou/ [R=301,L]
+
+ErrorDocument 404 /404/
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
