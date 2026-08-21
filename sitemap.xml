@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.dasologio.com/</loc></url>
-  <url><loc>https://www.dasologio.com/en/</loc></url>
   <url><loc>https://www.dasologio.com/blog/</loc></url>
-  <url><loc>https://www.dasologio.com/en/blog/</loc></url>
-  <url><loc>https://www.dasologio.com/learning/</loc></url>
   <url><loc>https://www.dasologio.com/services/dasikes-meletes/</loc></url>
-  <url><loc>https://www.dasologio.com/en/services/dasikes-meletes/</loc></url>
   <url><loc>https://www.dasologio.com/services/diaxeirisi-prostasia/</loc></url>
-  <url><loc>https://www.dasologio.com/en/services/diaxeirisi-prostasia/</loc></url>
   <url><loc>https://www.dasologio.com/services/ypiresies-ypaithrou/</loc></url>
-  <url><loc>https://www.dasologio.com/en/services/ypiresies-ypaithrou/</loc></url>
+  <url><loc>https://www.dasologio.com/blog/giati-ta-mikra-dasi-einai-simantika-gia-tis-poleis/</loc></url>
   <url><loc>https://www.dasologio.com/blog/parnassos/</loc></url>
   <url><loc>https://www.dasologio.com/blog/karydia/</loc></url>
   <url><loc>https://www.dasologio.com/blog/ermhneia-dasikou-xarth/</loc></url>
@@ -21,15 +16,4 @@
   <url><loc>https://www.dasologio.com/blog/imittos/</loc></url>
   <url><loc>https://www.dasologio.com/blog/tropoi-sunthrhsh-khpou/</loc></url>
   <url><loc>https://www.dasologio.com/blog/o-platanos-sto-krasi/</loc></url>
-  <url><loc>https://www.dasologio.com/en/blog/parnassos/</loc></url>
-  <url><loc>https://www.dasologio.com/en/blog/karydia/</loc></url>
-  <url><loc>https://www.dasologio.com/en/blog/ermhneia-dasikou-xarth/</loc></url>
-  <url><loc>https://www.dasologio.com/en/blog/diorthosi-dasikou-xarth/</loc></url>
-  <url><loc>https://www.dasologio.com/en/blog/bookchin/</loc></url>
-  <url><loc>https://www.dasologio.com/en/blog/dasika-akinhta/</loc></url>
-  <url><loc>https://www.dasologio.com/en/blog/dasikos-xartis/</loc></url>
-  <url><loc>https://www.dasologio.com/en/blog/imittos/</loc></url>
-  <url><loc>https://www.dasologio.com/en/blog/tropoi-sunthrhsh-khpou/</loc></url>
-  <url><loc>https://www.dasologio.com/en/blog/o-platanos-sto-krasi/</loc></url>
-  <url><loc>https://www.dasologio.com/learning/archeio-dasikis-gnosis/</loc></url>
 </urlset>
