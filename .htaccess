@@ -20,6 +20,8 @@ RewriteRule ^services-1(?:\.html)?$ /services/dasikes-meletes/ [R=301,L]
 RewriteRule ^services-2(?:\.html)?$ /services/diaxeirisi-prostasia/ [R=301,L]
 RewriteRule ^services-3(?:\.html)?$ /services/ypiresies-ypaithrou/ [R=301,L]
 
+RewriteRule ^api/checkout\.php$ - [L]
+
 ErrorDocument 404 /404/
 
 <IfModule mod_expires.c>
