@@ -95,6 +95,8 @@ $tour = find_tour($catalog, $slug);
 if (!$tour) fail_checkout(404, 'Unknown tour.');
 $max = (int) ($tour['maxGroupSize'] ?? 0);
 if ($participants > $max) fail_checkout(400, 'Group is larger than the published maximum.');
+$openDates = $tour['availableDates'] ?? [];
+if (is_array($openDates) && $openDates && !in_array($date, $openDates, true)) fail_checkout(400, 'Date is not available.');
 
 $price = (float) ($tour['priceEur'] ?? 0);
 $depositPercent = (int) ($tour['depositPercent'] ?? 100);
