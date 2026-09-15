@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://www.dasologio.com/learning/forest-mission/">
+<meta name="theme-color" content="#061d22">
+<title>Forest Mission — 88 Ecosystems</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;height:100dvh;overflow:hidden;background:#061d22;color:#ecfbf7;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}#map{position:fixed;inset:0}.leaflet-control-container{display:none}.shade{position:fixed;inset:0;z-index:400;background:linear-gradient(90deg,rgba(1,15,19,.94) 0%,rgba(2,20,25,.78) 40%,rgba(1,16,20,.42) 100%),linear-gradient(0deg,rgba(1,15,19,.72),transparent 55%);pointer-events:none}
+.top{position:fixed;z-index:1000;left:24px;right:24px;top:max(16px,env(safe-area-inset-top));display:flex;align-items:center;gap:14px}.tag{margin-left:auto;border:1px solid rgba(126,235,195,.24);background:rgba(4,34,39,.74);backdrop-filter:blur(14px);border-radius:999px;padding:9px 13px;color:#b6f4d0;font-size:10px;font-weight:900;letter-spacing:.1em}.lang-switch{display:flex;gap:4px;padding:4px;border:1px solid rgba(255,255,255,.10);background:rgba(3,25,30,.72);backdrop-filter:blur(12px);border-radius:999px}.lang-switch button{border:0;background:transparent;color:#91b8b1;border-radius:999px;padding:7px 9px;font-size:9px;font-weight:950;letter-spacing:.08em;cursor:pointer}.lang-switch button.active{background:rgba(110,231,161,.14);color:#d8f9e5;box-shadow:inset 0 0 0 1px rgba(110,231,161,.24)}
+.logo{width:min(330px,44vw);max-height:72px;object-fit:contain;object-position:left;filter:drop-shadow(0 8px 24px rgba(0,0,0,.2))}
+.hero{position:fixed;z-index:900;left:clamp(24px,5vw,86px);top:50%;transform:translateY(-48%);width:min(720px,88vw)}.eyebrow{font-size:11px;letter-spacing:.18em;font-weight:950;color:#73e6a0}.hero h1{font-size:clamp(50px,8vw,108px);line-height:.82;margin:14px 0 18px;letter-spacing:-.065em}.hero h1 span{color:#65dff2}.hero p{width:min(600px,100%);color:#b9d3ce;font-size:clamp(14px,1.35vw,19px);line-height:1.55;margin:0 0 24px}.stats{display:flex;gap:7px;flex-wrap:wrap}.stats div{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);border-radius:14px;padding:10px 13px;min-width:112px}.stats strong{display:block;font-size:20px;color:#f3d06c}.stats small{font-size:8px;color:#89aca6;letter-spacing:.08em}.feature-strip{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}.feature-chip{border:1px solid rgba(110,231,161,.18);background:rgba(4,34,39,.58);border-radius:999px;padding:7px 9px;color:#bfe8df;font-size:8px;font-weight:900;letter-spacing:.04em;backdrop-filter:blur(8px)}.start{margin-top:16px;border:0;border-radius:16px;background:linear-gradient(135deg,#1d9064,#147b8d);color:#fff;padding:16px 20px;font-size:13px;font-weight:950;letter-spacing:.08em;cursor:pointer;box-shadow:0 14px 42px rgba(0,0,0,.32);transition:.2s}.start:hover{transform:translateY(-2px)}
+.overlay{position:fixed;z-index:1400;inset:0;background:rgba(0,12,15,.65);backdrop-filter:blur(12px);display:none;place-items:center;padding:16px;overflow:auto}.overlay.show{display:grid}.panel{width:min(900px,100%);border:1px solid rgba(126,235,195,.16);border-radius:28px;background:linear-gradient(160deg,rgba(5,39,43,.98),rgba(3,24,31,.98));padding:24px;box-shadow:0 30px 100px rgba(0,0,0,.58)}.panel-head{display:flex;gap:12px;align-items:flex-start}.panel h2{font-size:30px;margin:0}.panel p{color:#9ebfba;font-size:12px;line-height:1.5}.close{margin-left:auto;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;border-radius:12px;width:44px;height:44px;cursor:pointer}.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:18px}.mode{border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.035);padding:18px 14px;text-align:left;cursor:pointer;min-height:210px;color:#fff;transition:.2s}.mode:hover{transform:translateY(-3px);border-color:rgba(101,223,242,.35);background:rgba(101,223,242,.07)}.mode .ico{font-size:35px}.mode strong{display:block;font-size:16px;margin:13px 0 7px}.mode small{display:block;color:#9ebfba;font-size:10px;line-height:1.45}.mode b{display:inline-block;margin-top:12px;color:#7de5a4;font-size:9px;letter-spacing:.08em}.team-setup{display:none;margin-top:14px;border-top:1px solid rgba(255,255,255,.09);padding-top:14px}.team-setup.show{display:block}.inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px}.inputs input{width:100%;border:1px solid rgba(255,255,255,.1);background:#082f34;color:#fff;border-radius:13px;padding:12px;font-size:16px}.team-actions{display:flex;gap:8px;margin-top:9px}.team-actions button{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;border-radius:12px;padding:11px 14px;font-weight:900;cursor:pointer}.team-actions .go{background:#187d61;margin-left:auto}.footnote{margin-top:16px;font-size:9px;color:#668b85}.point{width:11px;height:11px;border-radius:50%;background:#6ee7a1;border:2px solid rgba(255,255,255,.82);box-shadow:0 0 0 4px rgba(110,231,161,.13)}
+@media(max-width:860px){.modes{grid-template-columns:1fr 1fr}.hero h1{font-size:clamp(48px,13vw,78px)}.tag{display:none}.logo{width:250px}}@media(max-width:560px){.top{left:14px;right:14px;top:max(10px,env(safe-area-inset-top));gap:8px}.logo{width:190px}.lang-switch{margin-left:auto}.lang-switch button{padding:6px 7px}.hero{left:18px;width:calc(100vw - 36px)}.hero p{font-size:13px}.stats div{min-width:88px;padding:8px}.modes{grid-template-columns:1fr}.mode{min-height:0}.panel{padding:17px;border-radius:20px;max-height:94dvh;overflow:auto}.inputs{grid-template-columns:1fr}.hero h1{font-size:53px}.eyebrow{font-size:9px}}
+</style>
+</head>
+<body>
+<div id="map"></div><div class="shade"></div>
+<header class="top">
+  <img id="brandLogo" class="logo" src="assets/dasologio-logo-light.png" alt="ΔΑΣΟΛΟΓΙΟ">
+  <div class="tag">FOREST MISSION · 88 ECOSYSTEMS</div>
+  <div class="lang-switch" aria-label="Language"><button id="langEl" onclick="switchLang('el')">ΕΛ</button><button id="langEn" onclick="switchLang('en')">EN</button></div>
+</header>
+<main class="hero">
+  <div class="eyebrow">🛰️ MAP GAME · SPECIES RESEARCH · GREECE</div>
+  <h1>ZOOM.<br>SCAN.<br><span>UNLOCK.</span></h1>
+  <p id="heroCopy"></p>
+  <div class="stats"><div><strong>88</strong><small>FOREST ECOSYSTEMS</small></div><div><strong>32</strong><small>SIGNATURE TAXA</small></div><div><strong>1 MAP</strong><small>ZOOM-DRIVEN GAMEPLAY</small></div></div>
+  <div id="featureStrip" class="feature-strip"></div>
+  <button id="startBtn" class="start" onclick="openModes()"></button>
+</main>
+<section id="modeOverlay" class="overlay">
+  <div class="panel">
+    <div class="panel-head"><div><div id="chooseLabel" class="eyebrow"></div><h2 id="chooseTitle"></h2><p id="chooseIntro"></p></div><button class="close" onclick="closeModes()">✕</button></div>
+    <div class="modes">
+      <button class="mode" onclick="start('atlas')"><span class="ico">🌍</span><strong id="mode0t"></strong><small id="mode0c"></small><b id="mode0m"></b></button>
+      <button class="mode" onclick="start('blitz')"><span class="ico">⚡</span><strong id="mode1t"></strong><small id="mode1c"></small><b id="mode1m"></b></button>
+      <button class="mode" onclick="start('species')"><span class="ico">🧬</span><strong id="mode2t"></strong><small id="mode2c"></small><b id="mode2m"></b></button>
+      <button class="mode" onclick="showTeams()"><span class="ico">⚔️</span><strong id="mode3t"></strong><small id="mode3c"></small><b id="mode3m"></b></button>
+    </div>
+    <div id="teamSetup" class="team-setup"><div class="inputs"><input id="team0" maxlength="28"><input id="team1" maxlength="28"></div><div class="team-actions"><button id="randomTeamsBtn" onclick="randomTeams()"></button><button id="duelBtn" class="go" onclick="startTeams()"></button></div></div>
+    <div id="researchNote" class="footnote"></div>
+  </div>
+</section>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="data.js"></script><script src="i18n.js"></script>
+<script>
+const map=L.map('map',{zoomControl:false,dragging:false,scrollWheelZoom:false,doubleClickZoom:false,touchZoom:false,keyboard:false,attributionControl:false}).setView([38.55,23.55],6.25);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18}).addTo(map);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,opacity:.78}).addTo(map);
+forestEcosystems.forEach(f=>{const icon=L.divIcon({className:'',html:'<div class="point"></div>',iconSize:[11,11],iconAnchor:[5,5]});L.marker(f.coords,{icon,interactive:false}).addTo(map);});
+function applyStartLanguage(){
+  document.documentElement.lang=FM_LANG; const c=fmStartCopy();
+  heroCopy.textContent=c.hero; startBtn.textContent=c.start;
+  const features=FM_LANG==='en'?['🌫️ Discovery Fog','🌿 Forest Knowledge','⚡ Quick Checks','✨ Ecosystem Pulse','🏅 Badges']:['🌫️ Ομίχλη Ανακάλυψης','🌿 Γνώση Δάσους','⚡ Quick Checks','✨ Ecosystem Pulse','🏅 Badges'];
+  featureStrip.innerHTML=features.map(x=>`<span class="feature-chip">${x}</span>`).join(''); chooseLabel.textContent=c.choose; chooseTitle.textContent=c.title; chooseIntro.textContent=c.intro;
+  c.modes.forEach((m,i)=>{document.getElementById(`mode${i}t`).textContent=m[0];document.getElementById(`mode${i}c`).textContent=m[1];document.getElementById(`mode${i}m`).textContent=m[2]});
+  team0.placeholder=c.team0; team1.placeholder=c.team1; randomTeamsBtn.textContent=c.random; duelBtn.textContent=c.duel; researchNote.textContent=c.note;
+  const brandLogo=document.getElementById('brandLogo');
+  brandLogo.src = FM_LANG==='en' ? 'assets/dasologio-logo-light-en.png' : 'assets/dasologio-logo-light.png';
+  brandLogo.alt = FM_LANG==='en' ? 'DASOLOGIO' : 'ΔΑΣΟΛΟΓΙΟ';
+  langEl.classList.toggle('active',FM_LANG==='el'); langEn.classList.toggle('active',FM_LANG==='en');
+}
+function switchLang(lang){fmSetLanguage(lang);applyStartLanguage();randomTeams()}
+function openModes(){modeOverlay.classList.add('show')}function closeModes(){modeOverlay.classList.remove('show')}
+function start(mode){location.href=`game.html?mode=${encodeURIComponent(mode)}&lang=${FM_LANG}`}
+function showTeams(){teamSetup.classList.add('show');team0.focus()}
+const pools={el:['Έλατα','Δρυάδες','Ρόμπολα','Αρκεύθοι','Οξιές','Κουκουναριές','Γύπες','Λύκοι','Πλάτανοι','Φοίνικες'],en:['Firs','Dryads','Bosnian Pines','Junipers','Beeches','Stone Pines','Vultures','Wolves','Plane Trees','Palms']};
+function randomTeams(){const pool=pools[FM_LANG];const a=pool[Math.floor(Math.random()*pool.length)];let b=a;while(b===a)b=pool[Math.floor(Math.random()*pool.length)];team0.value=a;team1.value=b}
+function startTeams(){const a=(team0.value||fmT('team1')).trim().slice(0,28),b=(team1.value||fmT('team2')).trim().slice(0,28);location.href=`game.html?mode=teams&team0=${encodeURIComponent(a)}&team1=${encodeURIComponent(b)}&lang=${FM_LANG}`}
+applyStartLanguage();randomTeams();
+</script>
+</body>
+</html>

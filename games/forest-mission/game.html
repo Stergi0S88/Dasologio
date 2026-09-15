@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://www.dasologio.com/learning/forest-mission/">
+<meta name="theme-color" content="#061d22">
+<title>Dasologio Forest Mission — 88 Ecosystems</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+:root{
+  --ink:#eefcf8;--muted:#9bc3bd;--panel:rgba(4,25,29,.92);--panel2:rgba(7,38,43,.94);
+  --line:rgba(164,235,215,.16);--green:#6ee7a1;--cyan:#55d9f3;--gold:#f2c45e;--red:#ff7c6f;
+  --shadow:0 20px 60px rgba(0,0,0,.42);--radius:22px
+}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;height:100dvh;overflow:hidden;background:#061d22;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select{font:inherit}button{color:inherit}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid rgba(85,217,243,.65);outline-offset:2px}
+#map{position:fixed;inset:0;background:#0b2528}.leaflet-container{font:inherit;background:#0b2528}.leaflet-control-attribution{background:rgba(1,15,18,.62)!important;color:#b8d6d1!important;font-size:9px!important}.leaflet-control-attribution a{color:#d8f2ed!important}
+#map::after{content:"";position:absolute;inset:0;z-index:410;pointer-events:none;background:linear-gradient(180deg,rgba(1,16,20,.35),transparent 21%,transparent 74%,rgba(1,13,18,.38)),radial-gradient(circle at 50% 45%,transparent 42%,rgba(1,14,16,.20) 100%)}
+
+.topbar{position:fixed;z-index:1500;left:14px;right:14px;top:max(12px,env(safe-area-inset-top));height:68px;border:1px solid var(--line);border-radius:20px;background:rgba(3,21,25,.88);backdrop-filter:blur(18px) saturate(130%);display:flex;align-items:center;gap:12px;padding:8px 12px;box-shadow:var(--shadow)}
+.brand-logo{width:154px;max-height:46px;object-fit:contain;object-position:left center;flex:0 0 auto;filter:drop-shadow(0 4px 13px rgba(0,0,0,.18))}
+.mode-pill{border:1px solid rgba(110,231,161,.25);background:rgba(110,231,161,.09);color:#baf6d0;border-radius:999px;padding:7px 10px;font-size:10px;font-weight:900;letter-spacing:.08em;white-space:nowrap}
+
+.mission-card{position:fixed;z-index:1300;left:18px;top:94px;width:min(360px,calc(100vw - 36px));border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,rgba(3,27,32,.95),rgba(4,21,28,.94));backdrop-filter:blur(18px);box-shadow:var(--shadow);overflow:hidden}
+.mission-head{padding:18px 48px 13px 18px;background:linear-gradient(135deg,rgba(85,217,243,.12),rgba(110,231,161,.06));border-bottom:1px solid var(--line);position:relative}.mission-toggle{position:absolute;right:10px;top:10px;width:30px;height:30px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.055);color:#dff7f2;cursor:pointer;font-size:15px;font-weight:900}.mission-toggle:hover{background:rgba(85,217,243,.10);border-color:rgba(85,217,243,.3)}.mission-card.compact{width:min(270px,calc(100vw - 36px))}.mission-card.compact .mission-text,.mission-card.compact .zoom-gate,.mission-card.compact .clue-stack,.mission-card.compact .mission-foot{display:none}.mission-card.compact .mission-head{padding:12px 46px 12px 14px;border-bottom:0}.mission-card.compact .mission-title{font-size:15px;margin:4px 0}.mission-card.compact .mission-kicker{font-size:7px}
+.mission-kicker{display:flex;align-items:center;gap:7px;color:#90b6b2;font-size:9px;font-weight:950;letter-spacing:.14em}.mission-kicker b{color:#fff}.mission-title{font-size:23px;line-height:1.06;margin:8px 0 9px;letter-spacing:-.03em}.mission-text{font-size:13px;line-height:1.45;color:#d5e9e5;margin:0}.zoom-gate{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:11px;border-top:1px solid var(--line)}.zoom-bars{display:flex;gap:4px;flex:1}.zoom-bars i{height:5px;flex:1;border-radius:99px;background:rgba(255,255,255,.08);transition:.3s}.zoom-bars i.on{background:linear-gradient(90deg,var(--cyan),var(--green));box-shadow:0 0 12px rgba(85,217,243,.3)}.zoom-gate span{font-size:9px;color:#91b7b2;font-weight:900;white-space:nowrap}
+.clue-stack{padding:13px 18px 15px;display:grid;gap:7px}.clue{width:100%;display:flex;gap:9px;align-items:flex-start;border-radius:13px;padding:9px 42px 9px 10px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.055);color:inherit;text-align:left;font:inherit;opacity:.35;filter:grayscale(.4);transition:.22s;position:relative;cursor:default}.clue.unlocked{opacity:1;filter:none;background:rgba(110,231,161,.06);border-color:rgba(110,231,161,.18);cursor:pointer}.clue.unlocked:hover{transform:translateY(-1px);background:rgba(85,217,243,.10);border-color:rgba(85,217,243,.34)}.clue.unlocked:focus-visible{outline:3px solid rgba(85,217,243,.55);outline-offset:2px}.clue.unlocked::after{content:'TAP';position:absolute;right:9px;top:50%;transform:translateY(-50%);font-size:7px;font-weight:950;letter-spacing:.08em;color:#9de9dc;border:1px solid rgba(110,231,161,.22);background:rgba(1,18,22,.5);border-radius:999px;padding:4px 5px}.clue:disabled{pointer-events:none}.clue .ico{width:25px;text-align:center;font-size:17px}.clue div{min-width:0}.clue small{display:block;color:#779d98;font-size:8px;font-weight:950;letter-spacing:.1em;margin-bottom:2px}.clue strong{font-size:11px;line-height:1.3;display:block}.candidate-note{font-size:10px;line-height:1.45;color:#9fc2bd;margin:0 0 10px}.candidate-list{display:grid;gap:7px}.candidate-row{display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.035);padding:9px}.candidate-row .cicon{font-size:20px;text-align:center}.candidate-row strong{display:block;font-size:10px}.candidate-row small{display:block;color:#83aaa4;font-size:8px;line-height:1.35;margin-top:2px}.candidate-actions{display:flex;gap:5px}.candidate-actions button{border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;border-radius:9px;padding:7px 8px;font-size:8px;font-weight:900;cursor:pointer}.candidate-actions button.lock{border-color:rgba(110,231,161,.28);background:rgba(110,231,161,.09);color:#c8f8d8}.candidate-actions button:hover{border-color:rgba(85,217,243,.45);background:rgba(85,217,243,.08)}.species-card.clickable{cursor:pointer;transition:.18s}.species-card.clickable:hover{transform:translateY(-2px);border-color:rgba(85,217,243,.28);background:rgba(85,217,243,.06)}.mission-foot{display:flex;gap:7px;padding:0 18px 16px}.mini-btn{border:1px solid var(--line);background:rgba(255,255,255,.05);border-radius:12px;padding:9px 10px;font-size:10px;font-weight:900;cursor:pointer;transition:.2s}.mini-btn:hover{transform:translateY(-1px);border-color:rgba(85,217,243,.4)}.mini-btn.danger{color:#ffd4ce}.mini-btn.grow{flex:1}
+
+.map-message{position:fixed;z-index:2300;left:50%;top:95px;transform:translate(-50%,-10px);max-width:min(560px,calc(100vw - 24px));padding:11px 16px;border-radius:999px;border:1px solid rgba(85,217,243,.28);background:rgba(2,24,30,.92);backdrop-filter:blur(14px);box-shadow:0 14px 42px rgba(0,0,0,.34);font-size:11px;font-weight:900;letter-spacing:.02em;opacity:0;pointer-events:none;transition:.22s}.map-message.show{opacity:1;transform:translate(-50%,0)}.map-message.hot{border-color:rgba(242,196,94,.5);color:#ffe7a4}.map-message.wrong{border-color:rgba(255,124,111,.5);color:#ffd5d0}.map-message.good{border-color:rgba(110,231,161,.5);color:#cdf8dc}
+
+.tool-dock{position:fixed;z-index:1500;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(810px,calc(100vw - 28px));border:1px solid var(--line);background:rgba(3,22,27,.9);backdrop-filter:blur(18px);border-radius:22px;box-shadow:var(--shadow);padding:8px;display:grid;grid-template-columns:repeat(6,1fr);gap:6px}.tool{position:relative;min-height:58px;border:1px solid rgba(255,255,255,.07);border-radius:15px;background:rgba(255,255,255,.045);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px;transition:.2s}.tool:hover{transform:translateY(-2px);background:rgba(85,217,243,.08);border-color:rgba(85,217,243,.28)}.tool.active{background:rgba(110,231,161,.12);border-color:rgba(110,231,161,.42)}.tool .ti{font-size:21px}.tool .tc{text-align:left;min-width:0}.tool strong{display:block;font-size:10px;line-height:1.05}.tool small{display:block;color:#86aaa5;font-size:8px;margin-top:3px}.tool em{position:absolute;right:5px;top:4px;min-width:18px;height:18px;border-radius:999px;background:#17454a;color:#baf6d0;font-style:normal;font-size:8px;font-weight:900;display:grid;place-items:center;padding:0 4px}
+
+.eco-beacon{background:transparent;border:none}.beacon{--c:#6ee7a1;width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.84);background:var(--c);box-shadow:0 0 0 5px color-mix(in srgb,var(--c) 20%,transparent),0 6px 16px rgba(0,0,0,.32);display:grid;place-items:center;transition:.22s;position:relative}.beacon span{font-size:0;transition:.2s}.beacon::after{content:"";position:absolute;inset:-7px;border:1px solid color-mix(in srgb,var(--c) 70%,transparent);border-radius:50%;animation:pulse 2.2s ease-out infinite;opacity:.4}@keyframes pulse{0%{transform:scale(.55);opacity:.65}75%,100%{transform:scale(1.35);opacity:0}}
+.zoom-mid .beacon{width:28px;height:28px}.zoom-near .beacon{width:36px;height:36px;border-width:2px}.zoom-near .beacon span{font-size:17px}.beacon.discovered{background:#163d34;--c:#6ee7a1}.beacon.discovered span{font-size:15px}.beacon.scan{animation:scanGlow .65s ease-in-out alternate 6}.beacon.target-pulse{animation:targetPulse .75s ease-in-out alternate 6}@keyframes scanGlow{to{transform:scale(1.55);box-shadow:0 0 0 14px color-mix(in srgb,var(--c) 25%,transparent),0 0 30px var(--c)}}@keyframes targetPulse{to{transform:scale(1.6);box-shadow:0 0 0 16px rgba(242,196,94,.2),0 0 36px #f2c45e}}
+.forest-label{background:rgba(2,20,24,.9)!important;border:1px solid rgba(255,255,255,.15)!important;color:#effffb!important;border-radius:10px!important;box-shadow:0 8px 20px rgba(0,0,0,.32)!important;padding:6px 8px!important;font-size:9px!important;font-weight:850!important}.forest-label:before{display:none!important}
+.scan-ring{stroke-dasharray:7 8;animation:dash 1.4s linear infinite}@keyframes dash{to{stroke-dashoffset:-30}}
+
+.drawer{position:fixed;z-index:1800;right:14px;top:94px;bottom:94px;width:min(390px,calc(100vw - 28px));border:1px solid var(--line);border-radius:24px;background:rgba(3,23,28,.96);backdrop-filter:blur(20px);box-shadow:var(--shadow);transform:translateX(calc(100% + 24px));opacity:0;pointer-events:none;transition:.3s;display:flex;flex-direction:column;overflow:hidden}.drawer.open{transform:none;opacity:1;pointer-events:auto}.drawer-head{display:flex;align-items:center;gap:10px;padding:14px;border-bottom:1px solid var(--line)}.drawer-head h2{font-size:16px;margin:0}.drawer-head button{margin-left:auto;border:0;background:rgba(255,255,255,.06);color:#fff;width:34px;height:34px;border-radius:11px;cursor:pointer}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:8px;border-bottom:1px solid var(--line)}.tab{border:1px solid transparent;background:transparent;color:#8db5af;border-radius:10px;padding:9px 6px;font-size:9px;font-weight:900;cursor:pointer}.tab.active{background:rgba(110,231,161,.09);border-color:rgba(110,231,161,.2);color:#eafff1}.drawer-body{overflow:auto;padding:12px 12px 22px}.search-row{display:flex;gap:6px;margin-bottom:10px}.search-row input,.search-row select{min-width:0;border:1px solid var(--line);background:#082f34;color:#eafbf7;border-radius:11px;padding:9px 10px;font-size:10px}.search-row input{flex:1}.forest-list{display:grid;gap:6px}.passport-item{border:1px solid rgba(255,255,255,.07);border-radius:13px;background:rgba(255,255,255,.03);padding:9px;display:grid;grid-template-columns:28px 1fr auto;gap:8px;align-items:center;cursor:pointer}.passport-item:hover{border-color:rgba(85,217,243,.25)}.passport-item .picon{font-size:18px;text-align:center;filter:grayscale(1);opacity:.45}.passport-item.done .picon{filter:none;opacity:1}.passport-item strong{display:block;font-size:10px}.passport-item small{display:block;color:#7fa39e;font-size:8px;margin-top:2px}.passport-item .check{font-size:12px;color:#567c76}.passport-item.done .check{color:var(--green)}
+.codex-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.species-card{border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(255,255,255,.03);padding:10px}.species-card .big{font-size:26px}.species-card strong{display:block;font-size:10px;margin-top:4px}.species-card em{display:block;font-style:italic;color:#9cc2bd;font-size:8px}.species-card small{display:block;color:#6e9892;font-size:8px;margin-top:6px;line-height:1.35}.species-card b{display:inline-block;margin-top:7px;font-size:8px;color:#b7f5ca}.research-copy{font-size:11px;line-height:1.55;color:#bdd5d1}.research-copy h3{font-size:13px;color:#fff;margin:15px 0 6px}.source-link{display:block;margin-top:7px;color:#8de5f1;text-decoration:none;word-break:break-word}.source-link:hover{text-decoration:underline}.research-note{padding:10px;border-radius:13px;background:rgba(242,196,94,.08);border:1px solid rgba(242,196,94,.18);color:#f4dda6;margin:10px 0}
+
+.reveal{position:fixed;z-index:3000;inset:0;background:rgba(0,10,13,.58);backdrop-filter:blur(8px);display:none;place-items:center;padding:20px}.reveal.show{display:grid}.reveal-card{width:min(720px,100%);max-height:min(82dvh,720px);overflow:auto;border:1px solid rgba(110,231,161,.28);background:linear-gradient(160deg,#082f32,#061d26 66%);border-radius:28px;box-shadow:0 30px 100px rgba(0,0,0,.62);padding:24px;position:relative}.reveal-kicker{font-size:9px;font-weight:950;letter-spacing:.14em;color:#8fe8b0}.reveal-title{font-size:30px;line-height:1.04;margin:7px 0 4px;letter-spacing:-.035em}.reveal-region{color:#9fc2bd;font-size:11px}.reveal-grid{display:grid;grid-template-columns:1.35fr .9fr;gap:12px;margin-top:16px}.info-block{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.035);padding:12px}.info-block h4{font-size:9px;letter-spacing:.12em;color:#7da7a2;margin:0 0 7px}.info-block p{font-size:11px;line-height:1.5;margin:0;color:#d9ece8}.species-chips{display:flex;flex-wrap:wrap;gap:6px}.species-chip{border:1px solid rgba(110,231,161,.18);background:rgba(110,231,161,.07);border-radius:999px;padding:6px 8px;font-size:9px}.species-chip em{color:#99beb8}.reveal-actions{display:flex;gap:8px;margin-top:16px}.reveal-actions button,.reveal-actions a{flex:1;text-align:center;border-radius:13px;padding:12px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;text-decoration:none;font-size:10px;font-weight:900;cursor:pointer}.reveal-actions .next{background:linear-gradient(135deg,#1d8d60,#157b8c);border-color:rgba(110,231,161,.3)}
+
+.end-screen{position:fixed;z-index:3200;inset:0;background:radial-gradient(circle at 50% 35%,#124a47,#04181e 65%);display:none;place-items:center;padding:20px}.end-screen.show{display:grid}.end-card{width:min(680px,100%);text-align:center}.end-badge{font-size:64px}.end-card h1{font-size:clamp(34px,7vw,68px);letter-spacing:-.05em;margin:6px 0}.end-card p{color:#a9cbc6}.end-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:18px 0}.end-stat{border:1px solid var(--line);border-radius:16px;padding:12px;background:rgba(255,255,255,.04)}.end-stat strong{display:block;font-size:24px}.end-stat small{font-size:8px;color:#88aaa5}.end-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.end-actions button{border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.06);padding:12px 16px;font-size:10px;font-weight:900;cursor:pointer}.end-actions .primary{background:#16785c}
+
+.team-banner{position:fixed;z-index:1500;left:50%;top:94px;transform:translateX(-50%);display:none;border-radius:999px;padding:9px 13px;background:rgba(3,23,28,.92);border:1px solid var(--line);font-size:10px;font-weight:900}.team-banner.show{display:block}.team-blue{color:#74d4ff}.team-green{color:#80efa7}
+
+
+/* v1.5 — immersion + learning loop */
+.stat.knowledge strong{color:#baf6d0}.knowledge-meter{width:58px;height:4px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:3px}.knowledge-meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--green));border-radius:inherit;transition:width .45s ease}
+.fog-toggle{position:fixed;z-index:1450;right:18px;top:94px;border:1px solid rgba(180,235,225,.17);border-radius:999px;background:rgba(3,23,28,.88);backdrop-filter:blur(12px);color:#c6e8e2;padding:8px 11px;font-size:9px;font-weight:950;letter-spacing:.08em;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.26)}.fog-toggle.active{border-color:rgba(110,231,161,.38);background:rgba(110,231,161,.09);color:#dcffea}
+.learning-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.learning-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:17px;padding:12px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.02))}.learning-card::after{content:"";position:absolute;inset:auto -20px -40px auto;width:95px;height:95px;border-radius:50%;background:radial-gradient(circle,rgba(110,231,161,.10),transparent 68%);pointer-events:none}.learning-card .eyebrow{display:block;font-size:8px;letter-spacing:.12em;font-weight:950;color:#8ac8bd;margin-bottom:6px}.learning-card p{margin:0;color:#d9ece8;font-size:10px;line-height:1.5}.learning-card.fact{border-color:rgba(242,196,94,.22)}.learning-card.fact .eyebrow{color:#f7d77c}.learning-card.tip{border-color:rgba(85,217,243,.22)}.learning-card.tip .eyebrow{color:#8be9fa}
+.mastery-card{margin-top:10px;border:1px solid rgba(110,231,161,.18);border-radius:15px;padding:10px 11px;background:rgba(110,231,161,.055)}.mastery-head{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:9px;font-weight:950}.mastery-head span:last-child{color:#bdf4cf}.mastery-bar{height:7px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:7px}.mastery-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#55d9f3,#6ee7a1,#f2c45e);width:0;transition:width .55s ease}
+.quick-check{margin-top:10px;border:1px solid rgba(85,217,243,.22);border-radius:17px;background:rgba(85,217,243,.045);padding:12px}.quick-check-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.quick-check-head b{font-size:9px;letter-spacing:.1em;color:#9ceaf5}.quick-check-head span{font-size:8px;color:#86aaa5}.quick-question{font-size:11px;font-weight:850;line-height:1.4;margin:0 0 9px}.quick-options{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.quick-option{border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:12px;padding:9px 7px;min-height:48px;font-size:8.5px;font-weight:850;line-height:1.25;cursor:pointer;transition:.18s}.quick-option:hover{background:rgba(85,217,243,.09);border-color:rgba(85,217,243,.35)}.quick-option.correct{background:rgba(110,231,161,.13);border-color:rgba(110,231,161,.5);color:#d9ffe6}.quick-option.wrong{background:rgba(255,124,111,.10);border-color:rgba(255,124,111,.42);color:#ffd5d0}.quick-option:disabled{cursor:default}.quick-result{min-height:15px;margin-top:7px;font-size:9px;color:#9fc2bd;font-weight:750}
+.mastery-mini{display:flex;align-items:center;gap:6px;margin-top:4px}.mastery-mini span{font-size:7px;color:#7fa39e;min-width:46px}.mastery-mini i{height:4px;flex:1;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;position:relative}.mastery-mini i::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--m,0%);background:linear-gradient(90deg,var(--cyan),var(--green));border-radius:inherit}
+.badge-burst{position:fixed;z-index:3600;left:50%;top:50%;transform:translate(-50%,-48%) scale(.92);width:min(360px,calc(100vw - 30px));border:1px solid rgba(242,196,94,.42);border-radius:26px;background:linear-gradient(155deg,rgba(8,48,50,.98),rgba(4,24,30,.98));box-shadow:0 30px 100px rgba(0,0,0,.62),0 0 50px rgba(242,196,94,.08);padding:22px;text-align:center;opacity:0;pointer-events:none;transition:.25s}.badge-burst.show{opacity:1;transform:translate(-50%,-50%) scale(1)}.badge-burst .badge-icon{font-size:54px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.3))}.badge-burst small{display:block;color:#f6d77f;font-size:8px;font-weight:950;letter-spacing:.14em;margin-top:5px}.badge-burst strong{display:block;font-size:23px;margin-top:5px;letter-spacing:-.03em}.badge-burst p{font-size:10px;line-height:1.45;color:#a9cbc6;margin:7px 0 0}
+.eco-pulse-label{background:rgba(2,23,27,.91)!important;border:1px solid rgba(110,231,161,.22)!important;color:#dffff0!important;border-radius:999px!important;font-size:8px!important;font-weight:900!important;padding:5px 8px!important;box-shadow:0 7px 22px rgba(0,0,0,.25)!important}.eco-pulse-label:before{display:none!important}
+
+@media(max-width:980px){.mission-name{display:none}.mode-pill{display:none}.topbar{height:62px}.mission-card{top:84px;width:320px}.drawer{top:84px;bottom:86px}.tool-dock{grid-template-columns:repeat(6,1fr)}.tool .tc small{display:none}.tool{min-height:54px}.brand-logo{width:130px}.stat{min-width:58px;padding:5px}.stat small{font-size:7px}.stat strong{font-size:14px}}
+@media(max-width:720px){.fog-toggle{right:8px;top:72px;padding:6px 8px;font-size:8px}.learning-grid{grid-template-columns:1fr}.quick-options{grid-template-columns:1fr}.stat.knowledge{min-width:54px}.topbar{left:8px;right:8px;top:max(7px,env(safe-area-inset-top));padding:7px;height:58px;border-radius:16px}.brand-logo{width:104px}.lang-switch button{padding:5px 6px}.top-stats{gap:4px}.stat{min-width:50px;border-radius:11px;padding:5px 4px}.stat.timer{display:none}.mission-card{left:8px;top:72px;width:min(290px,calc(100vw - 16px));border-radius:18px}.mission-head{padding:13px 44px 13px 13px}.mission-title{font-size:18px}.mission-text{font-size:11px}.clue-stack{padding:9px 13px 10px;gap:4px}.clue{padding:7px}.clue .ico{font-size:14px}.clue strong{font-size:9px}.mission-foot{padding:0 13px 12px}.tool-dock{bottom:max(7px,env(safe-area-inset-bottom));width:calc(100vw - 14px);padding:5px;border-radius:16px;gap:3px}.tool{min-height:48px;padding:4px;border-radius:11px;flex-direction:column;gap:1px}.tool .ti{font-size:17px}.tool .tc{text-align:center}.tool strong{font-size:7px}.tool small{display:none}.drawer{right:7px;top:72px;bottom:70px;width:calc(100vw - 14px)}.reveal-card{padding:18px;border-radius:22px}.reveal-title{font-size:24px}.reveal-grid{grid-template-columns:1fr}.map-message{top:70px}.team-banner{top:71px}}
+@media(max-width:430px){.stat.knowledge small{display:none}.stat.knowledge{min-width:42px}.knowledge-meter{width:38px}.fog-toggle{top:136px}.brand-logo{width:86px}.stat{min-width:44px}.stat.score{display:none}.mission-card{width:268px}.mission-head{padding:11px 42px 9px 12px}.clue-stack{padding:7px 11px 8px}.mission-foot{padding:0 11px 10px}.tool strong{font-size:6.5px}.tool em{display:none}.end-stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div id="map" aria-label="Διαδραστικός χάρτης δασικών οικοσυστημάτων"></div>
+
+<header class="topbar">
+  <img id="brandLogo" class="brand-logo" src="assets/dasologio-logo-light.png" alt="ΔΑΣΟΛΟΓΙΟ">
+  <div class="mission-name"><small>FOREST MISSION · 88 ECOSYSTEMS</small><strong id="topMission">Ελληνικός δασικός χάρτης</strong></div>
+  <div id="modePill" class="mode-pill">GRAND ATLAS</div>
+  <div class="lang-switch" aria-label="Language"><button id="gameLangEl" onclick="switchGameLanguage('el')">ΕΛ</button><button id="gameLangEn" onclick="switchGameLanguage('en')">EN</button></div>
+  <div class="top-stats">
+    <div class="stat score"><small>SCORE</small><strong id="scoreValue">0</strong></div>
+    <div class="stat found"><small>FOUND</small><strong><span id="foundValue">0</span>/<span id="roundTotal">88</span></strong></div>
+    <div class="stat streak"><small>STREAK</small><strong id="streakValue">×0</strong></div>
+    <div class="stat knowledge"><small id="knowledgeLabel">KNOW</small><strong id="knowledgeValue">0%</strong><div class="knowledge-meter"><i id="knowledgeBar"></i></div></div>
+    <div class="stat timer"><small>TIME</small><strong id="timeValue">∞</strong></div>
+  </div>
+</header>
+
+<section class="mission-card" id="missionCard">
+  <div class="mission-head">
+    <button type="button" id="missionToggle" class="mission-toggle" onclick="toggleMissionCard(event)" title="Σύμπτυξη / ανάπτυξη αποστολής" aria-label="Σύμπτυξη / ανάπτυξη αποστολής">−</button>
+    <div class="mission-kicker"><span>🛰️</span><b id="missionIndex">MISSION 01</b><span id="difficultyLabel">· FIELD SCAN</span></div>
+    <h1 class="mission-title" id="missionTitle">Φόρτωση αποστολής…</h1>
+    <p class="mission-text" id="missionClue">Ο χάρτης προετοιμάζεται.</p>
+    <div class="zoom-gate"><div class="zoom-bars"><i></i><i></i><i></i></div><span id="zoomText">ZOOM 6.2 · 0/3 LENS</span></div>
+  </div>
+  <div class="clue-stack">
+    <button type="button" id="clueRegion" class="clue" onclick="useRegionLens()" disabled aria-label="Geographic clue"><div class="ico">🧭</div><div><small>REGION · CLICK TO SCAN</small><strong>Ζούμαρε για να ξεκλειδώσεις γεωγραφικό ίχνος</strong></div></button>
+    <button type="button" id="clueBiome" class="clue" onclick="useBiomeLens()" disabled aria-label="Ecosystem clue"><div class="ico">🧬</div><div><small>ECOSYSTEM · CLICK TO FILTER</small><strong>Το οικοσύστημα αποκαλύπτεται στο επόμενο zoom</strong></div></button>
+    <button type="button" id="clueSpecies" class="clue" onclick="useSpeciesLens()" disabled aria-label="Signature species clue"><div class="ico">🌿</div><div><small>SIGNATURE SPECIES · CLICK TO LOCK</small><strong>Κοντινό zoom = βοτανική ταυτότητα</strong></div></button>
+  </div>
+  <div class="mission-foot">
+    <button id="smartHintBtn" class="mini-btn grow" onclick="useHint()"><span id="smartHintText">💡 ΕΞΥΠΝΗ ΒΟΗΘΕΙΑ</span> <span id="hintLevel">0/3</span></button>
+    <button class="mini-btn" onclick="skipMission()">↷ SKIP</button>
+  </div>
+</section>
+
+<div id="teamBanner" class="team-banner"></div>
+<div id="mapMessage" class="map-message" role="status" aria-live="polite"></div>
+<button id="fogToggle" class="fog-toggle active" type="button" onclick="toggleFog()">🌫️ <span id="fogToggleText">DISCOVERY FOG</span></button>
+
+<nav id="toolDock" class="tool-dock" aria-label="Εργαλεία χάρτη">
+  <button class="tool" onclick="overview()"><span class="ti">🇬🇷</span><span class="tc"><strong id="toolGreece">ΕΛΛΑΔΑ</strong><small>zoom out</small></span></button>
+  <button id="scanBtn" class="tool" onclick="scanViewport()"><span class="ti">🛰️</span><span class="tc"><strong>SCAN</strong><small id="toolScanSub">σάρωση θέας</small></span><em id="scanCount">3</em></button>
+  <button id="hotColdBtn" class="tool" onclick="toggleHotCold()"><span class="ti">🔥</span><span class="tc"><strong>HOT / COLD</strong><small id="toolHotSub">απόσταση στόχου</small></span></button>
+  <button id="biomeBtn" class="tool" onclick="toggleBiomeVision()"><span class="ti">🧬</span><span class="tc"><strong>BIOME</strong><small id="toolBiomeSub">χρωματικός κώδικας</small></span></button>
+  <button class="tool" onclick="smartFlyHint()"><span class="ti">🎯</span><span class="tc"><strong>CAMERA HINT</strong><small id="toolCameraSub">χωρίς reveal</small></span></button>
+  <button class="tool" onclick="openDrawer('passport')"><span class="ti">📚</span><span class="tc"><strong>ATLAS</strong><small id="toolAtlasSub">88 δάση + είδη</small></span></button>
+</nav>
+
+<aside id="drawer" class="drawer" aria-hidden="true">
+  <div class="drawer-head"><h2>Forest Atlas</h2><button onclick="closeDrawer()">✕</button></div>
+  <div class="tabs">
+    <button id="tab-passport" class="tab active" onclick="setDrawerTab('passport')"><span id="tabForestsText">🗺️ 88 ΔΑΣΗ</span></button>
+    <button id="tab-codex" class="tab" onclick="setDrawerTab('codex')">🌿 SPECIES</button>
+    <button id="tab-research" class="tab" onclick="setDrawerTab('research')">🔬 RESEARCH</button>
+  </div>
+  <div id="drawerBody" class="drawer-body"></div>
+</aside>
+
+<section id="reveal" class="reveal" aria-hidden="true">
+  <article class="reveal-card">
+    <div class="reveal-kicker">✅ ECOSYSTEM UNLOCKED · <span id="revealPoints">+0 XP</span></div>
+    <h2 id="revealTitle" class="reveal-title"></h2>
+    <div id="revealRegion" class="reveal-region"></div>
+    <div class="reveal-grid">
+      <div class="info-block"><h4 id="revealEcoLabel">ΟΙΚΟΣΥΣΤΗΜΑ / ΔΑΣΙΚΗ ΖΩΝΗ</h4><p id="revealEco"></p></div>
+      <div class="info-block"><h4 id="revealThreatLabel">ΚΥΡΙΑ ΑΠΕΙΛΗ</h4><p id="revealThreat"></p></div>
+      <div class="info-block" style="grid-column:1/-1"><h4 id="revealSpeciesLabel">ΧΑΡΑΚΤΗΡΙΣΤΙΚΑ ΕΙΔΗ</h4><div id="revealSpecies" class="species-chips"></div></div>
+      <div class="info-block" style="grid-column:1/-1"><h4 id="revealUniqueLabel">ΓΙΑΤΙ ΕΙΝΑΙ ΜΟΝΑΔΙΚΟ</h4><p id="revealSignature"></p></div>
+    </div>
+    <div class="learning-grid">
+      <div class="learning-card fact"><span id="factEyebrow" class="eyebrow">🤯 ΤΟ ΗΞΕΡΕΣ;</span><p id="revealFact"></p></div>
+      <div class="learning-card tip"><span id="tipEyebrow" class="eyebrow">🧭 RANGER TIP</span><p id="revealTip"></p></div>
+    </div>
+    <div class="mastery-card"><div class="mastery-head"><span id="masteryLabel">🌿 FOREST KNOWLEDGE</span><span id="masteryValue">0%</span></div><div class="mastery-bar"><i id="masteryBar"></i></div></div>
+    <section id="quickCheck" class="quick-check">
+      <div class="quick-check-head"><b id="quickCheckLabel">⚡ QUICK CHECK</b><span id="quickReward">+120 XP · +15 KNOW</span></div>
+      <p id="quickQuestion" class="quick-question"></p>
+      <div id="quickOptions" class="quick-options"></div>
+      <div id="quickResult" class="quick-result"></div>
+    </section>
+    <div class="reveal-actions">
+      <a id="revealSource" href="#" target="_blank" rel="noopener" onclick="studySource()">🔬 ΑΝΟΙΓΜΑ ΠΗΓΗΣ</a>
+      <button id="nextMissionBtn" class="next" onclick="nextMission()">ΕΠΟΜΕΝΗ ΑΠΟΣΤΟΛΗ →</button>
+    </div>
+  </article>
+</section>
+
+<section id="endScreen" class="end-screen">
+  <div class="end-card">
+    <div class="end-badge">🌲🛰️</div>
+    <h1 id="endTitle">EXPEDITION COMPLETE</h1>
+    <p id="endCopy">Ο χάρτης μόλις έγινε δικός σου.</p>
+    <div class="end-stats">
+      <div class="end-stat"><strong id="endScore">0</strong><small>SCORE</small></div>
+      <div class="end-stat"><strong id="endFound">0</strong><small>FORESTS</small></div>
+      <div class="end-stat"><strong id="endAccuracy">0%</strong><small>ACCURACY</small></div>
+      <div class="end-stat"><strong id="endSpecies">0</strong><small>SPECIES</small></div>
+      <div class="end-stat"><strong id="endKnowledge">0%</strong><small>KNOWLEDGE</small></div>
+    </div>
+    <div class="end-actions"><button id="newMissionBtn" class="primary" onclick="restartRound()">↻ ΝΕΑ ΑΠΟΣΤΟΛΗ</button><button id="openAtlasBtn" onclick="openDrawer('passport');document.getElementById('endScreen').classList.remove('show')">📚 ΑΝΟΙΓΜΑ ATLAS</button><button id="homeBtn" onclick="goHome()">⌂ ΑΡΧΙΚΗ</button></div>
+  </div>
+</section>
+<div id="badgeBurst" class="badge-burst"><div id="badgeIcon" class="badge-icon">🏅</div><small id="badgeKicker">BADGE UNLOCKED</small><strong id="badgeTitle"></strong><p id="badgeCopy"></p></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="data.js"></script>
+<script src="i18n.js"></script>
+<script>
+'use strict';
+
+const $ = (id) => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+const rawMode = params.get('mode') || 'atlas';
+const gameMode = ['atlas','blitz','species','teams'].includes(rawMode) ? rawMode : 'atlas';
+const STATE_KEY = 'dasologio-forest-mission-88-v1';
+const GREECE_CENTER = [38.55,23.55];
+const GREECE_ZOOM = 6.35;
+
+let map, markersLayer, pulseLayer, tileLayer, labelLayer, fogLayer;
+let markerById = new Map();
+let gameQueue = [];
+let currentStep = 0;
+let score = 0;
+let streak = 0;
+let wrongClicks = 0;
+let answerClicks = 0;
+let hintsUsed = 0;
+let scanCharges = 3;
+let hotCold = false;
+let biomeVision = false;
+let revealOpen = false;
+let toastTimer = null;
+let hintLevel = 0;
+let roundSeconds = gameMode === 'blitz' ? 8 * 60 : null;
+let timerHandle = null;
+let activeTeam = 0;
+let teamScores = [0,0];
+let teamNames = [params.get('team0') || fmT('team1'), params.get('team1') || fmT('team2')];
+let sessionDiscovered = new Set();
+let fogEnabled = true;
+let scanStage = 0;
+let quizState = null;
+let badgeTimer = null;
+
+function safeState(){
+  try { return JSON.parse(localStorage.getItem(STATE_KEY) || '{}') || {}; }
+  catch(e){ return {}; }
+}
+const persisted = safeState();
+let allTimeDiscovered = new Set(Array.isArray(persisted.discovered) ? persisted.discovered : []);
+let knowledgePoints = Number(persisted.knowledgePoints)||0;
+let masteryByForest = (persisted.masteryByForest && typeof persisted.masteryByForest==='object') ? persisted.masteryByForest : {};
+let learnedActions = (persisted.learnedActions && typeof persisted.learnedActions==='object') ? persisted.learnedActions : {};
+let earnedBadges = new Set(Array.isArray(persisted.badges) ? persisted.badges : []);
+allTimeDiscovered.forEach(id=>{
+  if(!masteryByForest[id]) masteryByForest[id]=25;
+  if(!Array.isArray(learnedActions[id])) learnedActions[id]=['discover'];
+  else if(!learnedActions[id].includes('discover')) learnedActions[id].push('discover');
+});
+
+function saveState(){
+  try {
+    localStorage.setItem(STATE_KEY, JSON.stringify({
+      discovered:[...allTimeDiscovered],
+      bestScore:Math.max(Number(persisted.bestScore)||0,score),
+      knowledgePoints, masteryByForest, learnedActions, badges:[...earnedBadges],
+      updated:new Date().toISOString()
+    }));
+  } catch(e){}
+}
+
+function shuffled(arr){
+  const x=[...arr];
+  for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}
+  return x;
+}
+function byBiomeDiversity(items, count){
+  const buckets={};
+  items.forEach(f=>(buckets[f.biome] ||= []).push(f));
+  Object.values(buckets).forEach(b=>buckets[b]=shuffled(b));
+  const keys=shuffled(Object.keys(buckets)); const out=[];
+  let guard=0;
+  while(out.length<count && guard++<500){
+    for(const k of keys){ if(buckets[k]?.length){out.push(buckets[k].pop());if(out.length>=count)break;} }
+  }
+  return out;
+}
+function buildQueue(){
+  if(gameMode==='blitz') return byBiomeDiversity(forestEcosystems,12);
+  if(gameMode==='species') return byBiomeDiversity(forestEcosystems.filter(f=>f.species?.length),15);
+  if(gameMode==='teams') return byBiomeDiversity(forestEcosystems,16);
+  const undiscovered=forestEcosystems.filter(f=>!allTimeDiscovered.has(f.id));
+  const seen=forestEcosystems.filter(f=>allTimeDiscovered.has(f.id));
+  return [...shuffled(undiscovered),...shuffled(seen)];
+}
+
+function biomeMeta(f){ return fmBiome(f); }
+function primarySpecies(f){ return fmSpecies(f.species?.[0]); }
+function speciesList(f){ return (f.species||[]).map(id=>fmSpecies(id)).filter(Boolean); }
+function shortRegion(region){ return region.split('·')[0].trim(); }
+function currentForest(){ return gameQueue[currentStep] || null; }
+function forestView(f){ return fmForest(f); }
+function formatScore(n){ return Math.max(0,Math.round(n)).toLocaleString(FM_LANG==='en'?'en-US':'el-GR'); }
+
+function ltxt(key, ...args){
+  const en={
+    know:'KNOW', fog:'DISCOVERY FOG', did:'🤯 DID YOU KNOW?', tip:'🧭 RANGER TIP', mastery:'🌿 FOREST KNOWLEDGE', quick:'⚡ QUICK CHECK', quickReward:'+120 XP · +15 KNOW',
+    study:'+8 KNOW · source studied', badge:'BADGE UNLOCKED', tryAgain:'Good try — the correct answer is highlighted. That still counts as learning.', correct:'Correct — knowledge locked in!',
+    qSpecies:'Which signature species belongs to this ecosystem?', qBiome:'Which ecosystem type best matches this forest?', qRegion:'Which region did you just discover?',
+    masteryText:(n)=>`${n}% mastered`, ranger:(sp,biome,region)=>`Ranger rule: when ${sp} appears, connect it with ${biome.toLowerCase()} and the landscape of ${region}.`,
+    micro:(n,label)=>`+${n} KNOW · ${label}`, region:'regional trace', biome:'ecosystem pattern', species:'species clue', discover:'ecosystem discovered', source:'source studied', scan:'field scan', quiz:'quick check',
+    scanMiss:'🛰️ No target signal in this viewport. Reposition the map and scan again.',
+    scan0:(r)=>`🛰️ FIELD SIGNAL 1/3 · geographic trace: ${r}`,
+    scan1:(b,z)=>`🛰️ FIELD SIGNAL 2/3 · ${b} · ${z}`,
+    scan2:(s)=>`🛰️ FIELD SIGNAL 3/3 · signature species: ${s}`,
+  };
+  const el={
+    know:'ΓΝΩΣΗ', fog:'ΟΜΙΧΛΗ ΑΝΑΚΑΛΥΨΗΣ', did:'🤯 ΤΟ ΗΞΕΡΕΣ;', tip:'🧭 ΣΥΜΒΟΥΛΗ ΔΑΣΟΦΥΛΑΚΑ', mastery:'🌿 ΓΝΩΣΗ ΔΑΣΟΥΣ', quick:'⚡ ΓΡΗΓΟΡΟ CHECK', quickReward:'+120 XP · +15 ΓΝΩΣΗ',
+    study:'+8 ΓΝΩΣΗ · μελέτη πηγής', badge:'ΝΕΟ BADGE', tryAgain:'Καλή προσπάθεια — η σωστή απάντηση επισημάνθηκε. Και αυτό μετρά ως μάθηση.', correct:'Σωστό — η γνώση κλειδώθηκε!',
+    qSpecies:'Ποιο signature είδος ανήκει σε αυτό το οικοσύστημα;', qBiome:'Ποιος τύπος οικοσυστήματος ταιριάζει καλύτερα σε αυτό το δάσος;', qRegion:'Ποια περιοχή μόλις ανακάλυψες;',
+    masteryText:(n)=>`${n}% mastery`, ranger:(sp,biome,region)=>`Ranger rule: όταν βλέπεις ${sp}, σύνδεσέ το με ${biome.toLowerCase()} και το τοπίο της περιοχής ${region}.`,
+    micro:(n,label)=>`+${n} ΓΝΩΣΗ · ${label}`, region:'γεωγραφικό ίχνος', biome:'μοτίβο οικοσυστήματος', species:'είδος-κλειδί', discover:'ανακάλυψη οικοσυστήματος', source:'μελέτη πηγής', scan:'field scan', quiz:'quick check',
+    scanMiss:'🛰️ Δεν υπάρχει target signal στο οπτικό πεδίο. Μετακίνησε τον χάρτη και ξανασκάναρε.',
+    scan0:(r)=>`🛰️ FIELD SIGNAL 1/3 · γεωγραφικό ίχνος: ${r}`,
+    scan1:(b,z)=>`🛰️ FIELD SIGNAL 2/3 · ${b} · ${z}`,
+    scan2:(s)=>`🛰️ FIELD SIGNAL 3/3 · signature species: ${s}`,
+  };
+  const v=(FM_LANG==='en'?en:el)[key]; return typeof v==='function'?v(...args):v;
+}
+function forestMastery(id){return Math.max(0,Math.min(100,Number(masteryByForest[id])||0));}
+function knowledgePercent(){
+  const total=forestEcosystems.length*100; if(!total)return 0;
+  const sum=forestEcosystems.reduce((a,f)=>a+forestMastery(f.id),0); return Math.round(sum/total*100);
+}
+function hasLearned(id,action){return Array.isArray(learnedActions[id]) && learnedActions[id].includes(action);}
+function awardLearning(f,action,know,mastery,label,{silent=false}={}){
+  if(!f || hasLearned(f.id,action))return false;
+  (learnedActions[f.id] ||= []).push(action);
+  knowledgePoints += know;
+  masteryByForest[f.id]=Math.min(100,forestMastery(f.id)+mastery);
+  saveState(); updateHUD(); checkBadges();
+  if(!silent) toast(`🌿 ${ltxt('micro',know,label)}`,'good',1700);
+  return true;
+}
+const BADGES={
+  first:{icon:'🌱',en:['First Footprint','You opened your first forest ecosystem.'],el:['Πρώτο Ίχνος','Ξεκλείδωσες το πρώτο σου δασικό οικοσύστημα.']},
+  five:{icon:'🧭',en:['Forest Scout','Five ecosystems discovered.'],el:['Forest Scout','Ανακάλυψες πέντε οικοσυστήματα.']},
+  ten:{icon:'🌲',en:['Woodland Ranger','Ten ecosystems are now on your atlas.'],el:['Woodland Ranger','Δέκα οικοσυστήματα βρίσκονται πλέον στο atlas σου.']},
+  master1:{icon:'🧠',en:['Ecosystem Master','You reached 100% knowledge in one forest.'],el:['Ecosystem Master','Έφτασες 100% γνώση σε ένα δάσος.']},
+  know25:{icon:'🍃',en:['Quarter Canopy','Your total Forest Knowledge reached 25%.'],el:['Quarter Canopy','Η συνολική γνώση δασών έφτασε το 25%.']},
+  all88:{icon:'🏆',en:['Guardian of 88','All 88 ecosystems discovered.'],el:['Guardian of 88','Ανακάλυψες και τα 88 οικοσυστήματα.']}
+};
+function showBadge(id){
+  const b=BADGES[id]; if(!b)return; const txt=FM_LANG==='en'?b.en:b.el;
+  $('badgeIcon').textContent=b.icon; $('badgeKicker').textContent=ltxt('badge'); $('badgeTitle').textContent=txt[0]; $('badgeCopy').textContent=txt[1];
+  const el=$('badgeBurst'); el.classList.add('show'); clearTimeout(badgeTimer); badgeTimer=setTimeout(()=>el.classList.remove('show'),2600);
+}
+function unlockBadge(id){if(earnedBadges.has(id))return; earnedBadges.add(id);saveState();setTimeout(()=>showBadge(id),500);}
+function checkBadges(){
+  if(allTimeDiscovered.size>=1)unlockBadge('first'); if(allTimeDiscovered.size>=5)unlockBadge('five'); if(allTimeDiscovered.size>=10)unlockBadge('ten');
+  if(Object.values(masteryByForest).some(v=>Number(v)>=100))unlockBadge('master1'); if(knowledgePercent()>=25)unlockBadge('know25'); if(allTimeDiscovered.size>=88)unlockBadge('all88');
+}
+function circleRing(center,delta=0.34,steps=36){
+  const [lat,lng]=center; const out=[]; for(let i=0;i<steps;i++){const a=(i/steps)*Math.PI*2;out.push([lat+Math.sin(a)*delta,lng+Math.cos(a)*delta/Math.max(.45,Math.cos(lat*Math.PI/180))]);} return out;
+}
+function updateFog(){
+  if(!map)return; if(fogLayer){map.removeLayer(fogLayer);fogLayer=null;} if(!fogEnabled)return;
+  const outer=[[33,17],[33,31],[43,31],[43,17]]; const holes=[...allTimeDiscovered].map(id=>forestEcosystems.find(f=>f.id===id)).filter(Boolean).map(f=>circleRing(f.coords,0.34));
+  fogLayer=L.polygon([outer,...holes],{pane:'fogPane',stroke:false,fillColor:'#001214',fillOpacity:.36,fillRule:'evenodd',interactive:false}).addTo(map);
+}
+function toggleFog(){fogEnabled=!fogEnabled;$('fogToggle').classList.toggle('active',fogEnabled);updateFog();toast(fogEnabled?(FM_LANG==='en'?'🌫️ Discovery Fog on — each forest clears the landscape.':'🌫️ Η Ομίχλη Ανακάλυψης ενεργή — κάθε δάσος καθαρίζει τον χάρτη.'):(FM_LANG==='en'?'🌤️ Discovery Fog off.':'🌤️ Η Ομίχλη Ανακάλυψης κλειστή.'),'good',1800);}
+function ecosystemPulse(f){
+  const b=biomeMeta(f); const primary=f.species?.[0]; if(!primary)return;
+  [7000,14000,22000].forEach((r,i)=>L.circle(f.coords,{radius:r,color:b.color,weight:2,opacity:.72-i*.18,fillOpacity:0,dashArray:i?'6 10':null,interactive:false}).addTo(pulseLayer));
+  const origin=L.latLng(f.coords); const related=forestEcosystems.filter(x=>x.id!==f.id && (x.species||[]).includes(primary)).sort((a,b)=>origin.distanceTo(L.latLng(a.coords))-origin.distanceTo(L.latLng(b.coords))).slice(0,5);
+  related.forEach(x=>{L.polyline([f.coords,x.coords],{color:b.color,weight:1.6,opacity:.46,dashArray:'4 9',interactive:false}).addTo(pulseLayer); const m=markerById.get(x.id); if(m && map.getZoom()>=7.4)m.bindTooltip(forestView(x).name,{className:'eco-pulse-label',direction:'top',offset:[0,-16],permanent:false});});
+}
+function rangerTip(f){const v=forestView(f);const s=primarySpecies(f);return ltxt('ranger',s?.common||v.forestType,v.forestType,v.region);}
+function natureFact(f){const s=primarySpecies(f);return s?.fact || forestView(f).signature;}
+function shuffleOptions(arr){return shuffled([...new Set(arr)]).slice(0,3);}
+function buildQuickQuiz(f){
+  const v=forestView(f); const kind=f.sourceId%3; let question,correct,options;
+  if(kind===0 && primarySpecies(f)){
+    question=ltxt('qSpecies'); correct=primarySpecies(f).common;
+    const others=Object.keys(speciesCodex).map(id=>fmSpecies(id).common).filter(x=>x!==correct); options=shuffleOptions([correct,...shuffled(others).slice(0,2)]);
+  } else if(kind===1){
+    question=ltxt('qBiome'); correct=v.forestType; const others=Object.keys(BIOMES).map(k=>FM_LANG==='en'?(FM_BIOME_EN[k]||BIOMES[k].label):BIOMES[k].label).filter(x=>x!==correct); options=shuffleOptions([correct,...shuffled(others).slice(0,2)]);
+  } else {
+    question=ltxt('qRegion'); correct=v.region; const others=shuffled([...new Set(forestEcosystems.map(x=>forestView(x).region).filter(x=>x!==correct))]).slice(0,2); options=shuffleOptions([correct,...others]);
+  }
+  if(!options.includes(correct)){options[0]=correct;options=shuffled(options)}
+  return {f,question,correct,options,answered:false};
+}
+function renderQuickQuiz(f){
+  quizState=buildQuickQuiz(f); $('quickCheckLabel').textContent=ltxt('quick'); $('quickReward').textContent=ltxt('quickReward'); $('quickQuestion').textContent=quizState.question; $('quickResult').textContent='';
+  $('quickOptions').innerHTML=quizState.options.map((x,i)=>`<button class="quick-option" type="button" data-qidx="${i}">${x}</button>`).join('');
+  document.querySelectorAll('[data-qidx]').forEach(btn=>btn.onclick=()=>answerQuickQuiz(Number(btn.dataset.qidx)));
+}
+function answerQuickQuiz(i){
+  if(!quizState || quizState.answered)return; quizState.answered=true; const chosen=quizState.options[i]; const ok=chosen===quizState.correct; const f=quizState.f;
+  document.querySelectorAll('[data-qidx]').forEach((b,idx)=>{b.disabled=true; const val=quizState.options[idx]; if(val===quizState.correct)b.classList.add('correct'); else if(idx===i)b.classList.add('wrong');});
+  if(ok){const fresh=!hasLearned(f.id,'quiz');if(fresh){score+=120;if(gameMode==='teams')teamScores[activeTeam]+=120;}awardLearning(f,'quiz',15,40,ltxt('quiz'),{silent:true});$('quickResult').textContent=fresh?`✅ ${ltxt('correct')} +120 XP · +15 ${ltxt('know')}`:`✅ ${ltxt('correct')} · ${FM_LANG==='en'?'practice reinforced':'επανάληψη γνώσης'}`; if(window.confetti)confetti({particleCount:36,spread:48,origin:{y:.72},colors:['#6ee7a1','#55d9f3','#ffffff']});}
+  else {awardLearning(f,'quiz',4,18,ltxt('quiz'),{silent:true});$('quickResult').textContent=`🌿 ${ltxt('tryAgain')} +4 ${ltxt('know')}`;}
+  updateHUD(); updateMasteryCard(f);
+}
+function updateMasteryCard(f){const m=forestMastery(f.id);$('masteryLabel').textContent=ltxt('mastery');$('masteryValue').textContent=ltxt('masteryText',m);$('masteryBar').style.width=m+'%';}
+function studySource(){const f=currentForest();if(f && awardLearning(f,'source',8,10,ltxt('source'),{silent:true})){toast(`🔬 ${ltxt('study')}`,'good',1900);updateMasteryCard(f);}}
+
+
+function updateMissionLanguageOnly(){
+  const f=currentForest();
+  if(!f)return;
+  $('missionTitle').textContent=gameMode==='species' ? fmT('missionSpecies') : fmT('missionForest');
+  $('missionClue').textContent=missionPrompt(f);
+  $('topMission').textContent=gameMode==='species' ? `Species Hunter · Mission ${currentStep+1}` : `Forest Mission · ${currentStep+1}/${gameQueue.length}`;
+  updateZoomLens();
+  if(gameMode==='teams') updateTeamBanner();
+}
+function applyStaticLanguage(){
+  document.documentElement.lang=FM_LANG;
+  $('map').setAttribute('aria-label',fmT('mapAria'));
+  $('brandLogo').src = FM_LANG==='en' ? 'assets/dasologio-logo-light-en.png' : 'assets/dasologio-logo-light.png';
+  $('brandLogo').alt = FM_LANG==='en' ? 'DASOLOGIO' : 'ΔΑΣΟΛΟΓΙΟ';
+  $('gameLangEl').classList.toggle('active',FM_LANG==='el');
+  $('knowledgeLabel').textContent=ltxt('know'); $('fogToggleText').textContent=ltxt('fog');
+  $('gameLangEn').classList.toggle('active',FM_LANG==='en');
+  $('missionToggle').title=fmT('collapse'); $('missionToggle').setAttribute('aria-label',fmT('collapse'));
+  $('smartHintText').textContent=fmT('smartHint');
+  $('toolGreece').textContent=fmT('greece'); $('toolScanSub').textContent=fmT('scanSub'); $('toolHotSub').textContent=fmT('hotSub'); $('toolBiomeSub').textContent=fmT('biomeSub'); $('toolCameraSub').textContent=fmT('cameraSub'); $('toolAtlasSub').textContent=fmT('atlasSub');
+  $('toolDock').setAttribute('aria-label',FM_LANG==='en'?'Map tools':'Εργαλεία χάρτη');
+  $('tabForestsText').textContent=fmT('tabForests'); $('tab-codex').textContent=fmT('tabSpecies'); $('tab-research').textContent=fmT('tabResearch');
+  $('revealEcoLabel').textContent=fmT('revealEco'); $('revealThreatLabel').textContent=fmT('revealThreat'); $('revealSpeciesLabel').textContent=fmT('revealSpecies'); $('revealUniqueLabel').textContent=fmT('revealUnique');
+  $('revealSource').textContent=fmT('openSource'); $('nextMissionBtn').textContent=fmT('nextMission');
+  $('newMissionBtn').textContent=fmT('newMission'); $('openAtlasBtn').textContent=fmT('openAtlas'); $('homeBtn').textContent=fmT('home');
+}
+function switchGameLanguage(lang){
+  if(lang===FM_LANG)return;
+  fmSetLanguage(lang);
+  applyStaticLanguage();
+  forestEcosystems.forEach(f=>{const m=markerById.get(f.id);if(m?.getTooltip())m.unbindTooltip()});
+  refreshTooltips();
+  updateMissionLanguageOnly();
+  if($('drawer').classList.contains('open')) closeDrawer();
+  if(revealOpen){
+    const f=currentForest(); const gained=Number(String($('revealPoints').textContent).replace(/[^0-9]/g,''))||0;
+    if(f)showReveal(f,gained);
+  }
+  toast(FM_LANG==='en'?'🇬🇧 English version active.':'🇬🇷 Ελληνική έκδοση ενεργή.','good',1500);
+}
+
+function initMap(){
+  map=L.map('map',{zoomControl:false,minZoom:5.4,maxZoom:17,worldCopyJump:false,scrollWheelZoom:true,doubleClickZoom:true,touchZoom:true,zoomSnap:.25}).setView(GREECE_CENTER,GREECE_ZOOM);
+  map.createPane('fogPane'); map.getPane('fogPane').style.zIndex=350; map.getPane('fogPane').style.pointerEvents='none';
+  tileLayer=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles © Esri'}).addTo(map);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,opacity:.82}).addTo(map);
+  markersLayer=L.layerGroup().addTo(map); pulseLayer=L.layerGroup().addTo(map);
+  renderAllMarkers(); updateFog();
+  map.on('zoomend moveend',()=>{updateZoomLens(); if(map.getZoom()>=9.75) refreshTooltips();});
+  map.on('click',onMapClick);
+  updateZoomLens();
+}
+
+function markerHtml(f){
+  const b=biomeMeta(f); const discovered=allTimeDiscovered.has(f.id) || sessionDiscovered.has(f.id);
+  const sp=primarySpecies(f);
+  const icon=discovered?'✓':(sp?.icon||'🌲');
+  return `<div class="beacon ${discovered?'discovered':''}" data-id="${f.id}" style="--c:${b.color}"><span>${icon}</span></div>`;
+}
+function renderAllMarkers(){
+  markersLayer.clearLayers(); markerById.clear();
+  forestEcosystems.forEach(f=>{
+    const marker=L.marker(f.coords,{icon:L.divIcon({className:'eco-beacon',html:markerHtml(f),iconSize:[36,36],iconAnchor:[18,18]})});
+    marker.on('click',ev=>{
+      L.DomEvent.stopPropagation(ev);
+      if(map.getZoom()<7.6){map.flyTo(f.coords,8.4,{duration:.9});toast(FM_LANG==='en'?'🔬 Zoom in a little more to scan this hotspot.':'🔬 Ζούμαρε λίγο ακόμα για να σαρώσεις το σημείο.');return;}
+      if(hotCold){giveHotCold(L.latLng(f.coords[0],f.coords[1]));return;}
+      checkForestAnswer(f);
+    });
+    marker.addTo(markersLayer); markerById.set(f.id,marker);
+  });
+  refreshTooltips();
+}
+function updateMarker(f){
+  const m=markerById.get(f.id); if(!m)return;
+  m.setIcon(L.divIcon({className:'eco-beacon',html:markerHtml(f),iconSize:[36,36],iconAnchor:[18,18]}));
+}
+function refreshTooltips(){
+  const z=map.getZoom();
+  forestEcosystems.forEach(f=>{
+    const m=markerById.get(f.id); if(!m)return;
+    if(z>=10.25){
+      if(!m.getTooltip()) m.bindTooltip(forestView(f).name,{className:'forest-label',direction:'top',offset:[0,-17]});
+    } else if(m.getTooltip()){ m.unbindTooltip(); }
+  });
+}
+
+function setModeLabels(){
+  const cfg={
+    atlas:['GRAND ATLAS','88 ECOSYSTEMS'],blitz:['BLITZ · 12','8 MIN'],species:['SPECIES HUNTER','15 MISSIONS'],teams:['DUEL · 2 TEAMS','16 MISSIONS']
+  }[gameMode];
+  $('modePill').textContent=cfg[0];
+  $('difficultyLabel').textContent='· '+cfg[1];
+  if(gameMode==='teams') $('teamBanner').classList.add('show');
+}
+
+function missionPrompt(f){
+  const vf=forestView(f);
+  if(gameMode==='species'){
+    const sp=primarySpecies(f);
+    return sp ? (FM_LANG==='en' ? `Find the ecosystem that leads you to ${sp.common} (${sp.scientific}).` : `Βρες το οικοσύστημα όπου η αποστολή σε οδηγεί προς το είδος ${sp.common} (${sp.scientific}).`) : vf.clue;
+  }
+  return vf.clue;
+}
+
+function loadMission(){
+  revealOpen=false; pulseLayer.clearLayers(); hintLevel=0; scanStage=0; quizState=null; updateHintLabel();
+  const f=currentForest();
+  if(!f){finishRound();return;}
+  $('missionIndex').textContent=`MISSION ${String(currentStep+1).padStart(2,'0')} / ${gameQueue.length}`;
+  $('missionTitle').textContent=gameMode==='species' ? fmT('missionSpecies') : fmT('missionForest');
+  $('missionClue').textContent=missionPrompt(f);
+  $('topMission').textContent=gameMode==='species' ? `Species Hunter · Mission ${currentStep+1}` : `Forest Mission · ${currentStep+1}/${gameQueue.length}`;
+  $('roundTotal').textContent=gameQueue.length;
+  updateHUD();
+  updateZoomLens();
+  if(gameMode==='teams') updateTeamBanner();
+  if(map) map.flyTo(GREECE_CENTER,GREECE_ZOOM,{duration:1.1});
+}
+
+function updateZoomLens(){
+  if(!map)return;
+  const z=map.getZoom();
+  document.body.classList.toggle('zoom-mid',z>=8);
+  document.body.classList.toggle('zoom-near',z>=10);
+  const level=z>=10.2?3:z>=8.4?2:z>=7.0?1:0;
+  document.querySelectorAll('.zoom-bars i').forEach((el,i)=>el.classList.toggle('on',i<level));
+  $('zoomText').textContent=`ZOOM ${z.toFixed(1)} · ${level}/3 LENS`;
+  const f=currentForest(); if(!f)return;
+  const region=$('clueRegion'), biome=$('clueBiome'), species=$('clueSpecies');
+  const regionOpen=level>=1 || hintLevel>=1;
+  const biomeOpen=level>=2 || hintLevel>=2;
+  const speciesOpen=level>=3 || hintLevel>=3;
+  region.classList.toggle('unlocked',regionOpen);
+  biome.classList.toggle('unlocked',biomeOpen);
+  species.classList.toggle('unlocked',speciesOpen);
+  region.disabled=!regionOpen; biome.disabled=!biomeOpen; species.disabled=!speciesOpen;
+  region.setAttribute('aria-disabled',String(!regionOpen));
+  biome.setAttribute('aria-disabled',String(!biomeOpen));
+  species.setAttribute('aria-disabled',String(!speciesOpen));
+  const vf=forestView(f);
+  region.querySelector('strong').textContent=regionOpen?vf.region:fmT('lockedRegion');
+  biome.querySelector('strong').textContent=biomeOpen?`${biomeMeta(f).icon} ${vf.forestType} · ${vf.zone}`:fmT('lockedBiome');
+  const s=primarySpecies(f);
+  species.querySelector('strong').textContent=speciesOpen && s ? `${s.icon} ${s.common} · ${s.scientific}`:fmT('lockedSpecies');
+}
+
+function toggleMissionCard(ev){
+  if(ev)ev.stopPropagation();
+  const card=$('missionCard'); const compact=!card.classList.contains('compact');
+  card.classList.toggle('compact',compact);
+  $('missionToggle').textContent=compact?'＋':'−';
+  $('missionToggle').setAttribute('aria-expanded',String(!compact));
+  if(compact)toast(FM_LANG==='en'?'🗺️ Mission card minimized — more room for map clicks.':'🗺️ Mission card minimized — τώρα έχεις περισσότερο χώρο για map clicks.','good',1800);
+}
+
+function currentLensLevel(){
+  const z=map?.getZoom?.() ?? 0;
+  return z>=10.2?3:z>=8.4?2:z>=7.0?1:0;
+}
+function flashForestCandidates(candidates,label,{fit=false,duration=4200}={}){
+  if(!map || !candidates.length){toast(FM_LANG==='en'?'No candidate ecosystems found.':'Δεν βρέθηκαν υποψήφια οικοσυστήματα.','wrong');return;}
+  candidates.forEach(f=>{
+    const el=markerById.get(f.id)?.getElement()?.querySelector('.beacon');
+    if(el){el.classList.add('target-pulse');setTimeout(()=>el.classList.remove('target-pulse'),duration);}
+  });
+  if(fit && candidates.length>1){
+    const bounds=L.latLngBounds(candidates.map(f=>f.coords));
+    const mobile=innerWidth<720;
+    map.fitBounds(bounds,{paddingTopLeft:mobile?[18,80]:[390,100],paddingBottomRight:[30,90],maxZoom:9.25,animate:true,duration:.8});
+  } else if(candidates.length===1){
+    map.flyTo(candidates[0].coords,Math.max(9.5,map.getZoom()),{duration:.8});
+  }
+  toast(`${label} · ${candidates.length} hotspot${candidates.length===1?'':'s'} ${FM_LANG==='en'?'highlighted on the map.':'αναβοσβήνουν στον χάρτη.'}`,'good',2400);
+}
+function regionTokens(region){
+  return String(region||'').split(/[·/]/).map(x=>x.trim()).filter(Boolean);
+}
+function useRegionLens(){
+  const f=currentForest(); if(!f)return;
+  if(currentLensLevel()<1 && hintLevel<1){toast(FM_LANG==='en'?'🧭 Unlock REGION first with zoom or a hint.':'🧭 Ξεκλείδωσε πρώτα το REGION με zoom ή βοήθεια.','hot');return;}
+  awardLearning(f,'region',3,5,ltxt('region'));
+  const primary=regionTokens(f.region)[0];
+  const candidates=forestEcosystems.filter(x=>regionTokens(x.region).includes(primary));
+  flashForestCandidates(candidates,`🧭 REGION SCAN · ${forestView(f).region}`,{fit:true});
+}
+function useBiomeLens(){
+  const f=currentForest(); if(!f)return;
+  if(currentLensLevel()<2 && hintLevel<2){toast(FM_LANG==='en'?'🧬 Unlock ECOSYSTEM first with zoom or a hint.':'🧬 Ξεκλείδωσε πρώτα το ECOSYSTEM με zoom ή βοήθεια.','hot');return;}
+  awardLearning(f,'biome',5,8,ltxt('biome'));
+  const candidates=forestEcosystems.filter(x=>x.biome===f.biome);
+  flashForestCandidates(candidates,`🧬 ${biomeMeta(f).label}`,{fit:false});
+}
+function useSpeciesLens(){
+  const f=currentForest(); if(!f)return;
+  if(currentLensLevel()<3 && hintLevel<3){toast(FM_LANG==='en'?'🌿 Unlock SIGNATURE SPECIES with a closer zoom.':'🌿 Ξεκλείδωσε πρώτα το SIGNATURE SPECIES με κοντινό zoom.','hot');return;}
+  awardLearning(f,'species',7,12,ltxt('species'));
+  const s=primarySpecies(f); if(!s){toast(FM_LANG==='en'?'No signature species is assigned to this mission.':'Δεν υπάρχει signature species γι’ αυτή την αποστολή.','wrong');return;}
+  openSpeciesCandidates(f.species[0],true);
+}
+function openSpeciesCandidates(speciesId,missionLock=false){
+  const s=fmSpecies(speciesId); if(!s)return;
+  const target=currentForest();
+  const candidates=forestEcosystems.filter(f=>(f.species||[]).includes(speciesId));
+  $('drawer').classList.add('open'); $('drawer').setAttribute('aria-hidden','false');
+  ['passport','codex','research'].forEach(t=>$('tab-'+t).classList.remove('active'));
+  const targetRegionTokens=target?regionTokens(target.region):[];
+  const ranked=[...candidates].sort((a,b)=>{
+    const ar=targetRegionTokens.length && regionTokens(a.region).some(t=>targetRegionTokens.includes(t))?0:1;
+    const br=targetRegionTokens.length && regionTokens(b.region).some(t=>targetRegionTokens.includes(t))?0:1;
+    return ar-br || forestView(a).name.localeCompare(forestView(b).name,FM_LANG==='en'?'en':'el');
+  });
+  const note=missionLock
+    ? (FM_LANG==='en'?'Species Lock: choose a candidate forest, or tap 🎯 to inspect it on the map. 🔒 counts as your mission answer.':'Species Lock: διάλεξε ένα υποψήφιο δάσος ή πάτησε 🎯 για να το δεις στον χάρτη. Το 🔒 μετρά ως απάντηση στην τρέχουσα αποστολή.')
+    : (FM_LANG==='en'?'This species appears in the following ecosystems in the game dataset.':'Το είδος εμφανίζεται στα παρακάτω οικοσυστήματα του game dataset.');
+  $('drawerBody').innerHTML=`<div class="research-copy"><div class="research-note"><b>${s.icon} ${s.common}</b> · <i>${s.scientific}</i><br>${s.fact}</div><p class="candidate-note">${note}</p><div class="candidate-list">${ranked.map(x=>{const v=forestView(x);return `<div class="candidate-row"><div class="cicon">${biomeMeta(x).icon.split('').slice(0,2).join('')}</div><div><strong>${v.name}</strong><small>${v.region} · ${v.forestType}</small></div><div class="candidate-actions"><button type="button" onclick="focusCandidate('${x.id}')">🎯</button>${missionLock?`<button type="button" class="lock" onclick="lockCandidate('${x.id}')">🔒 LOCK</button>`:''}</div></div>`}).join('')}</div></div>`;
+  flashForestCandidates(candidates,`🌿 ${s.common}`,{fit:false,duration:5200});
+}
+function focusCandidate(id){
+  const f=forestEcosystems.find(x=>x.id===id); if(!f)return;
+  closeDrawer(); if(innerWidth<720)$('missionCard').classList.add('compact'); if($('missionToggle'))$('missionToggle').textContent='＋'; map.flyTo(f.coords,11,{duration:.9});
+  setTimeout(()=>{const el=markerById.get(f.id)?.getElement()?.querySelector('.beacon');if(el){el.classList.add('target-pulse');setTimeout(()=>el.classList.remove('target-pulse'),3500)}},650);
+  const vf=forestView(f); toast(FM_LANG==='en'?`🎯 ${vf.name} · tap the hotspot to answer.`:`🎯 ${vf.name} · πάτησε το hotspot για απάντηση.`,'good',2200);
+}
+function lockCandidate(id){
+  const f=forestEcosystems.find(x=>x.id===id); if(!f)return;
+  closeDrawer();
+  map.flyTo(f.coords,Math.max(10.5,map.getZoom()),{duration:.6});
+  setTimeout(()=>checkForestAnswer(f),260);
+}
+
+function updateHUD(){
+  $('scoreValue').textContent=formatScore(score);
+  $('foundValue').textContent=gameMode==='atlas' ? allTimeDiscovered.size : sessionDiscovered.size;
+  $('streakValue').textContent='×'+streak;
+  const kp=knowledgePercent(); $('knowledgeValue').textContent=kp+'%'; $('knowledgeBar').style.width=kp+'%';
+  $('scanCount').textContent=scanCharges;
+  if(roundSeconds===null) $('timeValue').textContent='∞';
+  else $('timeValue').textContent=`${Math.floor(roundSeconds/60)}:${String(roundSeconds%60).padStart(2,'0')}`;
+  if(gameMode==='teams') updateTeamBanner();
+}
+function updateTeamBanner(){
+  const el=$('teamBanner');
+  const sym=activeTeam===0?'🔵':'🟢';
+  el.className=`team-banner show ${activeTeam===0?'team-blue':'team-green'}`;
+  el.textContent=`${sym} ${teamNames[activeTeam]} · ${formatScore(teamScores[activeTeam])} XP · ${fmT('turn')} ${currentStep+1}/${gameQueue.length}`;
+}
+
+function checkForestAnswer(clicked){
+  if(revealOpen)return;
+  const target=currentForest(); if(!target)return;
+  answerClicks++;
+  if(clicked.id===target.id){ correctAnswer(target); }
+  else {
+    wrongClicks++; streak=0; score=Math.max(0,score-65);
+    if(gameMode==='teams') teamScores[activeTeam]=Math.max(0,teamScores[activeTeam]-35);
+    updateHUD();
+    const km=L.latLng(clicked.coords).distanceTo(L.latLng(target.coords))/1000;
+    const dir=bearingText(clicked.coords,target.coords);
+    const cv=forestView(clicked); toast(FM_LANG==='en'?`✖ Not ${cv.name}. The target is about ${Math.round(km)} km ${dir}.`:`✖ Όχι ${cv.name}. Ο στόχος είναι περίπου ${Math.round(km)} km ${dir}.`,'wrong',2200);
+    pulseWrong(clicked);
+  }
+}
+function pulseWrong(f){
+  const m=markerById.get(f.id); const el=m?.getElement()?.querySelector('.beacon'); if(!el)return;
+  el.animate([{transform:'translateX(0)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:320});
+}
+function correctAnswer(f){
+  revealOpen=true; streak++;
+  const base=900; const hintPenalty=hintLevel*115; const wrongPenalty=Math.min(260,wrongClicks*8); const zoomBonus=Math.min(220,Math.max(0,(map.getZoom()-7.5)*45)); const streakBonus=Math.min(420,streak*45);
+  const gained=Math.max(250,Math.round(base+zoomBonus+streakBonus-hintPenalty-wrongPenalty));
+  score+=gained;
+  if(gameMode==='teams') teamScores[activeTeam]+=gained;
+  sessionDiscovered.add(f.id); allTimeDiscovered.add(f.id); awardLearning(f,'discover',15,25,ltxt('discover'),{silent:true}); saveState(); updateMarker(f); updateFog(); updateHUD();
+  map.flyTo(f.coords,Math.max(11,f.zoom||11),{duration:1.0});
+  const b=biomeMeta(f); ecosystemPulse(f);
+  L.circle(f.coords,{radius:18000,color:b.color,weight:3,opacity:.9,fillColor:b.color,fillOpacity:.10,className:'scan-ring',interactive:false}).addTo(pulseLayer);
+  setTimeout(()=>showReveal(f,gained),650);
+  if(window.confetti) confetti({particleCount:90,spread:70,origin:{y:.72},colors:['#6ee7a1','#55d9f3','#f2c45e','#ffffff']});
+}
+
+function showReveal(f,gained){
+  const v=forestView(f);
+  $('revealPoints').textContent=`+${gained} XP`;
+  $('revealTitle').textContent=v.name;
+  $('revealRegion').textContent=`${biomeMeta(f).icon} ${v.region}${(!fmIsEnglish()&&f.elevation)?' · '+f.elevation:''}`;
+  $('revealEco').textContent=`${v.forestType} · ${v.zone}`;
+  $('revealThreat').textContent=v.threat;
+  $('revealSignature').textContent=v.signature;
+  $('factEyebrow').textContent=ltxt('did'); $('tipEyebrow').textContent=ltxt('tip'); $('revealFact').textContent=natureFact(f); $('revealTip').textContent=rangerTip(f); updateMasteryCard(f); renderQuickQuiz(f);
+  $('revealSource').href=f.sourceUrl;
+  $('revealSpecies').innerHTML=speciesList(f).map(s=>`<span class="species-chip">${s.icon} <b>${s.common}</b> · <em>${s.scientific}</em></span>`).join('') || `<span class="species-chip">${fmT('localMosaic')}</span>`;
+  $('reveal').classList.add('show'); $('reveal').setAttribute('aria-hidden','false');
+}
+function nextMission(){
+  $('reveal').classList.remove('show'); $('reveal').setAttribute('aria-hidden','true'); revealOpen=false;
+  if(gameMode==='atlas' && allTimeDiscovered.size>=forestEcosystems.length){ finishRound(); return; }
+  if(gameMode==='teams') activeTeam=1-activeTeam;
+  currentStep++; wrongClicks=0; scanCharges=Math.min(5,scanCharges+1); updateHUD(); loadMission();
+}
+
+function useHint(){
+  if(!currentForest() || hintLevel>=3)return;
+  hintLevel++; hintsUsed++; score=Math.max(0,score-90); if(gameMode==='teams') teamScores[activeTeam]=Math.max(0,teamScores[activeTeam]-45); updateHintLabel(); updateZoomLens(); updateHUD();
+  toast(FM_LANG==='en'?`💡 Hint ${hintLevel}/3 — -90 XP`:`💡 Βοήθεια ${hintLevel}/3 — -90 XP`,'hot');
+  if(hintLevel===3) smartFlyHint(false);
+}
+function updateHintLabel(){ $('hintLevel').textContent=`${hintLevel}/3`; }
+function smartFlyHint(showMsg=true){
+  const f=currentForest(); if(!f)return;
+  const c=map.getCenter(); const t=L.latLng(f.coords); const lat=c.lat+(t.lat-c.lat)*.68; const lng=c.lng+(t.lng-c.lng)*.68;
+  map.flyTo([lat,lng],Math.max(7.5,map.getZoom()),{duration:1.1});
+  if(showMsg)toast(FM_LANG==='en'?'🎯 Camera moved toward the right direction.':'🎯 Η κάμερα μετακινήθηκε προς τη σωστή κατεύθυνση.','hot');
+}
+function skipMission(){
+  if(!currentForest())return;
+  score=Math.max(0,score-180); streak=0; gameQueue.push(gameQueue[currentStep]); currentStep++; updateHUD(); toast(FM_LANG==='en'?'↷ Mission moved to the end of the route. -180 XP':'↷ Η αποστολή μπήκε ξανά στο τέλος της διαδρομής. -180 XP','wrong'); loadMission();
+}
+
+function overview(){ map.flyTo(GREECE_CENTER,GREECE_ZOOM,{duration:1.0}); toast(FM_LANG==='en'?'🇬🇷 Back to the full map of Greece.':'🇬🇷 Επιστροφή στη συνολική εικόνα της Ελλάδας.'); }
+function scanViewport(){
+  if(scanCharges<=0){toast(FM_LANG==='en'?'🛰️ No scans left. Earn one with a correct answer.':'🛰️ Δεν έχεις άλλο scan. Κέρδισε ένα με σωστή απάντηση.','wrong');return;}
+  const target=currentForest(); if(!target)return; const bounds=map.getBounds(); const visible=forestEcosystems.filter(f=>bounds.contains(L.latLng(f.coords)));
+  visible.forEach(f=>{const el=markerById.get(f.id)?.getElement()?.querySelector('.beacon'); if(el){el.classList.add('scan');setTimeout(()=>el.classList.remove('scan'),4200)}});
+  if(!bounds.contains(L.latLng(target.coords))){scanCharges--;updateHUD();toast(ltxt('scanMiss'),'hot',2400);return;}
+  scanCharges--; const v=forestView(target); const s=primarySpecies(target); let msg; const stage=scanStage;
+  if(stage===0)msg=ltxt('scan0',v.region); else if(stage===1)msg=ltxt('scan1',v.forestType,v.zone); else msg=ltxt('scan2',s?`${s.common} · ${s.scientific}`:v.signature);
+  scanStage=Math.min(2,stage+1); awardLearning(target,`scan${stage}`,2,3,ltxt('scan'),{silent:true}); updateHUD(); toast(msg,'good',3000);
+}
+function toggleHotCold(){
+  hotCold=!hotCold; $('hotColdBtn').classList.toggle('active',hotCold);
+  toast(hotCold?(FM_LANG==='en'?'🔥 HOT/COLD on — tap anywhere on the map for distance.':'🔥 HOT/COLD ενεργό — πάτησε οπουδήποτε στον χάρτη για απόσταση.'):(FM_LANG==='en'?'❄️ HOT/COLD off.':'❄️ HOT/COLD κλειστό.'),'hot');
+}
+function onMapClick(ev){ if(hotCold) giveHotCold(ev.latlng); }
+function giveHotCold(latlng){
+  const f=currentForest(); if(!f)return;
+  const km=latlng.distanceTo(L.latLng(f.coords))/1000;
+  let msg=FM_LANG==='en'?(km<20?'🔥🔥🔥 BURNING HOT':km<60?'🔥 VERY HOT':km<140?'🌤️ WARMER':km<280?'🌬️ COLD':'❄️ FREEZING'):(km<20?'🔥🔥🔥 ΚΑΙΓΕΣΑΙ':km<60?'🔥 ΠΟΛΥ ΖΕΣΤΑ':km<140?'🌤️ ΖΕΣΤΑΙΝΕΙΣ':km<280?'🌬️ ΚΡΥΟ':'❄️ ΠΑΓΩΜΕΝΑ');
+  toast(`${msg} · ${Math.round(km)} km`,'hot',1700);
+  L.circleMarker(latlng,{radius:7,color:'#fff',weight:2,fillColor:km<60?'#f2c45e':'#55d9f3',fillOpacity:.85,interactive:false}).addTo(pulseLayer);
+  setTimeout(()=>pulseLayer.clearLayers(),1800);
+}
+function toggleBiomeVision(){
+  biomeVision=!biomeVision; $('biomeBtn').classList.toggle('active',biomeVision);
+  document.body.classList.toggle('zoom-near',biomeVision || map.getZoom()>=10);
+  toast(biomeVision?(FM_LANG==='en'?'🧬 BIOME VISION — markers now show species icons.':'🧬 BIOME VISION — οι δείκτες δείχνουν τώρα species icons.'):'🛰️ BIOME VISION OFF');
+}
+
+function bearingText(from,to){
+  const [lat1,lon1]=from.map(x=>x*Math.PI/180),[lat2,lon2]=to.map(x=>x*Math.PI/180);
+  const y=Math.sin(lon2-lon1)*Math.cos(lat2),x=Math.cos(lat1)*Math.sin(lat2)-Math.sin(lat1)*Math.cos(lat2)*Math.cos(lon2-lon1);
+  const d=(Math.atan2(y,x)*180/Math.PI+360)%360;
+  if(FM_LANG==='en') return d<22.5||d>=337.5?'north':d<67.5?'northeast':d<112.5?'east':d<157.5?'southeast':d<202.5?'south':d<247.5?'southwest':d<292.5?'west':'northwest';
+  return d<22.5||d>=337.5?'προς Β':d<67.5?'προς ΒΑ':d<112.5?'προς Α':d<157.5?'προς ΝΑ':d<202.5?'προς Ν':d<247.5?'προς ΝΔ':d<292.5?'προς Δ':'προς ΒΔ';
+}
+function toast(text,type='',ms=1900){
+  const el=$('mapMessage'); clearTimeout(toastTimer); el.textContent=text; el.className=`map-message show ${type}`; toastTimer=setTimeout(()=>el.className='map-message',ms);
+}
+
+function openDrawer(tab='passport'){$('drawer').classList.add('open');$('drawer').setAttribute('aria-hidden','false');setDrawerTab(tab)}
+function closeDrawer(){$('drawer').classList.remove('open');$('drawer').setAttribute('aria-hidden','true')}
+function setDrawerTab(tab){
+  ['passport','codex','research'].forEach(t=>$('tab-'+t).classList.toggle('active',t===tab));
+  if(tab==='passport')renderPassport(); else if(tab==='codex')renderCodex(); else renderResearch();
+}
+function renderPassport(filter=''){
+  const body=$('drawerBody');
+  body.innerHTML=`<div class="search-row"><input id="forestSearch" placeholder="${fmT('searchPlaceholder')}"><select id="biomeFilter"><option value="">${fmT('allBiomes')}</option>${Object.keys(BIOMES).map(k=>`<option value="${k}">${FM_LANG==='en'?(FM_BIOME_EN[k]||BIOMES[k].label):BIOMES[k].label}</option>`).join('')}</select></div><div id="forestList" class="forest-list"></div>`;
+  const update=()=>{
+    const locale=FM_LANG==='en'?'en-US':'el-GR';
+    const q=$('forestSearch').value.toLocaleLowerCase(locale); const bf=$('biomeFilter').value;
+    const rows=forestEcosystems.filter(f=>{const v=forestView(f);const hay=`${v.name} ${v.region} ${f.name} ${f.region}`.toLocaleLowerCase(locale);return (!bf||f.biome===bf)&&(!q||hay.includes(q))});
+    $('forestList').innerHTML=rows.map(f=>{
+      const v=forestView(f); const done=allTimeDiscovered.has(f.id); const b=biomeMeta(f);
+      const mastery=forestMastery(f.id); return `<div class="passport-item ${done?'done':''}" data-forest="${f.id}"><div class="picon">${b.icon.split('').slice(0,2).join('')}</div><div><strong>${v.name}</strong><small>${v.region} · ${v.forestType}</small><div class="mastery-mini"><span>${mastery}% ${ltxt('know')}</span><i style="--m:${mastery}%"></i></div></div><div class="check">${done?'✓':'○'}</div></div>`;
+    }).join('');
+    document.querySelectorAll('[data-forest]').forEach(el=>el.onclick=()=>focusForest(el.dataset.forest));
+  };
+  $('forestSearch').oninput=update; $('biomeFilter').onchange=update; update();
+}
+function focusForest(id){
+  const f=forestEcosystems.find(x=>x.id===id); if(!f)return; const v=forestView(f); closeDrawer(); map.flyTo(f.coords,10.5,{duration:1}); const el=markerById.get(f.id)?.getElement()?.querySelector('.beacon'); if(el){el.classList.add('target-pulse');setTimeout(()=>el.classList.remove('target-pulse'),4200)}
+  toast(`${biomeMeta(f).icon} ${v.name} · ${v.forestType}`,'good',2200);
+}
+function renderCodex(){
+  const counts={}; forestEcosystems.forEach(f=>(f.species||[]).forEach(id=>counts[id]=(counts[id]||0)+1));
+  $('drawerBody').innerHTML=`<div class="codex-grid">${Object.keys(speciesCodex).map(id=>{const s=fmSpecies(id);return `<article class="species-card clickable" role="button" tabindex="0" data-species="${id}"><div class="big">${s.icon}</div><strong>${s.common}</strong><em>${s.scientific}</em><small>${s.fact}</small><b>${counts[id]||0} ${fmT('ecosystemsTap')}</b></article>`}).join('')}</div>`;
+  document.querySelectorAll('[data-species]').forEach(el=>{
+    const open=()=>openSpeciesCandidates(el.dataset.species,false);
+    el.onclick=open; el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}};
+  });
+}
+function renderResearch(){
+  const done=allTimeDiscovered.size;
+  $('drawerBody').innerHTML=`<div class="research-copy"><div class="research-note"><b>${fmT('accuracyRule')}</b> ${fmT('researchAccuracy')}</div><h3>${fmT('datasetTitle')}</h3><p>${fmT('datasetCopy',Object.keys(speciesCodex).length)}</p><h3>${fmT('sourcesTitle')}</h3><a class="source-link" target="_blank" rel="noopener" href="https://greekforests.gr/katalogos-dason">${fmT('sourceCatalog')}</a><p>${fmT('bookCopy')}</p><h3>${fmT('progressTitle')}</h3><p>${fmT('progressCopy',done)}</p><h3>${fmT('dataVersion')}</h3><p>${forestDataMeta.version} · ${forestDataMeta.generated}</p><h3>${FM_LANG==='en'?'Learning layer':'Learning layer / Γνώση'}</h3><p>${FM_LANG==='en'?`Total Forest Knowledge: ${knowledgePercent()}%. Knowledge points: ${knowledgePoints}. Badges: ${earnedBadges.size}.`:`Συνολική Γνώση Δασών: ${knowledgePercent()}%. Knowledge points: ${knowledgePoints}. Badges: ${earnedBadges.size}.`}</p></div>`;
+}
+
+function startTimer(){
+  if(roundSeconds===null)return;
+  clearInterval(timerHandle);
+  timerHandle=setInterval(()=>{roundSeconds--;updateHUD();if(roundSeconds<=0){clearInterval(timerHandle);finishRound('time')}},1000);
+}
+function finishRound(reason='complete'){
+  clearInterval(timerHandle);
+  const distinctSpecies=new Set(); sessionDiscovered.forEach(id=>{const f=forestEcosystems.find(x=>x.id===id);(f?.species||[]).forEach(s=>distinctSpecies.add(s))});
+  const accuracy=answerClicks?Math.round((sessionDiscovered.size/answerClicks)*100):0;
+  $('endScore').textContent=formatScore(score); $('endFound').textContent=sessionDiscovered.size; $('endAccuracy').textContent=accuracy+'%'; $('endSpecies').textContent=distinctSpecies.size; $('endKnowledge').textContent=knowledgePercent()+'%';
+  $('endTitle').textContent=reason==='time'?'TIME OUT — MAP SAVED':'EXPEDITION COMPLETE';
+  $('endCopy').textContent=gameMode==='atlas'?fmT('finishAtlas'):fmT('finishOther');
+  $('endScreen').classList.add('show');
+}
+function restartRound(){location.href=`game.html?mode=${encodeURIComponent(gameMode)}&lang=${FM_LANG}${gameMode==='teams'?`&team0=${encodeURIComponent(teamNames[0])}&team1=${encodeURIComponent(teamNames[1])}`:''}`}
+function goHome(){location.href=`START_HERE.html?lang=${FM_LANG}`}
+
+function init(){
+  applyStaticLanguage(); gameQueue=buildQueue(); setModeLabels(); initMap(); loadMission(); startTimer(); checkBadges();
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){closeDrawer();$('reveal').classList.remove('show')}
+    if(e.key.toLowerCase()==='h')useHint(); if(e.key.toLowerCase()==='s')scanViewport(); if(e.key.toLowerCase()==='o')overview();
+  });
+  setTimeout(()=>toast(FM_LANG==='en'?'🌲 Explore, scan, learn, then answer. Every clue can build Forest Knowledge.':'🌲 Εξερεύνησε, σκάναρε, μάθε και μετά απάντησε. Κάθε clue χτίζει Γνώση Δάσους.','good',3600),700);
+}
+
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
