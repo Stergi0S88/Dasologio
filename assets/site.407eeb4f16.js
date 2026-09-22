@@ -345,3 +345,74 @@ if (cookieBanner) {
     });
   }
 }
+
+const quoteRoot = document.querySelector('[data-quote-calculator]');
+if (quoteRoot) {
+  const catalogNode = document.getElementById('quote-catalog');
+  const catalog = JSON.parse(catalogNode?.textContent || '{}');
+  const form = quoteRoot.querySelector('[data-quote-form]');
+  const money = (value) => `${Number(value).toLocaleString(document.documentElement.lang === 'en' ? 'en-GB' : 'el-GR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
+  const itemBySlug = (slug) => (catalog.items || []).find((item) => item.slug === slug);
+  const complexityBySlug = (slug) => (catalog.complexities || []).find((item) => item.slug === slug);
+  const updateEstimate = () => {
+    const item = itemBySlug(form.elements.namedItem('itemSlug').value);
+    const complexity = complexityBySlug(form.elements.namedItem('complexity').value);
+    const unitsInput = form.elements.namedItem('units');
+    if (item) unitsInput.max = String(item.maxUnits);
+    const units = Number(unitsInput.value);
+    if (!item || !complexity || !Number.isFinite(units) || units < 0 || units > item.maxUnits) return;
+    const net = Math.round((item.baseEur + units * item.perUnitEur) * complexity.multiplier * 100) / 100;
+    const includeVat = form.elements.namedItem('includeVat').checked;
+    const vat = includeVat ? Math.round(net * Number(catalog.vatRate || 0) * 100) / 100 : 0;
+    quoteRoot.querySelector('[data-quote-net]').textContent = money(net);
+    quoteRoot.querySelector('[data-quote-vat-amount]').textContent = money(vat);
+    quoteRoot.querySelector('[data-quote-total]').textContent = money(net + vat);
+  };
+  form.addEventListener('input', updateEstimate);
+  form.addEventListener('change', updateEstimate);
+  updateEstimate();
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const success = quoteRoot.querySelector('[data-quote-success]');
+    const error = quoteRoot.querySelector('[data-quote-error]');
+    const submit = quoteRoot.querySelector('[data-quote-submit]');
+    const english = document.documentElement.lang === 'en';
+    success.hidden = true;
+    error.hidden = true;
+    submit.disabled = true;
+    try {
+      const response = await fetch('/api/quote.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          itemSlug: form.elements.namedItem('itemSlug').value,
+          units: Number(form.elements.namedItem('units').value),
+          complexity: form.elements.namedItem('complexity').value,
+          includeVat: form.elements.namedItem('includeVat').checked,
+          name: form.elements.namedItem('name').value.trim(),
+          email: form.elements.namedItem('email').value.trim(),
+          phone: form.elements.namedItem('phone').value.trim(),
+          taxId: form.elements.namedItem('taxId').value.trim(),
+          notes: form.elements.namedItem('notes').value.trim(),
+          website: form.elements.namedItem('website').value.trim(),
+          lang: english ? 'en' : 'el',
+        }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || payload.ok === false) {
+        error.textContent = english ? 'Sending failed. Try again or email contact@dasologio.com.' : 'Η αποστολή απέτυχε. Δοκιμάστε ξανά ή γράψτε μας στο contact@dasologio.com.';
+        error.hidden = false;
+        return;
+      }
+      success.hidden = false;
+      form.reset();
+      form.elements.namedItem('includeVat').checked = true;
+      updateEstimate();
+    } catch {
+      error.textContent = english ? 'Sending failed. Try again or email contact@dasologio.com.' : 'Η αποστολή απέτυχε. Δοκιμάστε ξανά ή γράψτε μας στο contact@dasologio.com.';
+      error.hidden = false;
+    } finally {
+      submit.disabled = false;
+    }
+  });
+}

@@ -21,6 +21,7 @@ RewriteRule ^services-2(?:\.html)?$ /services/diaxeirisi-prostasia/ [R=301,L]
 RewriteRule ^services-3(?:\.html)?$ /services/ypiresies-ypaithrou/ [R=301,L]
 
 RewriteRule ^api/checkout\.php$ - [L]
+RewriteRule ^api/quote\.php$ - [L]
 
 ErrorDocument 404 /404/
 
