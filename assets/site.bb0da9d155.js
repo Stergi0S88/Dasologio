@@ -58,6 +58,8 @@ document.querySelectorAll('[data-modal-open]').forEach((button) => {
     const modal = document.getElementById(button.dataset.modalOpen);
     if (!modal) return;
     lastModalTrigger = button;
+    const mapFrame = modal.querySelector('iframe[data-map-src]');
+    if (mapFrame && !mapFrame.getAttribute('src')) mapFrame.src = mapFrame.dataset.mapSrc;
     modal.setAttribute('data-open', '');
     document.body.classList.add('modal-open');
     modal.querySelector('button, input, textarea, a')?.focus();
