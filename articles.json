@@ -14,7 +14,7 @@
       "Google Calendar",
       "ψηφιακά εργαλεία"
     ],
-    "image": "/images/articles/pos-na-organoseis-mathima-me-dasologio-class/app-commercial.jpg",
+    "image": "/images/media/knowhowphoto.jpg",
     "imageAlt": "Εκπαιδευτικός με μαθητές που χρησιμοποιούν laptop στην τάξη, σύμβολο τεχνολογίας και δημιουργικής μάθησης",
     "featured": true,
     "draft": false,
@@ -27,6 +27,34 @@
     "seoTitle": "Dasologio Class: πρακτικός οδηγός για εκπαιδευτικούς",
     "noindex": false,
     "url": "/blog/pos-na-organoseis-mathima-me-dasologio-class/"
+  },
+  {
+    "title": "Ο Άγιος Φραγκίσκος της Ασίζης και η Περιβαλλοντική ηθική",
+    "slug": "agios-fragkiskos-assizis-perivallontiki-ithiki",
+    "description": "Πριν η οικολογία γίνει επιστήμη, πολιτική και δημόσια συζήτηση, ο Φραγκίσκος της Ασίζης έδειξε έναν άλλον τρόπο σχέσης με τη φύση: ταπεινότητα, συγγένεια και ευθύνη.",
+    "publishedAt": "2026-09-29",
+    "author": "Δασολόγιο",
+    "category": "ΟΙΚΟΛΟΓΙΑ",
+    "tags": [
+      "Άγιος Φραγκίσκος",
+      "Ασίζη",
+      "οικολογική ηθική",
+      "περιβαλλοντική εκπαίδευση",
+      "φύση"
+    ],
+    "image": "/images/media/francis.jpg",
+    "imageAlt": "Άγιος Φραγκίσκος της Ασίζης",
+    "featured": false,
+    "draft": false,
+    "titleEn": "How St. Francis of Assisi shaped modern environmental ethics",
+    "descriptionEn": "Environmental ethics, education about sustainability, and other buzzwords we tend to use regardless the context have their origin in Francis's thinking and spiritual work.",
+    "categoryEn": "ECOLOGY",
+    "imageAltEn": "St. Francis d' Assisi",
+    "bodyEn": "Back when ecology was not at the centre of the conversation even not accepted as science especially during the Middle Ages the wordlview of Francis was really groundbrearking. He made us feel about nature differently, giving us a clear concept in which we are parts of the same universe not just stewards, or ethically superior compared to animals. It would not be accurate to claim Ecology back then, it was more of a different perception of human position in the world.\nSeeing nature-human relationship as a deep kinship established a new idea about what is the accepted behavior and attitude towards a better future with less unequaliies. \n\nFrancis was born in Assisi, Italy, at the end of 12th century, in a deeply hierarcaclly based world,  fanatical and violent. He choosed a life of simplicity and humility and the most groundbreaking of all is the absolute refusal of any ownership/. This was something completely at odds with the ideas of the historical context. Given this philosophy, stripping out of all ownership and property was the key to humility and sincere connection with our environment including animals.  He called Sun, Water, Fire and birds and animals like brothers, he wrote the famous Cantivle of the Creatures, a religious hymn and poem around 1225 during his last months while illnes striked him hard. Much of his humility and originality can be a mark on how we deal with environmental problems nowadays. It's really crucial to perceive our attitudes, and values in day to day, to understand and get some meaningful shifts, in order to see things going better. \nMaybe the first move towards this directions is getting a vision like Francis's. Value is not about getting bigger and bigger, is about grow mentally, cultivate, create relationships and connections and making bigger changes along the way.\n\nEnvironmental is mainly an education as an exercise in relationships and interactions. Here, Francis encounters environmental education in a very distinctive way. He offers us not a teaching method, but an attitude. He invites us to view nature not as a decorative backdrop to human history, but as a conversation partner. This is paramount in our days environmet discussion is often cold and strictly project managemnt or science oriented, what we need is not ,more performance indicators, wrangling with multinational compiled data but more quality education. More quality on how we grow and not only about marketing based analysis on how well our project went.  Science tells us what is happening. Ethics asks us what kind of people we want to be in the face of what is happening. \nToday the image of a person talkikng to birds or calling the earth \"Mother\" can easilly mistaken as a hippy romanticism. Yet, perhaps the problem of our times is that we have lost the ability to be moved without feeling ashamed of it. \n\nEnvironmental threats are here for real, forest fires, soil degradation, water scarcity is a continuous process and biodiversity is under great risks. Franciscan worldview could be an antidote to an inner malady: the conviction that we can go on living as if we owe nothing to anyone. Francis of Assisi does not offer us a technical management plan. He offers something simpler—and perhaps more demanding: a lesson in kinship. He reminds us that the ecological crisis will not be resolved merely by learning to measure nature more accurately, but by learning once again to stand before it with respect",
+    "publishEnglish": false,
+    "seoTitle": "Άγιος Φραγκίσκος της Ασίζης: Περιβαλλοντική ηθική και Φύση",
+    "noindex": false,
+    "url": "/blog/agios-fragkiskos-assizis-perivallontiki-ithiki/"
   },
   {
     "title": "Τι έχει πάει λάθος με τους 17 Στόχους για τη Βιώσιμη Ανάπτυξη;",
