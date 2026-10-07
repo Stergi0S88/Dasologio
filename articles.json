@@ -1,5 +1,34 @@
 [
   {
+    "title": "Πόσο μπροστά ήταν η Τζέιν Γκούντολ;",
+    "slug": "jane-goodall-pagkosmia-imera-zoon",
+    "description": "Στην Παγκόσμια Ημέρα των Ζώων τιμούμε την Jane Goodall, την επιστήμονα που άλλαξε για πάντα την κατανόησή μας για τον ζωικό κόσμο.",
+    "publishedAt": "2026-10-04",
+    "author": "Δασολόγιο",
+    "category": "ΕΚΠΑΙΔΕΥΣΗ",
+    "tags": [
+      "Jane Goodall",
+      "Παγκόσμια Ημέρα Ζώων",
+      "χιμπατζήδες",
+      "περιβαλλοντική εκπαίδευση",
+      "προστασία ζώων",
+      "οικολογία"
+    ],
+    "image": "/images/media/jane-chimp.jpg",
+    "imageAlt": "Jane Goodall και η προστασία των ζώων",
+    "featured": false,
+    "draft": false,
+    "titleEn": "Jane Goodall: The Woman Who Changed How We See Animals",
+    "descriptionEn": "On World Animal Day, we honor Jane Goodall, the scientist who forever changed our understanding of the animal kingdom.",
+    "categoryEn": "EDUCATION",
+    "imageAltEn": "Jane Goodall and animal conservation",
+    "bodyEn": "Every year on October 4th, the world celebrates World Animal Day. And there is no better occasion to remember one of the most important figures in the history of animal research: Jane Goodall.\n\nIn 1960, a young 26-year-old British woman arrived in Tanzania with a notebook and binoculars. Without a university degree, but with endless passion, she began observing chimpanzees in Gombe. What she discovered shocked the scientific community: chimpanzees use tools, have complex social relationships, and express emotions similar to humans.\n\nJane Goodall taught us that the line separating us from other animals is much thinner than we thought. She gave names to chimpanzees instead of numbers, recognizing their individuality. She spent over 60 years of her life studying and protecting them.\n\nToday, at 92 years old, she continues to travel 300 days a year spreading her message: every individual can make a difference. Her Roots & Shoots program has inspired millions of young people worldwide to take action for the environment.\n\nWhat can we learn from Jane Goodall?\n\n- Patience and observation are the keys to understanding nature\n- Science doesn't always require degrees, but always requires passion\n- Every creature has value and deserves respect\n- It's never too late to start making a difference\n\nOn this World Animal Day, let's remember that we are part of nature, not separate from it. As Jane says: 'Only when we understand, can we care. Only when we care, will we help. Only when we help, will they be saved.'",
+    "publishEnglish": true,
+    "seoTitle": "Jane Goodall: Παγκόσμια Ημέρα Ζώων",
+    "noindex": false,
+    "url": "/blog/jane-goodall-pagkosmia-imera-zoon/"
+  },
+  {
     "title": "Oργάνωσε το μάθημα σου με το Dasologio-class",
     "slug": "pos-na-organoseis-mathima-me-dasologio-class",
     "description": "Ένας πρακτικός οδηγός για εκπαιδευτικούς: από την πρώτη ιδέα μέχρι το ημερολόγιο, το Dasologio Class συγκεντρώνει τον σχεδιασμό του μαθήματος σε ένα ήρεμο ψηφιακό περιβάλλον.",
@@ -14,7 +43,7 @@
       "Google Calendar",
       "ψηφιακά εργαλεία"
     ],
-    "image": "/images/media/knowhowphoto.jpg",
+    "image": "/images/articles/jane-goodall-pagkosmia-imera-zoon/class-teach.jpg",
     "imageAlt": "Εκπαιδευτικός με μαθητές που χρησιμοποιούν laptop στην τάξη, σύμβολο τεχνολογίας και δημιουργικής μάθησης",
     "featured": true,
     "draft": false,
